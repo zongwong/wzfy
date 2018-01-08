@@ -1,0 +1,150 @@
+<style lang="scss">
+// 页面
+page{
+  background: #f2f2f2;
+}
+.container{
+  overflow: hidden;
+}
+// 按钮
+.btn{}
+.btn.bottom{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #FF6340;
+  color: #fff;
+}
+// 图标
+.icon{
+  display: inline-block;
+  vertical-align: middle;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+// 列表
+.ceils_wrap{
+  background-color: #fff;
+  line-height: 1.47058824;
+  font-size: 30rpx;
+  overflow: hidden;
+  position: relative;
+  .ceil_item{
+    padding: 10px 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    .ceil_bd{
+      flex: 1;
+    }
+    .ceil_ft{
+      text-align: right;
+      color: #999999; 
+    }
+  }
+  .ceil_item_access{
+    .ceil_ft{
+      padding-right: 13px;
+      position: relative;
+      &:after{        
+        content: " ";
+        display: inline-block;
+        height: 6px;
+        width: 6px;
+        border-width: 2px 2px 0 0;
+        border-color: #C8C8CD;
+        border-style: solid;
+        -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+        transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+        position: relative;
+        top: -2px;
+        position: absolute;
+        top: 50%;
+        margin-top: -4px;
+        right: 2px;    
+      }
+    }
+  }
+  .ceil_swiped{
+    padding: 0;
+    .ceil_bd{
+      z-index: 1;
+      background:#fff;
+    }
+    .ceil_ft{
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      color: #FFFFFF;
+    }
+  }
+  .border_bottom{
+    border-bottom: 2rpx solid #f2f2f2;
+  }
+  &+.ceils_wrap{
+    margin-top: 16rpx;
+  }
+}
+
+
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/user/recommend',
+      'pages/user/msg',
+      'pages/user/invite',
+      'pages/user/user',
+      'pages/index/index'
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#000',
+      navigationBarTitleText: '万众分佣',
+      navigationBarTextStyle: 'white'
+    },
+    tabBar: {
+      backgroundColor: '#fff',
+      selectedColor:'#ff6340',
+      list: [
+        {
+          pagePath: "pages/index/index",
+          text: "首页",
+          iconPath: "icon/icon_index.png",
+          selectedIconPath: "icon/icon_index_on.png"
+        },
+        { 
+          pagePath: "pages/index/index",
+          text: "我的",
+          iconPath: "icon/icon_my.png",
+          selectedIconPath: "icon/icon_my_on.png"
+        }
+      ]
+    }
+  }
+
+  globalData = {
+    userInfo: null
+  }
+
+  constructor () {
+    super()
+    this.use('requestfix')
+    this.use('promisify')
+  }
+
+  onLaunch() {
+
+  }
+  
+}
+</script>

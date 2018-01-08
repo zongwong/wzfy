@@ -1,0 +1,12 @@
+<style lang="scss">
+ 
+</style>
+<template>
+  <button type="default" class="btn bottom" @tap="onClick">我的按钮测试</button>
+</template>
+<script>
+  import wepy from 'wepy'
+  export default class Button extends wepy.component {
+
+  }
+</script>

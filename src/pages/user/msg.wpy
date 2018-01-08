@@ -1,0 +1,104 @@
+<style lang="scss">
+.msg{
+  padding-top: 16rpx;
+}
+.del{
+  background: #df0a17;
+  display: block;
+  padding: 10px 1em;
+  line-height: 1.47058824;
+  font-size: 17px;
+  width: 2em;
+  .del_text{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+  }
+}
+.msg_item{
+  .info{
+    display: flex;
+    justify-content: space-between;
+    .msg_type{
+      
+    }
+    .time{
+      color: #999;
+      font-size: 22rpx;
+    }
+  }
+  .content{
+    color: #666;
+  }
+}
+</style>
+<template>
+  <view class="container msg">
+
+      <view class="ceils_wrap">
+
+        <view class="ceil_item border_bottom ceil_swiped">
+          <view class="ceil_bd" style="transform:translateX(-68px);">
+            <view class="ceil_item border_bottom">
+              <view class="ceil_bd msg_item">
+                <view class="info">
+                  <view class="msg_type">[系统消息]</view>
+                  <view class="time">2017-12-12</view>
+                </view>
+                <view class="content">123</view>
+              </view>
+            </view>
+          </view>
+          <view class="ceil_ft">
+            <view class="del"><view class="del_text">删除</view></view>
+          </view>
+        </view>
+
+        <view class="ceil_item border_bottom ceil_swiped">
+          <view class="ceil_bd" >
+            <view class="ceil_item border_bottom">
+              <view class="ceil_bd msg_item">
+                <view class="info">
+                  <view class="msg_type">[系统消息]</view>
+                  <view class="time">2017-12-12</view>
+                </view>
+                <view class="content">123</view>
+              </view>
+            </view>
+          </view>
+          <view class="ceil_ft">
+            <view class="del"><view class="del_text">删除</view></view>
+          </view>
+        </view>
+
+      </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Msg extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的消息'
+    }
+
+    data = {
+      
+    }
+
+    
+
+    methods = {
+     
+    }
+
+    events = {
+      
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

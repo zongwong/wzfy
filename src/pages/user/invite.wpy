@@ -1,0 +1,62 @@
+<style lang="scss">
+.invite{
+  .invite_title{
+   padding: 0 30rpx;
+   line-height: 90rpx;
+   font-size: 32rpx; 
+  }
+  .ceil_item{
+    margin: 0 30rpx;
+    padding: 15px 0;
+    background: #ffffff;
+  }
+}
+</style>
+<template>
+  <view class="container invite">
+    <view class="invite_title">
+      我邀请的好友列表
+    </view>
+      <view class="ceils_wrap">
+        <view class="ceil_item ceil_item_access border_bottom">
+          <view class="ceil_bd">
+            <text>我的消息</text>
+          </view>
+          <view class="ceil_ft">1586525125</view>
+        </view>
+        <view class="ceil_item ceil_item_access border_bottom">
+          <view class="ceil_bd">
+            <text>我的消息</text>
+          </view>
+          <view class="ceil_ft">1586525125</view>
+        </view>
+      </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Invite extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的邀请'
+    }
+
+    data = {
+      
+    }
+
+    
+
+    methods = {
+     
+    }
+
+    events = {
+      
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

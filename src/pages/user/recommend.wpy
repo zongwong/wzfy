@@ -1,0 +1,78 @@
+<style lang="scss">
+.recommend{
+  .ceils_wrap{
+    padding: 18rpx 36rpx;
+    margin-top: 18rpx;
+    .list_item{
+      border-radius: 8rpx;
+      border: 2rpx solid #e9e9e9;
+      margin-bottom: 20rpx;
+      padding: 15px;
+      overflow: hidden;
+      .status{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20rpx;
+        height: 20rpx;
+        background: red;
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view class="container recommend">
+    <tab :navs="navs"></tab>
+    <view class="ceils_wrap">
+      <view class="ceil_item ceil_item_access list_item">
+        <view class="ceil_bd">新房购买</view>
+        <view class="ceil_ft">123</view>
+        <view class="status"></view>
+      </view>
+      <view class="ceil_item ceil_item_access list_item">
+        <view class="ceil_bd">新房购买</view>
+        <view class="ceil_ft">123</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import tab from '../../components/tab'
+  export default class Recommend extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的推荐'
+    }
+
+    data = {
+      navs:[{
+            text:'未完成',
+            selected:true,
+        },{
+            text:'已成交',
+            selected:false,
+        },{
+            text:'未成交',
+            selected:false,
+        }],
+    }
+
+    components = {
+      tab:tab
+    }
+
+    methods = {
+     
+    }
+
+    events = {
+      
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>
