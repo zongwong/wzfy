@@ -100,6 +100,7 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/user/redetail',
       'pages/user/recommend',
       'pages/user/msg',
       'pages/user/invite',

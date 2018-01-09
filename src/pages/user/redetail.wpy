@@ -1,0 +1,155 @@
+<style lang="scss">
+.redetail{
+    .block{
+        padding: 0 36rpx;
+        margin-bottom: 18rpx;
+        background:#fff;
+        .block_title{
+            font-size: 30rpx;
+            // font-weight: 600;
+            border-bottom: 2rpx solid #f2f2f2;
+            line-height: 86rpx;
+        }
+        .block_content{
+            font-size: 28rpx;
+            padding: 20rpx 0;
+            .name{
+                margin-bottom: 4rpx;
+            }
+            .info{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .time{
+                    color: #666;
+                    font-size: 24rpx;
+                }
+                .dot{
+                    width: 10rpx;
+                    height: 10rpx;
+                    background: #000;
+                    border-radius: 50%;
+                    margin-right: 18rpx;
+                }
+                .text{
+                    flex: 1;
+                }
+            }
+            .record{
+                padding: 20rpx 0;
+            }
+            .success{
+                .dot{
+                    background: #ff6340;
+                }
+                color:#ff6340;
+                // font-weight: bold;
+            }
+            .fail{
+                .dot{
+                    background: #999;
+                }
+                color:#999;
+                // font-weight: bold;
+            }
+        }
+    }
+    .card{
+        margin: 30rpx 36rpx;
+        border: 2rpx solid #f2f2f2;
+        background: #fff;
+        border-radius: 16rpx;
+        box-shadow: 0 0 10px 3px rgb(230, 230, 230);
+        text-align: center;
+        .top{
+            overflow: hidden;
+            // height: 142rpx;
+            border-bottom: 2rpx solid #f2f2f2;
+            padding: 30rpx 0;
+            .text{
+                font-weight: bold;
+                color: #ff6340;
+                font-size: 30rpx;
+                margin-bottom: 14rpx;
+            }
+            .time{
+                font-size: 24rpx;
+                color: #999;
+            }
+        }
+        .bottom{
+            padding: 30rpx;
+            // height: 120rpx;
+            font-size: 26rpx;
+            color: #999;
+        }
+    }
+}
+</style>
+<template>
+  <view class="container redetail">
+    <view class="block">
+        <view class="block_title">客户资料</view>
+        <view class="block_content">
+            <view class="name">黄小仙</view>
+            <view class="info"><text>12312312312</text>
+            <text class="time">2131232312</text></view>
+        </view>
+    </view>
+    <view class="block">
+        <view class="block_title">专属顾问</view>
+        <view class="block_content">
+            <view class="info"><text>姓名</text>
+            <text>2131232312</text></view>
+        </view>
+    </view>
+    <view class="block">
+        <view class="block_title">交易跟进状态：</view>
+        <view class="block_content" style="padding:10rpx 0;">
+            <view class="info record success"><text class="dot"></text><text class="text">姓驱蚊器而且we气温气温名</text>
+            <text class="time">2131232312</text></view>
+            <view class="info record fail"><text class="dot"></text><text class="text">姓请问请问而且我额名</text>
+            <text class="time">2131232312</text></view>
+        </view>
+    </view>
+    <view class="card">
+       <view class="top">
+           <view class="text">很抱歉交易失败,</view>
+           <view class="text" style="font-weight: normal;">请前往个人中心查看佣金</view>
+           <view class="time">2017/05/02</view>
+       </view>
+       <view class="bottom">
+           <view class="tips">备注:12312312313</view>
+       </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Redetail extends wepy.page {
+    config = {
+      navigationBarTitleText: '推荐详情'
+    }
+
+    data = {
+
+    }
+
+    components = {
+
+    }
+
+    methods = {
+     
+    }
+
+    events = {
+      
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>
