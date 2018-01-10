@@ -13,18 +13,23 @@ page{
 }
 // 按钮
 .btn{
-  
-}
-.btn.bottom{
-  position: fixed;
-  bottom: 45rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 677rpx;
-  background: #FF6340;
-  color: #fff;
-  font-size: 34rpx;
-  line-height: 1.8823529;
+  &.bottom{
+    position: fixed;
+    bottom: 45rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 677rpx;
+    background: #FF6340;
+    color: #fff;
+    font-size: 34rpx;
+    line-height: 1.8823529;
+  }
+  &.full{
+    width: 100%;
+    bottom: 0;
+    line-height: 2.5882352941;
+    border-radius: 0;
+  } 
 }
 // 图标
 .icon{
@@ -106,13 +111,32 @@ page{
   background:#fff;
 }
 // form
-// .box_input{
-//   border-radius: 6rpx;
-//   padding: 10rpx;
-//   border: 2rpx solid #ededed;
-//   input{}
-// }
-
+.checkbox{
+  margin-right: 58rpx;
+  .text{
+    vertical-align: middle;
+  }
+  .icon_checkbox{
+    vertical-align: middle;
+    width: 40rpx;
+    height: 30rpx;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAeCAMAAABpA6zvAAAAS1BMVEUAAACcnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJycnJxfl63QAAAAGHRSTlMAljxmErvcUwf5pYWg5rF2ZUxFNC3OzWOr7lByAAAAgUlEQVQ4y+3OOQ7DMAxEUcpWKGrx7iRz/5OmCyCSrV35dSN8CKS/mEYlRbJiybBKNB2Dq/6xMliXM5qQIQ1z/3LiTa4Pzm4vWP1wxdLtgMEPB4QnfMK7w4rkhwm12xuKHxZs3RZG8j9kUbfkHI6oHCFnc/s+wTHtZMjYXkr5Cl3oBwNcC+E3gp4UAAAAAElFTkSuQmCC);
+    &.checked{
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAeCAYAAABe3VzdAAAD10lEQVRYhbXXa4iUdRTH8c/O7qq7mrtZWnYxu8kqxnaBGAUVWdStzLKaQl/UQBIodiWizAJBwiip0IyCakjLF1N4KSxWCwqtCdHKsMLSzVuSklKZru6604tnR4bZZy67s/5ennOe83yf/3P+/3P+FR1zpimkRDTWDxMwEpUFgwvrJHbEU8kfSoyvxI0VhQAT0dh8LMKQMsBytQPz4qnkljz+IZiDuTiQFzARjS3DfMGXr8Z3OF0G2GBMxZSuPPfEU8mPc8Aew6NdsbA5FDARjc3G+/gNzfFUcncZYLm578YHOIGGeCr5D57AU1lgGW2O5MnzLM5gZl/CQTyV/EhQNvXX/fHLcsEvX5wDdxwv4r5uK5iIxkZgL76Ip5JNfQmX0a5hVzUM6Dj104ijBytyXGm8h2dwCKpCnr80k+dcwGHWqMN7Xkcu3O+I48tsY9gvzhwl6T4GG4i3BfV3fo5vJRpz4QhfwXOha7AOY7KNnRURkXTnw1ie78F8m6Qv1YytcuBOV1V3toye+J8CcORZwYp0unuF9E4PYYXuHWjfp2MmVx+rrastlqAbYE17W3W0dbva9rapqBWcV73RIjwfYt+NpmO1dV+VkiQXsP+MHRsX17S3wdXYhOk42gOwCizF4yG+A4JOsrfUZNk1WIt1Ne1t47Ns47AFw3sA+GoeuCOCVtfag1xnAQdhA8IacwNaMLSEfC/hkRD7CdyCn3sClwGsw2eYVCBuLNaiX4GYp/FkiD2NWdjWU7gM4GAcKyF2PN7K47sXL+TxLcD6nqMFimA/bsed2Fck/gFBO8rWTXhX+MG0Ckt6C5cBzGgdRv9dc96HRZ5ZJtjhBHW5VrDBcvUNHiwHLhcQTqxpbH5tY8MEHZGqtjzPDMKbghV7B5eFxOzHHcobcEMBwcH6i20YOzkpmKLD1CRYuekhvjOYLThWylbeXny0tv44JuKTPCEz8tifw+Yyuc4qDDDTNS4UTLYzBcVeilqUsCkS0Vg1hilhlcMAd3VBTklEY3XoEOzc1UVyHcH9Spsjb8UAfNtjwHgq2SE47+rxRiIaqxTUVVzh82we/iz2wkQ0dgleEXzIimLx+QbWxbhN0AEuT0RjS7D92sOtc8e1bhsRSaevzw4+E6lcv/Lmuz7XfVLO1hBBu1uIi7A0nkp+XQyw0L14qODqOSXbPvD0SdN/3KRr4nGqqp81jc3aqvsXe1dG7XgZC+OpZGevAbNAmwQbZST6w5V/7b9g0q+pG2DrFY07dw4fdagEsH/xPVbFU8k9JcSXBlhAKwR3jWn6/oJ1VuVcmhYI6uqcwcH/TBUDs+Yb1CcAAAAASUVORK5CYII=);
+    }
+  }
+}
+.need{
+  position: relative;
+  &:after{
+    content:'*';
+    color: #e30000;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -20rpx;
+  }
+}
 </style>
 
 <script>
@@ -122,6 +146,12 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
+      // 'pages/financial/index',
+      // 'pages/financial/detail',
+      'pages/financial/form',
+      'pages/house/index',
+      'pages/house/detail',
+      'pages/house/form',
       'pages/user/share',
       'pages/user/moneydetail',
       'pages/user/money',

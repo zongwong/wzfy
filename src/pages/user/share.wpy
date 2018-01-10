@@ -29,16 +29,13 @@ page{
       text-align: center;
       line-height: 1.5;
       color: #fc6447;
+      background: #fff;
+      &:after{
+        content:none;
+      }
     }
   }
 }
-.checkbox{
-  .icon_checkbox{
-    width: 28rpx;
-    height: 28rpx;
-  }
-}
-
 </style>
 <template>
   <view class="container share">
@@ -59,8 +56,8 @@ page{
       </view>
       <view class="ceil_item border_bottom">
         <view class="ceil_ft">性别：</view>
-        <view class="checkbox"><text>男</text><text class="icon icon_checkbox"></text></view>
-        <view class="checkbox"><text>女</text><text class="icon icon_checkbox"></text></view>
+        <view class="checkbox"><text class="text">男</text><text class="icon icon_checkbox"></text></view>
+        <view class="checkbox"><text class="text">女</text><text class="icon icon_checkbox checked"></text></view>
       </view>
     </view>
     <button class="btn bottom">注册</button>
