@@ -2,19 +2,29 @@
 // 页面
 page{
   background: #f2f2f2;
+  color: #3f3f3f;
 }
 .container{
   overflow: hidden;
 }
+// class
+.light{
+  color: #FF6340;
+}
 // 按钮
-.btn{}
+.btn{
+  
+}
 .btn.bottom{
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  bottom: 45rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 677rpx;
   background: #FF6340;
   color: #fff;
+  font-size: 34rpx;
+  line-height: 1.8823529;
 }
 // 图标
 .icon{
@@ -83,13 +93,25 @@ page{
     }
   }
   .border_bottom{
-    border-bottom: 2rpx solid #f2f2f2;
+    border-bottom: 2rpx solid #e7e7e7;
   }
   &+.ceils_wrap{
     margin-top: 16rpx;
   }
 }
-
+// card
+.card{
+  padding: 0 36rpx;
+  margin-bottom: 18rpx;
+  background:#fff;
+}
+// form
+// .box_input{
+//   border-radius: 6rpx;
+//   padding: 10rpx;
+//   border: 2rpx solid #ededed;
+//   input{}
+// }
 
 </style>
 
@@ -100,6 +122,9 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/user/share',
+      'pages/user/moneydetail',
+      'pages/user/money',
       'pages/user/redetail',
       'pages/user/recommend',
       'pages/user/msg',
