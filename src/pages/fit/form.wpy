@@ -3,7 +3,7 @@
 </style>
 <template>
   <view class="container house">
-    <image src="../../images/ad.png" class="ad"></image>
+    <image src="../../images/ad3.png" class="ad"></image>
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom">
         <view class="ceil_ft need" style="width:3em;">姓名：</view>
@@ -18,29 +18,19 @@
         <view class="checkbox" style="margin-left:2em;"><text class="text">男</text><text class="icon icon_checkbox"></text></view>
         <view class="checkbox"><text class="text">女</text><text class="icon icon_checkbox checked"></text></view>
       </view>
-    </view>
-    <view class="ceils_wrap house_form">
-      <view class="ceil_item border_bottom more_cb">
-        <view class="ceil_ft">需求：</view>
-        <view class="checkbox"><text class="text">买房</text><text class="icon icon_checkbox"></text></view>
-        <view class="checkbox"><text class="text">卖方</text><text class="icon icon_checkbox checked"></text></view>
-        <view class="checkbox"><text class="text">租房</text><text class="icon icon_checkbox checked"></text></view>
-      </view>
-      <view class="ceil_item border_bottom more_cb">
-        <view class="ceil_ft">装修程度：</view>
-        <view class="checkbox"><text class="text">毛坯</text><text class="icon icon_checkbox"></text></view>
-        <view class="checkbox"><text class="text">普装</text><text class="icon icon_checkbox checked"></text></view>
-        <view class="checkbox"><text class="text">精装</text><text class="icon icon_checkbox checked"></text></view>
-        <view class="checkbox"><text class="text">豪装</text><text class="icon icon_checkbox checked"></text></view>
+      <view class="ceil_item border_bottom">
+        <view class="ceil_ft need" style="width:3em;">需求：</view>
+        <view class="checkbox" style="margin-left:2em;"><text class="text">自住</text><text class="icon icon_checkbox"></text></view>
+        <view class="checkbox"><text class="text">出租</text><text class="icon icon_checkbox checked"></text></view>
       </view>
     </view>
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom">
-        <view class="ceil_ft">其他需求</view>
+        <view class="ceil_ft need" style="white-space:nowrap;">房屋实际情况/具体装修要求</view>
       </view>
-      <view class="ceil_item border_bottom">
+      <view class="ceil_item">
         <view class="ceil_bd">
-          <textarea name="" class="other" placeholder="如：不要老小区，不要靠近街道。"></textarea>
+          <textarea name="" class="other" placeholder="如：楼盘地址、楼层、面积、格局(房/卫)等。"></textarea>
         </view>
       </view>
     </view>
@@ -50,9 +40,9 @@
 
 <script>
   import wepy from 'wepy'
-  export default class Form extends wepy.page {
+  export default class FitForm extends wepy.page {
     config = {
-      navigationBarTitleText: '二手房'
+      navigationBarTitleText: '装修推荐'
     }
 
     data = {

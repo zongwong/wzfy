@@ -16,9 +16,26 @@
       }
   }
 }
+// tab
+.tabNav{
+  background:#F9F9F9;
+  border-color: #ddddde;
+  position: relative;
+  &:after{
+    content:'';
+    width: 2rpx;
+    height: 36rpx;
+    background: #ddddde;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+}
 </style>
 <template>
   <view class="container houseindex">
+    <tab :navs="navs"></tab>
     <view class="index_list">
         <navigator class="index_item"  url="/pages/house/detail?id=1" wx:for="{{5}}" wx:key="list*">
             <image mode="aspectFill" src="../../images/house.png" class="post"></image>
@@ -34,13 +51,22 @@
 
 <script>
   import wepy from 'wepy'
-  export default class Financialindex extends wepy.page {
+  import tab from '../../components/tab'
+  export default class Fitindex extends wepy.page {
     config = {
-      navigationBarTitleText: '金融服务'
+      navigationBarTitleText: '装修服务'
     }
-
+    components = {
+      tab:tab
+    }
     data = {
-      
+      navs:[{
+        text:'套餐介绍',
+        selected:true,
+      },{
+        text:'装修案例',
+        selected:false,
+      }]
     }
 
     
@@ -50,7 +76,9 @@
     }
 
     events = {
-      
+      navTapEvent(index) {
+
+      }
     }
 
     onLoad() {

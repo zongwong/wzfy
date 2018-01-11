@@ -146,8 +146,12 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      // 'pages/financial/index',
-      // 'pages/financial/detail',
+      'pages/new/index',
+      'pages/fit/index',
+      'pages/fit/detail',
+      'pages/fit/form',
+      'pages/financial/index',
+      'pages/financial/detail',
       'pages/financial/form',
       'pages/house/index',
       'pages/house/detail',
