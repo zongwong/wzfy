@@ -74,24 +74,6 @@
               text-align: center;
               line-height: 28rpx;
             }
-            .flagtext{
-              // vertical-align: top;
-            }
-          }
-          .flag{
-            vertical-align: top;
-            background: #fff;
-            background: #e20001;
-            border-radius: 6rpx;
-            color: #fff;
-            width: 28rpx;
-            height: 28rpx;
-            font-size: 24rpx;
-            text-align: center;
-            line-height: 28rpx;
-          }
-          .flagtext{
-            vertical-align: top;
           }
           .nbtn{
             background: #fd6447;

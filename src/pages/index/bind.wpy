@@ -1,0 +1,111 @@
+<style lang="scss">
+.logo{
+  display: block;
+  width: 143rpx;
+  height: 143rpx;
+  margin: 86rpx auto 14rpx;
+}
+.title{
+  text-align: center;
+  font-size: 30rpx;
+  color: #000;
+  margin-bottom: 80rpx;
+}
+.bind_wrap{
+  margin: 0 36rpx;
+  overflow: hidden;
+  border: 2rpx solid #e4e4e4;
+  border-radius: 18rpx;
+}
+.code_wrap{
+  margin: 30rpx 36rpx!important;
+  overflow: hidden;
+  background: transparent;
+  .ceil_item{
+    padding: 0;
+    .ceil_bd{
+      background: #fff;
+      // height: 72rpx;
+      // box-sizing: border-box;
+      border: 2rpx solid #e4e4e4;
+      border-radius: 18rpx;
+      margin-right: 30rpx;
+      // padding: 0 15px;
+      input{
+        line-height: 32rpx;
+        height: 100%;
+      }
+    }
+    .code{
+      background: #fff;
+      // box-sizing: border-box;
+      border-radius: 18rpx;
+      border:2rpx solid #fd6447;
+      color: #fd6447;
+      font-size: 30rpx;
+      // line-height: 72rpx;
+      padding:6px 15px;
+      line-height:48rpx;
+      width: 230rpx;
+    }
+  }
+}
+.bindbtn{
+  background: #fd6447;
+  margin: 0 36rpx;
+  color: #fff;
+  font-size: 32rpx;
+}
+</style>
+<template>
+  <view class="container">
+    <image src="../../images/logo.png" class="logo"></image>
+    <view class="title">万众分佣</view>
+    <form class="">
+      <view class="ceils_wrap bind_wrap">
+        <view class="ceil_item" style="padding:6px 15px;">
+          <view class="ceil_ft" style="margin-right:20rpx;color:#000;">+86</view>
+          <view class="ceil_bd">
+            <input type="number" placeholder="手机号"/>
+          </view>
+        </view>
+      </view>
+      <view class="ceils_wrap code_wrap">
+        <view class="ceil_item">
+          <view class="ceil_bd" style="padding:6px 15px;">
+            <input type="number" placeholder="请输入短信验证码"/>
+          </view>
+          <view class="ceil_ft"><button class="code">获取验证码</button></view>
+        </view>
+      </view>
+      <button class="bindbtn">立即绑定</button>
+    </form>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class Bind extends wepy.page {
+    config = {
+      navigationBarTitleText: '绑定手机号'
+    }
+
+    data = {
+      
+    }
+
+    
+
+    methods = {
+     
+    }
+
+    events = {
+      
+    }
+
+    onLoad() {
+      
+    }
+  }
+</script>

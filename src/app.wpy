@@ -146,6 +146,7 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/new/detail',
       'pages/new/index',
       'pages/fit/index',
       'pages/fit/detail',
@@ -164,6 +165,7 @@ export default class extends wepy.app {
       'pages/user/msg',
       'pages/user/invite',
       'pages/user/user',
+      'pages/index/bind',
       'pages/index/index'
     ],
     window: {
