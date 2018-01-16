@@ -1,0 +1,6 @@
+
+  <view class="container housedetail">
+    <image src="../../images/house.png" class="post"/>
+    
+    <button class="btn bottom full">我要推荐</button>
+  </view>

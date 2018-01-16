@@ -1,0 +1,24 @@
+
+  <view class="container">
+    <image src="../../images/logo.png" class="logo"/>
+    <view class="title">万众分佣</view>
+    <form class="">
+      <view class="ceils_wrap bind_wrap">
+        <view class="ceil_item" style="padding:6px 15px;">
+          <view class="ceil_ft" style="margin-right:20rpx;color:#000;">+86</view>
+          <view class="ceil_bd">
+            <input type="number" placeholder="手机号" bindinput="phoneInput" value="{{phone}}"/>
+          </view>
+        </view>
+      </view>
+      <view class="ceils_wrap code_wrap">
+        <view class="ceil_item">
+          <view class="ceil_bd" style="padding:6px 15px;">
+            <input type="number" placeholder="请输入短信验证码" bindinput="codeInput" value="{{code}}"/>
+          </view>
+          <view class="ceil_ft"><button class="code" bindtap="getCode" disabled="{{disabled}}">{{text}}</button></view>
+        </view>
+      </view>
+      <button class="bindbtn" bindtap="bind">立即绑定</button>
+    </form>
+  </view>

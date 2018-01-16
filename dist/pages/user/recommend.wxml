@@ -1,0 +1,24 @@
+
+  <view class="container recommend">
+    
+  <view class="tabNav">
+      <view class="tabBox">
+        <view  wx:for="{{$tab$navs}}" wx:key="tab_{{index}}" class="tabNav-item {{item.selected?'active':''}}" bindtap="$tab$tap" data-wpytap-a="{{index}}">
+            {{item.text}}
+        </view>
+      </view>
+  </view>
+
+    <view class="ceils_wrap">
+      <navigator class="ceil_item ceil_item_access list_item">
+        <view class="ceil_bd">新房购买</view>
+        <view class="ceil_ft">123</view>
+        <view class="status nocj"/>
+      </navigator>
+      <navigator class="ceil_item ceil_item_access list_item">
+        <view class="ceil_bd">新房购买</view>
+        <view class="ceil_ft">123</view>
+        <view class="status yescj"/>
+      </navigator>
+    </view>
+  </view>

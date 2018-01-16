@@ -1,0 +1,10 @@
+
+  <view class="container houseindex">
+    <view class="index_list">
+        <navigator class="index_item" url="/pages/house/detail?id={{item.id}}"  wx:for="{{list}}" wx:key="list*">
+            <image mode="aspectFill" src="{{item.thumb}}" class="post"/>
+            <view class="title">{{item.title}}</view>
+        </navigator>
+    </view>
+    <navigator url="/pages/house/form" class="btn bottom full">我要推荐</navigator>
+  </view>

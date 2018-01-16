@@ -1,0 +1,1 @@
+.moneydetail .list{flex-wrap:wrap;padding-top:28rpx;padding-bottom:28rpx}.moneydetail .list .row{font-size:30rpx;width:100%;display:flex;justify-content:space-between;align-items:center}.moneydetail .list .row .light{font-weight:bold}.moneydetail .list .row .black{font-weight:bold;color:#000}.moneydetail .list .row .small{color:#999;font-size:22rpx}

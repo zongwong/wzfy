@@ -13,6 +13,7 @@ page{
 }
 // 按钮
 .btn{
+  text-align: center;
   &.bottom{
     position: fixed;
     bottom: 45rpx;
@@ -146,17 +147,19 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/new/detail',
-      'pages/new/index',
+      // 'pages/index/bind',
       'pages/fit/index',
-      'pages/fit/detail',
-      'pages/fit/form',
+      'pages/new/index',
       'pages/financial/index',
-      'pages/financial/detail',
-      'pages/financial/form',
       'pages/house/index',
       'pages/house/detail',
       'pages/house/form',
+      'pages/index/index',
+      'pages/new/detail',
+      'pages/fit/detail',
+      'pages/fit/form',
+      'pages/financial/detail',
+      'pages/financial/form',
       'pages/user/share',
       'pages/user/moneydetail',
       'pages/user/money',
@@ -164,9 +167,7 @@ export default class extends wepy.app {
       'pages/user/recommend',
       'pages/user/msg',
       'pages/user/invite',
-      'pages/user/user',
-      'pages/index/bind',
-      'pages/index/index'
+      'pages/user/user'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -185,7 +186,7 @@ export default class extends wepy.app {
           selectedIconPath: "icon/icon_index_on.png"
         },
         { 
-          pagePath: "pages/index/index",
+          pagePath: "pages/user/user",
           text: "我的",
           iconPath: "icon/icon_my.png",
           selectedIconPath: "icon/icon_my_on.png"

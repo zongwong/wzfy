@@ -1,0 +1,37 @@
+
+  <view class="container redetail">
+    <view class="block">
+        <view class="block_title">客户资料</view>
+        <view class="block_content">
+            <view class="name">黄小仙</view>
+            <view class="info"><text>12312312312</text>
+            <text class="time">2131232312</text></view>
+        </view>
+    </view>
+    <view class="block">
+        <view class="block_title">专属顾问</view>
+        <view class="block_content">
+            <view class="info"><text>姓名</text>
+            <text>2131232312</text></view>
+        </view>
+    </view>
+    <view class="block">
+        <view class="block_title">交易跟进状态：</view>
+        <view class="block_content" style="padding:10rpx 0;">
+            <view class="info record success"><text class="dot"/><text class="text">姓驱蚊器而且we气温气温名</text>
+            <text class="time">2131232312</text></view>
+            <view class="info record fail"><text class="dot"/><text class="text">姓请问请问而且我额名</text>
+            <text class="time">2131232312</text></view>
+        </view>
+    </view>
+    <view class="card">
+       <view class="top">
+           <view class="text">很抱歉交易失败,</view>
+           <view class="text" style="font-weight: normal;">请前往个人中心查看佣金</view>
+           <view class="time">2017/05/02</view>
+       </view>
+       <view class="bottom">
+           <view class="tips">备注:12312312313</view>
+       </view>
+    </view>
+  </view>

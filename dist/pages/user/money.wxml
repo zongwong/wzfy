@@ -1,0 +1,36 @@
+
+  <view class="container money">
+    <view class="card card_money">
+      <view class="title">提现金额</view>
+      <view class="box_input">
+        <input type="digit" placeholder="请输入提现金额"/>
+      </view>
+      <view class="info">零钱余额￥190550.00，<text class="light">全部提现</text></view>
+    </view>
+    <view class="card" style="padding:40rpx 36rpx;">
+      <view class="ceils_wrap">
+        <view class="ceil_item box_input">
+          <view class="label">提现人姓名：</view>
+          <view class="ceil_bd"><input type="text" placeholder="请输入提现人姓名"/></view>
+        </view>
+        <view class="ceil_item box_input box_bank">
+          <view class="label">提现人姓名：</view>
+          <view class="ceil_bd"><input type="text" placeholder="请选择提现银行"/></view>
+          <view class="ceil_ft icon_down"/>
+        </view>
+        <view class="ceil_item box_input">
+          <view class="label">银行卡号：</view>
+          <view class="ceil_bd"><input type="number" placeholder="请输入提现银行卡号"/></view>
+        </view>
+        <view class="ceil_item box_input" style="margin-bottom:0;">
+          <view class="label">银行开户行：</view>
+          <view class="ceil_bd"><input type="text" placeholder="请输入提现银行开户行"/></view>
+        </view>
+      </view>
+    </view>
+    <view class="tips">
+      <view class="light">温馨提示：</view>
+      <view>请认真填写银行卡信息并且核对确认无误</view>
+    </view>
+    <button class="btn bottom">申请提现</button>
+  </view>

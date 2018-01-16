@@ -1,0 +1,41 @@
+
+  <view class="container msg">
+
+      <view class="ceils_wrap">
+
+        <view class="ceil_item border_bottom ceil_swiped">
+          <view class="ceil_bd" style="transform:translateX(-68px);">
+            <view class="ceil_item border_bottom">
+              <view class="ceil_bd msg_item">
+                <view class="info">
+                  <view class="msg_type">[系统消息]</view>
+                  <view class="time">2017-12-12</view>
+                </view>
+                <view class="content">123</view>
+              </view>
+            </view>
+          </view>
+          <view class="ceil_ft">
+            <view class="del"><view class="del_text">删除</view></view>
+          </view>
+        </view>
+
+        <view class="ceil_item border_bottom ceil_swiped">
+          <view class="ceil_bd">
+            <view class="ceil_item border_bottom">
+              <view class="ceil_bd msg_item">
+                <view class="info">
+                  <view class="msg_type">[系统消息]</view>
+                  <view class="time">2017-12-12</view>
+                </view>
+                <view class="content">123</view>
+              </view>
+            </view>
+          </view>
+          <view class="ceil_ft">
+            <view class="del"><view class="del_text">删除</view></view>
+          </view>
+        </view>
+
+      </view>
+  </view>

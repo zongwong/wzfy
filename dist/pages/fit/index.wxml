@@ -1,0 +1,22 @@
+
+  <view class="container houseindex">
+    
+  <view class="tabNav">
+      <view class="tabBox">
+        <view  wx:for="{{$tab$navs}}" wx:key="tab_{{index}}" class="tabNav-item {{item.selected?'active':''}}" bindtap="$tab$tap" data-wpytap-a="{{index}}">
+            {{item.text}}
+        </view>
+      </view>
+  </view>
+
+    <view class="index_list">
+        <navigator class="index_item" url="/pages/house/detail?id=1"  wx:for="{{list}}" wx:key="list*">
+            <image mode="aspectFill" src="{{item.thumb}}" class="post"/>
+            <view class="title">
+              <view>{{item.title}}</view>
+              <view class="sub_title">{{item.description}}</view>
+            </view>
+        </navigator>
+    </view>
+    <navigator url="/pages/fit/form" class="btn bottom full">我要推荐</navigator>
+  </view>

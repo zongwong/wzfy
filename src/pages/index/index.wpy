@@ -95,28 +95,28 @@
         indicator-active-color="#fff"
         autoplay="true"
         class="swiper">
-        <block wx:for="{{4}}" wx:key="swiper_{{index}}">
+        <block wx:for="{{banner}}" wx:key="swiper_{{index}}">
           <swiper-item>
-            <image src="../../images/banner.png" mode="aspectFill" class="slide_image" />
+            <image src="{{item.thumb}}" mode="aspectFill" class="slide_image" />
           </swiper-item>
         </block>
       </swiper>
-      <view class="city">厦门<text class="icon icon_down"></text></view>
+      <view class="city">{{cityInfo.addressComponent.city}}<text class="icon icon_down"></text></view>
     </view>
     <view class="navs_wrap">
-      <navigator class="nav_item" hover-class="none">
+      <navigator class="nav_item" hover-class="none" url="/pages/new/index">
         <text class="icon icon_navs icon_house"></text>
         <text class="text_house">新房团购</text>
       </navigator>
-      <navigator class="nav_item" hover-class="none">
+      <navigator class="nav_item" hover-class="none" url="/pages/house/index">
         <text class="icon icon_navs icon_house2"></text>
         <text class="text_house2">二手房</text>
       </navigator>
-      <navigator class="nav_item" hover-class="none">
+      <navigator class="nav_item" hover-class="none" url="/pages/financial/index">
         <text class="icon icon_navs icon_money"></text>
         <text class="text_money">金融服务</text>
       </navigator>
-      <navigator class="nav_item" hover-class="none">
+      <navigator class="nav_item" hover-class="none" url="/pages/fit/index">
         <text class="icon icon_navs icon_fix"></text>
         <text class="text_fix">装修服务</text>
       </navigator>
@@ -126,14 +126,16 @@
 
 <script>
   import wepy from 'wepy'
-  import Button from '../../components/button'
+  import api from '../../interfaces/api'
+  import wxApi from '../../interfaces/wxapi'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '万众分佣'
     }
 
     data = {
-      
+      banner:[],
+      cityInfo:null
     }
 
     
@@ -146,7 +148,17 @@
       
     }
 
-    onLoad() {
+    async onLoad() {
+      const data = await api.banner()
+      this.banner = data
+
+      wxApi.BaiduMap().then((res)=>{
+        this.cityInfo = res.originalData.result
+        this.$apply()
+      }).catch((res)=>{
+        console.log(res)
+      })
+      
       
     }
   }

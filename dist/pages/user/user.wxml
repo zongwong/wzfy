@@ -1,0 +1,48 @@
+
+  <view class="container">
+    <view class="user">
+      <image class="avatar"/>
+      <text class="nickName">123</text>
+      <text class="phone">123</text>
+    </view>
+    <view class="ceils_wrap">
+      <navigator class="ceil_item ceil_item_access border_bottom" url="">
+        <view class="ceil_bd user_navs">
+          <text class="icon icon_user icon_msg"/><text>我的消息</text>
+        </view>
+        <view class="ceil_ft"/>
+      </navigator>
+      <navigator class="ceil_item ceil_item_access border_bottom" url="">
+        <view class="ceil_bd user_navs">
+          <text class="icon icon_user icon_tj"/><text>我的推荐</text>
+        </view>
+        <view class="ceil_ft"/>
+      </navigator>
+      <navigator class="ceil_item ceil_item_access border_bottom" url="">
+        <view class="ceil_bd user_navs">
+          <text class="icon icon_user icon_money"/><text>我的佣金</text>
+        </view>
+        <view class="ceil_ft"/>
+      </navigator>
+      <navigator class="ceil_item ceil_item_access border_bottom" url="">
+        <view class="ceil_bd user_navs">
+          <text class="icon icon_user icon_share"/><text>分享好友</text>
+        </view>
+        <view class="ceil_ft"/>
+      </navigator>
+      <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/invite">
+        <view class="ceil_bd user_navs">
+          <text class="icon icon_user icon_invite"/><text>我的邀请</text>
+        </view>
+        <view class="ceil_ft"/>
+      </navigator>
+    </view>
+    <view class="ceils_wrap">
+      <navigator class="ceil_item ceil_item_access border_bottom" url="">
+        <view class="ceil_bd user_navs">
+          <text class="icon icon_user icon_msg"/><text>退出帐号</text>
+        </view>
+        <view class="ceil_ft"/>
+      </navigator>
+    </view>
+  </view>

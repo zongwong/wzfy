@@ -1,0 +1,31 @@
+
+  <view class="container">
+    <view class="swiper_wrap">
+      <swiper indicator-dots="true" indicator-active-color="#fff" autoplay="true" class="swiper">
+        <block  wx:for="{{banner}}" wx:key="swiper_{{index}}">
+          <swiper-item>
+            <image src="{{item.thumb}}" mode="aspectFill" class="slide_image"/>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="city">{{cityInfo.addressComponent.city}}<text class="icon icon_down"/></view>
+    </view>
+    <view class="navs_wrap">
+      <navigator class="nav_item" hover-class="none" url="/pages/new/index">
+        <text class="icon icon_navs icon_house"/>
+        <text class="text_house">新房团购</text>
+      </navigator>
+      <navigator class="nav_item" hover-class="none" url="/pages/house/index">
+        <text class="icon icon_navs icon_house2"/>
+        <text class="text_house2">二手房</text>
+      </navigator>
+      <navigator class="nav_item" hover-class="none" url="/pages/financial/index">
+        <text class="icon icon_navs icon_money"/>
+        <text class="text_money">金融服务</text>
+      </navigator>
+      <navigator class="nav_item" hover-class="none" url="/pages/fit/index">
+        <text class="icon icon_navs icon_fix"/>
+        <text class="text_fix">装修服务</text>
+      </navigator>
+    </view>
+  </view>

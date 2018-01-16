@@ -37,21 +37,22 @@
   <view class="container houseindex">
     <tab :navs="navs"></tab>
     <view class="index_list">
-        <navigator class="index_item"  url="/pages/house/detail?id=1" wx:for="{{5}}" wx:key="list*">
-            <image mode="aspectFill" src="../../images/house.png" class="post"></image>
+        <navigator class="index_item"  url="/pages/house/detail?id=1" wx:for="{{list}}" wx:key="list*">
+            <image mode="aspectFill" src="{{item.thumb}}" class="post"></image>
             <view class="title">
-              <view>请问请问亲我额</view>
-              <view class="sub_title">请问请问亲我额</view>
+              <view>{{item.title}}</view>
+              <view class="sub_title">{{item.description}}</view>
             </view>
         </navigator>
     </view>
-    <button class="btn bottom full">我要推荐</button>
+    <navigator url="/pages/fit/form" class="btn bottom full">我要推荐</navigator>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
   import tab from '../../components/tab'
+  import api from '../../interfaces/api'
   export default class Fitindex extends wepy.page {
     config = {
       navigationBarTitleText: '装修服务'
@@ -66,7 +67,9 @@
       },{
         text:'装修案例',
         selected:false,
-      }]
+      }],
+      list:null,
+      tabIndex:0
     }
 
     
@@ -77,12 +80,27 @@
 
     events = {
       navTapEvent(index) {
-
+        this.tabIndex = index
+        if(index==0){
+          this.getDecoratesList()
+        }else{
+          this.getCaseList()
+        }
       }
     }
 
-    onLoad() {
-      
+    async onLoad() {
+      await this.getDecoratesList()
+    }
+    async getDecoratesList() {
+      const data = await api.decorates()
+      this.list = data.data
+      this.$apply()
+    }
+    async getCaseList() {
+      const data = await api.cases()
+      this.list = data.data
+      this.$apply()
     }
   }
 </script>

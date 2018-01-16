@@ -1,0 +1,25 @@
+
+  <view class="container moneydetail">
+    <view class="ceils_wrap">
+      <view class="ceil_item border_bottom list">
+        <view class="row">
+          <view class="left">123123</view>
+          <view class="right small">123123</view>
+        </view>
+        <view class="row">
+          <view class="left small">123123</view>
+          <view class="right light">1231231</view>
+        </view>
+      </view>
+      <view class="ceil_item border_bottom list">
+        <view class="row">
+          <view class="left">123123</view>
+          <view class="right small">123123</view>
+        </view>
+        <view class="row">
+          <view class="left small">123123</view>
+          <view class="right black">-1231231</view>
+        </view>
+      </view>
+    </view>
+  </view>

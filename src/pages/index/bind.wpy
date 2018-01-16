@@ -38,12 +38,10 @@
     }
     .code{
       background: #fff;
-      // box-sizing: border-box;
       border-radius: 18rpx;
       border:2rpx solid #fd6447;
       color: #fd6447;
       font-size: 30rpx;
-      // line-height: 72rpx;
       padding:6px 15px;
       line-height:48rpx;
       width: 230rpx;
@@ -66,40 +64,120 @@
         <view class="ceil_item" style="padding:6px 15px;">
           <view class="ceil_ft" style="margin-right:20rpx;color:#000;">+86</view>
           <view class="ceil_bd">
-            <input type="number" placeholder="手机号"/>
+            <input type="number" placeholder="手机号" @input="phoneInput" value="{{phone}}"/>
           </view>
         </view>
       </view>
       <view class="ceils_wrap code_wrap">
         <view class="ceil_item">
           <view class="ceil_bd" style="padding:6px 15px;">
-            <input type="number" placeholder="请输入短信验证码"/>
+            <input type="number" placeholder="请输入短信验证码" @input="codeInput" value="{{code}}"/>
           </view>
-          <view class="ceil_ft"><button class="code">获取验证码</button></view>
+          <view class="ceil_ft"><button class="code" @tap="getCode" disabled="{{disabled}}">{{text}}</button></view>
         </view>
       </view>
-      <button class="bindbtn">立即绑定</button>
+      <button class="bindbtn" @tap="bind">立即绑定</button>
     </form>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import api from '../../interfaces/api'
+  import WxValidate from '../../utils/WxValidate'
   export default class Bind extends wepy.page {
     config = {
       navigationBarTitleText: '绑定手机号'
     }
 
     data = {
-      
+      phone:'',
+      text:'获取验证码',
+      disabled: false,
+      code: ''
     }
-
-    
 
     methods = {
-     
+      phoneInput(e) {
+        this.phone = e.detail.value
+      },
+      codeInput(e) {
+        this.code = e.detail.value
+      },
+      // 验证码
+      async getCode() {
+        if(!(/^1[345789]\d{9}$/.test(this.phone))){
+          wepy.showModal({
+            content: '请输入正确的手机号',
+            title: '提示'
+          })
+          return false;
+        }
+        const data = await api.sms({
+          phone: this.phone
+        })
+        if(data.status){
+          wepy.showToast({
+            title: '验证码已发送'
+          })
+          this.disabled = true
+          this.text = '60s后获取'
+          let second = 60
+          let timer = setInterval(()=>{
+            second = second - 1
+            this.text = `${second}s后获取`
+            if(second==0){
+              this.text = '获取验证码'
+              this.disabled = false
+              clearInterval(timer)
+            }
+            this.$apply()
+          },1000)
+        }
+      },
+      // 绑定
+      async bind() {
+        wepy.setStorageSync('token','GF3HIMALCZEpL7zdexeqavILoQNUmdKh');
+        if(!(/^1[345789]\d{9}$/.test(this.phone))){
+          wepy.showModal({
+            content: '请输入正确的手机号',
+            title: '提示'
+          })
+          return false;
+        }
+        if(!this.code){
+          wepy.showModal({
+            content: '请填写短信验证码',
+            title: '提示'
+          })
+          return false;
+        }
+        const data = await api.bind({
+          phone: this.phone,
+          code: this.code
+        }) 
+        console.log(data)
+        if(!data.status){
+          wepy.showModal({
+            title: '提示',
+            content: data.message
+          })
+          return false
+        }
+        
+        if(data.token){
+          wepy.setStorageSync('token','Bearer'+token)
+          wepy,showToast({
+            title:'登录成功'
+          })
+        }
+        // if(0){
+        //   wepy.navigateTo({
+        //     url: '/pages/index/index'
+        //   })
+        // }
+      }
     }
-
     events = {
       
     }

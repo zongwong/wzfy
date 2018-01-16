@@ -4,24 +4,25 @@
 <template>
   <view class="container houseindex">
     <view class="index_list">
-        <navigator class="index_item"  url="/pages/house/detail?id=1" wx:for="{{5}}" wx:key="list*">
-            <image mode="aspectFill" src="../../images/house.png" class="post"></image>
-            <view class="title">请问请问亲我额</view>
+        <navigator class="index_item"  url="/pages/house/detail?id={{item.id}}" wx:for="{{list}}" wx:key="list*">
+            <image mode="aspectFill" src="{{item.thumb}}" class="post"></image>
+            <view class="title">{{item.title}}</view>
         </navigator>
     </view>
-    <button class="btn bottom full">我要推荐</button>
+    <navigator url="/pages/house/form" class="btn bottom full">我要推荐</navigator>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import api from '../../interfaces/api'
   export default class Houseindex extends wepy.page {
     config = {
       navigationBarTitleText: '二手房'
     }
 
     data = {
-      
+      list:null
     }
 
     
@@ -34,8 +35,10 @@
       
     }
 
-    onLoad() {
-      
+    async onLoad() {
+      const data = await api.house()
+      this.list = data.data
+      this.$apply()
     }
   }
 </script>

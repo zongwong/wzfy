@@ -1,0 +1,1 @@
+.msg{padding-top:16rpx}.del{background:#df0a17;display:block;padding:10px 1em;line-height:1.47058824;font-size:17px;width:2em}.del .del_text{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%)}.msg_item .info{display:flex;justify-content:space-between}.msg_item .info .time{color:#999;font-size:22rpx}.msg_item .content{color:#666}

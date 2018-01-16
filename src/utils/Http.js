@@ -3,7 +3,7 @@ import Tips from './Tips';
 
 // HTTP工具类
 export default class http {
-  static async request (method, url, data, loading = true) {
+  static async request (method, url, data, loading = true , token = true) {
     const param = {
       url: url,
       method: method,
@@ -12,9 +12,17 @@ export default class http {
     if (loading) {
       // Tips.loading();
     }
+    if (token){
+      const token = wepy.getStorageSync('token')
+      param.header = {
+        'content-type': 'application/x-www-form-urlencoded',
+        'Authorization' : 'Bearer '+token
+      }
+    }
     const res = await wepy.request(param);
-    if (this.isSuccess(res)) {
-      return res.data.data;
+
+    if (res.statusCode == 200) {
+      return res.data;
     } else {
       throw this.requestException(res);
     }
