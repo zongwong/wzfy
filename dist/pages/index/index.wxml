@@ -8,7 +8,7 @@
           </swiper-item>
         </block>
       </swiper>
-      <view class="city">{{cityInfo.addressComponent.city}}<text class="icon icon_down"/></view>
+      <view class="city" bindtap="toCity">{{mycity}}<text class="icon icon_down"/></view>
     </view>
     <view class="navs_wrap">
       <navigator class="nav_item" hover-class="none" url="/pages/new/index">

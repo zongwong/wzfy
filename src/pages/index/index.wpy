@@ -101,7 +101,7 @@
           </swiper-item>
         </block>
       </swiper>
-      <view class="city">{{cityInfo.addressComponent.city}}<text class="icon icon_down"></text></view>
+      <view class="city" @tap="toCity">{{mycity}}<text class="icon icon_down"></text></view>
     </view>
     <view class="navs_wrap">
       <navigator class="nav_item" hover-class="none" url="/pages/new/index">
@@ -135,13 +135,17 @@
 
     data = {
       banner:[],
-      cityInfo:null
+      mycity:''
     }
 
     
 
     methods = {
-     
+     toCity() {
+       wepy.navigateTo({
+         url:'/pages/index/city'
+       })
+     }
     }
 
     events = {
@@ -151,15 +155,20 @@
     async onLoad() {
       const data = await api.banner()
       this.banner = data
-
-      wxApi.BaiduMap().then((res)=>{
-        this.cityInfo = res.originalData.result
+      this.$apply()
+    }
+    async onShow() {
+      const city = await wepy.getStorageInfo('city')
+      console.log(city)
+      if(city){
+        this.mycity = city
         this.$apply()
-      }).catch((res)=>{
-        console.log(res)
-      })
-      
-      
+      }else{
+        wxApi.BaiduMap().then((res)=>{
+          this.mycity = res.originalData.result.addressComponent.city
+          this.$apply()
+        })
+      }
     }
   }
 </script>
