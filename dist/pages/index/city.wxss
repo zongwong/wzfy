@@ -1,0 +1,1 @@
+.city .title{font-size:26rpx;padding:18rpx 15px}.city .selected{border:2rpx solid #ff6340;color:#ff6340;padding:4rpx 70rpx;border-radius:8rpx}

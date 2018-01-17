@@ -1,0 +1,71 @@
+<style lang="scss">
+.city{
+    .title{
+        font-size: 26rpx;
+        padding: 18rpx 15px;
+    }
+    .selected{
+        border: 2rpx solid #ff6340;
+        color: #ff6340;
+        padding: 4rpx 70rpx;
+        border-radius: 8rpx;
+    }
+}
+</style>
+<template>
+  <view class="container city">
+      <view class="title">当前定位城市：</view>
+      <view class="ceils_wrap">
+          <view class="ceil_item">
+              <view class="ceil_bd"><text class="selected"  @tap="chooseCity({{gpsCity}})">{{gpsCity}}</text></view>
+          </view>
+      </view>
+      <view class="title">选择城市：</view>
+      <view class="ceils_wrap">
+          <view class="ceil_item border_bottom" wx:for="{{city}}" wx:key="city_{{index}}">
+              <view class="ceil_bd" @tap="chooseCity({{item}})">{{item}}</view>
+          </view>
+      </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '../../interfaces/api'
+  import wxApi from '../../interfaces/wxapi'
+  export default class City extends wepy.page {
+    config = {
+      navigationBarTitleText: '选择城市'
+    }
+
+    data = {
+      city:[],
+      gpsCity:'',
+    }
+
+    
+
+    methods = {
+     async chooseCity(city){
+         await wepy.setStorageSync('city',city)
+         await wepy.navigateBack({
+             delta:1
+         })
+     }
+    }
+
+    events = {
+      
+    }
+
+    async onLoad() {
+      const data = await api.cities()
+      this.city = data
+      wxApi.BaiduMap().then((res)=>{
+          this.gpsCity = res.originalData.result.addressComponent.city
+          this.$apply()
+      })
+      this.$apply()
+    }
+  }
+</script>
