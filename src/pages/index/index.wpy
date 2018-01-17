@@ -158,7 +158,7 @@
       this.$apply()
     }
     async onShow() {
-      const city = await wepy.getStorageInfo('city')
+      const city = await wepy.getStorageSync('city')
       console.log(city)
       if(city){
         this.mycity = city
