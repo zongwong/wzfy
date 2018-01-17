@@ -60,30 +60,30 @@
 <template>
   <view class="container">
     <view class="user">
-      <image class="avatar"></image>
-      <text class="nickName">123</text>
+      <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+      <text class="nickName">{{userInfo.nickName}}</text>
       <text class="phone">123</text>
     </view>
     <view class="ceils_wrap">
-      <navigator class="ceil_item ceil_item_access border_bottom" url="">
+      <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/msg">
         <view class="ceil_bd user_navs">
           <text class="icon icon_user icon_msg"></text><text>我的消息</text>
         </view>
         <view class="ceil_ft"></view>
       </navigator>
-      <navigator class="ceil_item ceil_item_access border_bottom" url="">
+      <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/recommend">
         <view class="ceil_bd user_navs">
           <text class="icon icon_user icon_tj"></text><text>我的推荐</text>
         </view>
         <view class="ceil_ft"></view>
       </navigator>
-      <navigator class="ceil_item ceil_item_access border_bottom" url="">
+      <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/money">
         <view class="ceil_bd user_navs">
           <text class="icon icon_user icon_money"></text><text>我的佣金</text>
         </view>
         <view class="ceil_ft"></view>
       </navigator>
-      <navigator class="ceil_item ceil_item_access border_bottom" url="">
+      <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/share">
         <view class="ceil_bd user_navs">
           <text class="icon icon_user icon_share"></text><text>分享好友</text>
         </view>
@@ -109,13 +109,14 @@
 
 <script>
   import wepy from 'wepy'
+  import wxApi from '../../interfaces/wxapi'
   export default class User extends wepy.page {
     config = {
       navigationBarTitleText: '个人中心'
     }
 
     data = {
-      
+      userInfo:null
     }
 
     
@@ -128,8 +129,10 @@
       
     }
 
-    onLoad() {
-      
+    async onLoad() {
+      const userInfo = await wxApi.getUser()
+      this.userInfo = userInfo
+      this.$apply()
     }
   }
 </script>

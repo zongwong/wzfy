@@ -60,7 +60,7 @@
     }
 
     data = {
-      
+      list:null
     }
 
     
@@ -73,8 +73,10 @@
       
     }
 
-    onLoad() {
-      
+    async onLoad() {
+      const data = await api.accounts()
+      this.list = data
+      this.$apply()
     }
   }
 </script>

@@ -36,13 +36,14 @@
 
 <script>
   import wepy from 'wepy'
+  import api from '../../interfaces/api'
   export default class Invite extends wepy.page {
     config = {
       navigationBarTitleText: '我的邀请'
     }
 
     data = {
-      
+      list:[]
     }
 
     
@@ -55,8 +56,10 @@
       
     }
 
-    onLoad() {
-      
+    async onLoad() {
+      const data = await api.msg()
+      this.list = data
+      this.$apply()
     }
   }
 </script>

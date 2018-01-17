@@ -25,4 +25,23 @@ export default class wxApi extends base {
     })
 
   }
+  // 获取用户信息
+  static async getUser () {
+    let Info
+    try {
+      Info = wepy.getStorageSync('userInfo')
+      if (Info) {
+          console.log(1)
+          return Info
+      }else{
+         console.log(2)
+         const { userInfo } = await wepy.getUserInfo()
+         return userInfo
+      }
+    } catch (e) {
+      console.log(3)
+      const { userInfo } = await wepy.getUserInfo()
+      return data
+    }
+  }
 }

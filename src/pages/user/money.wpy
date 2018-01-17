@@ -87,6 +87,7 @@
 
 <script>
   import wepy from 'wepy'
+  import api from '../../interfaces/api'
   export default class Money extends wepy.page {
     config = {
       navigationBarTitleText: '我的佣金'
@@ -106,8 +107,8 @@
       
     }
 
-    onLoad() {
-      
+    async onLoad() {
+      const data = await api.accounts()
     }
   }
 </script>

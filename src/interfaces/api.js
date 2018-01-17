@@ -96,4 +96,24 @@ export default class Api extends base{
     const url = `${this.host}/cases`
     return await this.get(url)
   }
+  // 我的消息
+  static async msg() {
+    const url = `${this.host}/notifications`
+    return await this.get(url)
+  }
+  // 我的邀请
+  static async inviters() {
+    const url = `${this.host}/inviters`
+    return await this.get(url)
+  }
+  // 我的佣金 
+  static async accounts() {
+    const url = `${this.host}/accounts`
+    return await this.get(url)
+  }
+  // 提现
+  static async wallet(data) {
+    const url = `${this.host}/wallet`
+    return await this.post(url, data)
+  }
 }
