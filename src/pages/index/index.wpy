@@ -158,17 +158,20 @@
       this.$apply()
     }
     async onShow() {
-      const city = await wepy.getStorageSync('city')
-      console.log(city)
-      if(city){
-        this.mycity = city
-        this.$apply()
-      }else{
-        wxApi.BaiduMap().then((res)=>{
-          this.mycity = res.originalData.result.addressComponent.city
-          this.$apply()
-        })
-      }
+      const city = await wxApi.getCity()
+      this.mycity = city
+      this.$apply()
+      // const city = await wepy.getStorageSync('city')
+      // console.log(city)
+      // if(city){
+      //   this.mycity = city
+      //   this.$apply()
+      // }else{
+      //   wxApi.BaiduMap().then((res)=>{
+      //     this.mycity = res.originalData.result.addressComponent.city
+      //     this.$apply()
+      //   })
+      // }
     }
   }
 </script>

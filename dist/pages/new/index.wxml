@@ -7,28 +7,28 @@
       <view class="item"><text>物业</text><text class="icon icon_arrow"/></view>
     </view>
     <view class="ceils_wrap new_wrap">
-      <view class="ceil_item">
+      <navigator class="ceil_item" url="/pages/new/detail?id={{item.id}}"  wx:for="{{all.data}}">
         <view class="ceil_ft post">
-          <image class="img" mode="aspectFill" src="../../images/ad.png"/>
+          <image class="img" mode="aspectFill" src="{{item.thumb[0]}}"/>
         </view>
         <view class="ceil_bd info">
           <view class="info_row">
-            <text class="title">气温气温</text>
-            <text class="red">2000元/m2</text>
+            <text class="title">{{item.title}}</text>
+            <text class="red">{{item.per_square}}元/m2</text>
           </view>
           <view class="info_row area">
-            <text>海沧－马銮湾片区</text>
+            <text>{{item.city}}－{{item.county}}</text>
           </view>
           <view class="info_row">
-            <text>50-116m2  ｜ 2-3室</text>
+            <text>{{item.area}}  ｜ {{item.apartment_layout}} {{item.property_type}}</text>
             <text class="money">89万起</text>
           </view>
           <view class="info_row flag_row">
-            <view class="red flag_box"><text class="icon flag">佣</text><text class="flagtext">3.5%/套</text></view>
+            <view class="red flag_box"><text class="icon flag">佣</text><text class="flagtext">{{item.commision}}/套</text></view>
             <text class="nbtn">我要推荐</text>
           </view>
         </view>
-      </view>
+      </navigator>
     </view>
     
   </view>

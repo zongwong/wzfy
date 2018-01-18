@@ -109,23 +109,23 @@
       <view class="ceils_wrap">
         <view class="ceil_item border_bottom">
           <view class="ceil_bd">
-            <view class="title">阿萨德</view>
+            <view class="title">{{info.title}}</view>
             <view class="ceils_wrap">
               <view class="ceil_item row">
-                <view class="ceil_bd light">1231元/m2</view>
-                <view class="ceil_ft flag_box"><text class="icon flag">佣</text><text class="flagtext">3.5%/套</text></view>
+                <view class="ceil_bd light">{{info.per_square}}元/m2</view>
+                <view class="ceil_ft flag_box"><text class="icon flag">佣</text><text class="flagtext">{{info.commision}}/套</text></view>
               </view>
             </view>
           </view>
         </view>
         <view class="ceil_item ceil_item_access border_bottom">
-          <view class="ceil_bd">厦门市是明确两路</view>
+          <view class="ceil_bd">{{info.address}}</view>
           <view class="ceil_ft">查看地图</view>
         </view>
         <view class="ceil_item ceil_block">
-          <view>开盘时间：待定</view>
-          <view>合作时间：2017/02/09至2917/12/08</view>
-          <view>项目负责人：26448996</view>
+          <view>开盘时间：{{info.open_time}}</view>
+          <view>合作时间：{{info.open_time}}至{{info.open_time}}</view>
+          <view>项目负责人：{{info.manager}}</view>
         </view>
       </view>
     </view>
@@ -186,7 +186,7 @@
               <view class="ceils_wrap">
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">开房时间：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.open_time}}</view>
                 </view>
                 <view class="ceil_item">
                   <view class="ceil_ft">交房时间：</view>
@@ -196,15 +196,15 @@
               <view class="ceils_wrap">
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">开发商：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.developer}}</view>
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">开发商品牌：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.company}}</view>
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">物业公司：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.company}}</view>
                 </view>
                 <view class="ceil_item">
                   <view class="ceil_ft">售楼部电话：</view>
@@ -222,15 +222,15 @@
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">绿化率：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.green_rate}}%</view>
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">总户数：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.total_houses}}</view>
                 </view>
                 <view class="ceil_item">
                   <view class="ceil_ft">车位数：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.parking_spaces}}</view>
                 </view>
               </view>
               <view class="param">住宅参数：</view>
@@ -253,7 +253,7 @@
                 </view>
                 <view class="ceil_item">
                   <view class="ceil_ft">产权年限：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.property_rights}}</view>
                 </view>
               </view>
               <view class="param">别墅参数：</view>
@@ -276,7 +276,7 @@
                 </view>
                 <view class="ceil_item">
                   <view class="ceil_ft">产权年限：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.property_rights}}</view>
                 </view>
               </view>
             </view>
@@ -291,6 +291,7 @@
 
 <script>
   import wepy from 'wepy'
+  import api from '../../interfaces/api'
   export default class Fitdetail extends wepy.page {
     config = {
       navigationBarTitleText: '新房详情',
@@ -308,7 +309,8 @@
         {title: '楼盘卖点'},
         {title: '楼盘信息'}
       ],
-      activeKey: 1
+      activeKey: 1,
+      info:null
     }
 
     
@@ -325,8 +327,10 @@
       
     }
 
-    onLoad() {
-      
+    async onLoad(options) {
+      const data = await api.buildInfo(options.id)
+      this.info = data
+      this.$apply()
     }
   }
 </script>

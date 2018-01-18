@@ -43,11 +43,17 @@
       gpsCity:'',
     }
 
-    
-
     methods = {
      async chooseCity(city){
-         await wepy.setStorageSync('city',city)
+         if(this.city.indexOf(city)==-1){
+             city = this.city[0]
+             await wepy.showModal({
+                 title:'提示',
+                 content:'当前城市未开通服务'
+             })
+             
+         }
+         wepy.setStorageSync('city',city)
          await wepy.navigateBack({
              delta:1
          })
@@ -61,11 +67,13 @@
     async onLoad() {
       const data = await api.cities()
       this.city = data
+      this.$apply()
       wxApi.BaiduMap().then((res)=>{
-          this.gpsCity = res.originalData.result.addressComponent.city
+          let city = res.originalData.result.addressComponent.city
+        //   this.gpsCity = city.slice(0,city.length-1)
+        this.gpsCity = '呼和浩特'
           this.$apply()
       })
-      this.$apply()
     }
   }
 </script>
