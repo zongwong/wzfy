@@ -1,4 +1,7 @@
 <style lang="scss">
+  page{
+    position: relative;
+  }
   .search{
     display: flex;
     background: #f9f9f9;
@@ -10,6 +13,13 @@
       flex: 1;
       text-align: center;
       position: relative;
+      line-height: 1;
+      &.active{
+        color: #fd6447;
+        .icon_arrow{
+          background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAKCAYAAAC9vt6cAAAAn0lEQVQokZXRoRIBYRSG4ccyAsG4AEVQFDdhzDZRFBSNZJghCaKiCYrIJbkRgrBrZof1W188873vnP8/pcdkIJAqdljgnleohGjsMUUJ87xCFIDHKQwzjP4R9HB4mx3RLSJo4oLa27yOKxohQYQz2l826+Ak+ZNcwRrxF/iVoeQqH4IYmx/wK1v0s4K2ZPXQVbIpp/1WRfKeJW4F4WxWT7jAEeSrT66OAAAAAElFTkSuQmCC);
+        }
+      }
       .icon_arrow{
         width: 16rpx;
         height: 10rpx;
@@ -94,17 +104,19 @@
       }
     }
   }
+
+
 </style>
 <template>
   <view class="container new">
     <view class="search">
-      <view class="item"><text>区域</text><text class="icon icon_arrow"></text></view>
-      <view class="item"><text>总价</text><text class="icon icon_arrow"></text></view>
-      <view class="item"><text>户型</text><text class="icon icon_arrow"></text></view>
-      <view class="item"><text>物业</text><text class="icon icon_arrow"></text></view>
+      <view class="item {{areaStatus?'active':''}}" @tap="areaSelect"><text>区域</text><text class="icon icon_arrow"></text></view>
+      <view class="item {{priceStatus?'active':''}}" @tap="priceSelect"><text>总价</text><text class="icon icon_arrow"></text></view>
+      <view class="item {{typeStatus?'active':''}}" @tap="typeSelect"><text>户型</text><text class="icon icon_arrow"></text></view>
+      <view class="item {{propertyStatus?'active':''}}" @tap="propertySelect"><text>物业</text><text class="icon icon_arrow"></text></view>
     </view>
     <view class="ceils_wrap new_wrap">
-      <navigator class="ceil_item" url="/pages/new/detail?id={{item.id}}" wx:for="{{all.data}}">
+      <navigator class="ceil_item" url="/pages/new/detail?id={{item.id}}" wx:for="{{all.data}}" wx:key="item_{{index}}">
         <view class="ceil_ft post">
           <image class="img" mode="aspectFill" src="{{item.thumb[0]}}"></image>
         </view>
@@ -127,32 +139,84 @@
         </view>
       </navigator>
     </view>
-    
   </view>
+  <areaSelect :list.sync="areaList" :status.sync="areaStatus"></areaSelect>
+  <priceSelect :list.sync="priceList" :status.sync="priceStatus"></priceSelect>
+  <typeSelect :list.sync="typeList" :status.sync="typeStatus"></typeSelect>
+  <propertySelect :list.sync="propertyList" :status.sync="propertyStatus"></propertySelect>
 </template>
 
 <script>
   import wepy from 'wepy'
   import api from '../../interfaces/api'
   import wxApi from '../../interfaces/wxapi'
+  import select from '../../components/select'
   export default class New extends wepy.page {
     config = {
       navigationBarTitleText: '新房'
     }
 
+    components = {
+      areaSelect:select,
+      priceSelect:select,
+      typeSelect:select,
+      propertySelect:select,
+    }
+
     data = {
       mycity:'',
-      all:null
+      all:null,
+      areaList: [
+        {
+          text:'司马',
+          selected:false
+        },{
+          text:'请问',
+          selected:false
+        }
+      ],
+      priceList:[],
+      typeList:[],
+      propertyList:[],
+      areaStatus:false,
+      priceStatus:false,
+      typeStatus:false,
+      propertyStatus:false,
     }
 
     
 
     methods = {
-     
+      areaSelect() {
+        this.priceStatus = false
+        this.typeStatus = false
+        this.propertyStatus = false
+        this.areaStatus = true
+      },
+      priceSelect() {
+        this.areaStatus = false
+        this.typeStatus = false
+        this.propertyStatus = false
+        this.priceStatus = true
+      },
+      typeSelect() {
+        this.priceStatus = false
+        this.areaStatus = false
+        this.propertyStatus = false
+        this.typeStatus = true
+      },
+      propertySelect() {
+        this.priceStatus = false
+        this.typeStatus = false
+        this.areaStatus = false
+        this.propertyStatus = true
+      }
     }
 
     events = {
-      
+      selected() {
+        console.log('xz')
+      }
     }
 
     async onLoad() {

@@ -62,7 +62,7 @@ export default class Api extends base{
     return await this.get(url,data)
   }
   // 获取楼盘下的户型
-  static async buildsName(id) {
+  static async saleType(id) {
     const url = `${this.host}/doors?build_id=${id}`
     return await this.get(url)
   }

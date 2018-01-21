@@ -1,6 +1,16 @@
 
   <view class="container newdetail">
-    <image src="../../images/house.png" class="post"/>
+    <view class="post">
+      <swiper class="swiper" autoplay="true" bindchange="swiperChange">
+        <block  wx:for="{{info.thumb}}" wx:key="thumb_{{index}}">
+          <swiper-item>
+            <image src="{{item}}" class="slide-image" mode="aspectFill"/>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="navs">{{nowImgIndex}} / {{info.thumb.length}}</view>
+    </view>
+    <!-- <image src="../../images/house.png"></image> -->
     <view class="info">
       <view class="ceils_wrap">
         <view class="ceil_item border_bottom">
@@ -14,7 +24,8 @@
             </view>
           </view>
         </view>
-        <view class="ceil_item ceil_item_access border_bottom">
+        <view bindtap="toMap" class="ceil_item ceil_item_access border_bottom" url="/pages/new/map?address={{info.address}}" hover-class="none">
+          <view class="icon icon_map"/>
           <view class="ceil_bd">{{info.address}}</view>
           <view class="ceil_ft">查看地图</view>
         </view>
@@ -38,19 +49,27 @@
           </wxc-tab-label>
         </view>
 
-        <wxc-tab-panel  wx:for="{{tabs}}" wx:for-item="tab" wx:key="{{tab.content}}" tab-index="{{index}}" component-id="c3">
+        <wxc-tab-panel wx:for="{{tabs}}" wx:for-item="tab" wx:key="{{tab.content}}" tab-index="{{index}}" component-id="c3">
           <view wx:if="{{index==0}}"><view>123123</view></view>
           <view wx:if="{{index==1}}">
             <view class="sale_ceils">
               <view class="ceils_wrap">
-                <view class="ceil_item border_bottom">
+                <view class="ceil_item border_bottom" wx:for="{{saleList}}" wx:key="type_{{index}}">
                   <view class="ceil_ft post_wrap">
-                    <image class="img" src="../../images/ad.png" mode="aspectFill"/>
+                    <image class="img" src="{{item.thumb}}" mode="aspectFill"/>
                   </view>
                   <view class="ceil_bd sale_info">
-                    <view class="info_row"/>
-                    <view class="info_row"/>
-                    <view class="info_row"/>
+                    <view class="info_row">
+                      <text>{{item.title}}</text>
+                      <text class="money">{{item.total}}万起</text>
+                    </view>
+                    <view class="info_row info_row2">
+                      <text>{{item.square}}m2</text>
+                    </view>
+                    <view class="info_row info_row3">
+                      <text>{{item.type}}</text>
+                      <text>{{item.status=='sale'?'在售':'售罄'}}</text>
+                    </view>
                   </view>
                 </view>
               </view>

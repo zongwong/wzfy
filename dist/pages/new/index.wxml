@@ -1,13 +1,13 @@
 
   <view class="container new">
     <view class="search">
-      <view class="item"><text>区域</text><text class="icon icon_arrow"/></view>
-      <view class="item"><text>总价</text><text class="icon icon_arrow"/></view>
-      <view class="item"><text>户型</text><text class="icon icon_arrow"/></view>
-      <view class="item"><text>物业</text><text class="icon icon_arrow"/></view>
+      <view class="item {{areaStatus?'active':''}}" bindtap="areaSelect"><text>区域</text><text class="icon icon_arrow"/></view>
+      <view class="item {{priceStatus?'active':''}}" bindtap="priceSelect"><text>总价</text><text class="icon icon_arrow"/></view>
+      <view class="item {{typeStatus?'active':''}}" bindtap="typeSelect"><text>户型</text><text class="icon icon_arrow"/></view>
+      <view class="item {{propertyStatus?'active':''}}" bindtap="propertySelect"><text>物业</text><text class="icon icon_arrow"/></view>
     </view>
     <view class="ceils_wrap new_wrap">
-      <navigator class="ceil_item" url="/pages/new/detail?id={{item.id}}"  wx:for="{{all.data}}">
+      <navigator class="ceil_item" url="/pages/new/detail?id={{item.id}}"  wx:for="{{all.data}}" wx:key="item_{{index}}">
         <view class="ceil_ft post">
           <image class="img" mode="aspectFill" src="{{item.thumb[0]}}"/>
         </view>
@@ -30,5 +30,55 @@
         </view>
       </navigator>
     </view>
-    
+  </view>
+  
+  <view class="selectBlock"  wx:if="{{$areaSelect$status}}">
+    <view class="select">
+      <view class="select_item" wx:for="{{$areaSelect$list}}" wx:key="select_item" bindtap="$areaSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
+        <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
+        <view class="icon {{item.selected?'icon_selected':''}}"/>
+      </view>
+    </view>
+    <view class="btn_box">
+      <button class="selected_btn" bindtap="$areaSelect$selectedSure">确定</button>
+    </view>
+  </view>
+
+  
+  <view class="selectBlock"  wx:if="{{$priceSelect$status}}">
+    <view class="select">
+      <view class="select_item" wx:for="{{$priceSelect$list}}" wx:key="select_item" bindtap="$priceSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
+        <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
+        <view class="icon {{item.selected?'icon_selected':''}}"/>
+      </view>
+    </view>
+    <view class="btn_box">
+      <button class="selected_btn" bindtap="$priceSelect$selectedSure">确定</button>
+    </view>
+  </view>
+
+  
+  <view class="selectBlock"  wx:if="{{$typeSelect$status}}">
+    <view class="select">
+      <view class="select_item" wx:for="{{$typeSelect$list}}" wx:key="select_item" bindtap="$typeSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
+        <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
+        <view class="icon {{item.selected?'icon_selected':''}}"/>
+      </view>
+    </view>
+    <view class="btn_box">
+      <button class="selected_btn" bindtap="$typeSelect$selectedSure">确定</button>
+    </view>
+  </view>
+
+  
+  <view class="selectBlock"  wx:if="{{$propertySelect$status}}">
+    <view class="select">
+      <view class="select_item" wx:for="{{$propertySelect$list}}" wx:key="select_item" bindtap="$propertySelect$selectedChange" data-wpyselectedchange-a="{{index}}">
+        <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
+        <view class="icon {{item.selected?'icon_selected':''}}"/>
+      </view>
+    </view>
+    <view class="btn_box">
+      <button class="selected_btn" bindtap="$propertySelect$selectedSure">确定</button>
+    </view>
   </view>

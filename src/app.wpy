@@ -148,7 +148,9 @@ export default class extends wepy.app {
   config = {
     pages: [
             // 'pages/index/bind',
+      
       'pages/index/index',
+      'pages/new/map',
       'pages/index/city',
       'pages/user/user',
       'pages/fit/index',
@@ -208,7 +210,7 @@ export default class extends wepy.app {
   }
 
   onLaunch() {
-
+    wepy.setStorageSync('token','GF3HIMALCZEpL7zdexeqavILoQNUmdKh');
   }
   
 }

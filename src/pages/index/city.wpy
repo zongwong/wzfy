@@ -70,8 +70,7 @@
       this.$apply()
       wxApi.BaiduMap().then((res)=>{
           let city = res.originalData.result.addressComponent.city
-        //   this.gpsCity = city.slice(0,city.length-1)
-        this.gpsCity = '呼和浩特'
+          this.gpsCity = city.slice(0,city.length-1)
           this.$apply()
       })
     }
