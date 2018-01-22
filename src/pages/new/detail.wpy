@@ -1,4 +1,5 @@
-<style lang="scss">
+<style lang="less">
+@import '../../wxParse/wxParse.wxss';
 .newdetail{
   margin-bottom: 80rpx;
   .post{
@@ -135,8 +136,13 @@
     }
   }
 }
+.html_content{
+  padding: 36rpx;
+  font-size: 32rpx;
+}
 </style>
-<template>
+<template>  
+  <import src="../../wxParse/wxParse.wxml"/>
   <view class="container newdetail">
     <view class="post">
       <swiper  class="swiper" 
@@ -209,7 +215,11 @@
           tab-index="{{index}}"
           component-id="c3"
         >
-          <view wx:if="{{index==0}}"><view>123123</view></view>
+          <view wx:if="{{index==0}}">
+            <view class="html_content">
+              <template is="wxParse" data="{{wxParseData:rules.nodes}}"/>
+            </view>
+          </view>
           <view wx:if="{{index==1}}">
             <view class="sale_ceils">
               <view class="ceils_wrap">
@@ -234,7 +244,7 @@
               </view>
             </view>
           </view>
-          <view wx:if="{{index==2}}"><view>555</view></view>
+          <view wx:if="{{index==2}}"><view class="html_content"><template is="wxParse" data="{{wxParseData:selling_point.nodes}}"/></view></view>
           <view wx:if="{{index==3}}">
             <view class="tab_ceils">
               <view class="ceils_wrap">
@@ -346,6 +356,7 @@
 <script>
   import wepy from 'wepy'
   import api from '../../interfaces/api'
+  import WxParse from '../../wxParse/wxParse.js'
   export default class Fitdetail extends wepy.page {
     config = {
       navigationBarTitleText: '新房详情',
@@ -399,16 +410,16 @@
       }
     }
 
-    events = {
-      
-    }
-
     async onLoad(options) {
       const data = await api.buildInfo(options.id)
       const saleList = await api.saleType(options.id)
       this.info = data
       this.saleList = saleList
       this.$apply()
+      WxParse.wxParse('rules', 'html', data.rules, this, 4)
+      WxParse.wxParse('selling_point', 'html', data.selling_point, this, 4)
+      
     }
+
   }
 </script>

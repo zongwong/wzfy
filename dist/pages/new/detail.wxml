@@ -1,4 +1,5 @@
-
+  
+  <import src="../../wxParse/wxParse.wxml"/>
   <view class="container newdetail">
     <view class="post">
       <swiper class="swiper" autoplay="true" bindchange="swiperChange">
@@ -50,7 +51,11 @@
         </view>
 
         <wxc-tab-panel wx:for="{{tabs}}" wx:for-item="tab" wx:key="{{tab.content}}" tab-index="{{index}}" component-id="c3">
-          <view wx:if="{{index==0}}"><view>123123</view></view>
+          <view wx:if="{{index==0}}">
+            <view class="html_content">
+              <template is="wxParse" data="{{wxParseData:rules.nodes}}"/>
+            </view>
+          </view>
           <view wx:if="{{index==1}}">
             <view class="sale_ceils">
               <view class="ceils_wrap">
@@ -75,7 +80,7 @@
               </view>
             </view>
           </view>
-          <view wx:if="{{index==2}}"><view>555</view></view>
+          <view wx:if="{{index==2}}"><view class="html_content"><template is="wxParse" data="{{wxParseData:selling_point.nodes}}"/></view></view>
           <view wx:if="{{index==3}}">
             <view class="tab_ceils">
               <view class="ceils_wrap">

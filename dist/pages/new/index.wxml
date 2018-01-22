@@ -32,53 +32,53 @@
     </view>
   </view>
   
-  <view class="selectBlock"  wx:if="{{$areaSelect$status}}">
+  <view class="selectBlock"  wx:if="{{$areaSelect$status}}" catchtap="$areaSelect$close">
     <view class="select">
-      <view class="select_item" wx:for="{{$areaSelect$list}}" wx:key="select_item" bindtap="$areaSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
+      <view class="select_item" wx:for="{{$areaSelect$list}}" wx:key="select_item" catchtap="$areaSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
         <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
         <view class="icon {{item.selected?'icon_selected':''}}"/>
       </view>
     </view>
     <view class="btn_box">
-      <button class="selected_btn" bindtap="$areaSelect$selectedSure">确定</button>
+      <button class="selected_btn" catchtap="$areaSelect$selectedSure">确定</button>
     </view>
   </view>
 
   
-  <view class="selectBlock"  wx:if="{{$priceSelect$status}}">
+  <view class="selectBlock"  wx:if="{{$priceSelect$status}}" catchtap="$priceSelect$close">
     <view class="select">
-      <view class="select_item" wx:for="{{$priceSelect$list}}" wx:key="select_item" bindtap="$priceSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
+      <view class="select_item" wx:for="{{$priceSelect$list}}" wx:key="select_item" catchtap="$priceSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
         <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
         <view class="icon {{item.selected?'icon_selected':''}}"/>
       </view>
     </view>
     <view class="btn_box">
-      <button class="selected_btn" bindtap="$priceSelect$selectedSure">确定</button>
+      <button class="selected_btn" catchtap="$priceSelect$selectedSure">确定</button>
     </view>
   </view>
 
   
-  <view class="selectBlock"  wx:if="{{$typeSelect$status}}">
+  <view class="selectBlock"  wx:if="{{$typeSelect$status}}" catchtap="$typeSelect$close">
     <view class="select">
-      <view class="select_item" wx:for="{{$typeSelect$list}}" wx:key="select_item" bindtap="$typeSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
+      <view class="select_item" wx:for="{{$typeSelect$list}}" wx:key="select_item" catchtap="$typeSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
         <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
         <view class="icon {{item.selected?'icon_selected':''}}"/>
       </view>
     </view>
     <view class="btn_box">
-      <button class="selected_btn" bindtap="$typeSelect$selectedSure">确定</button>
+      <button class="selected_btn" catchtap="$typeSelect$selectedSure">确定</button>
     </view>
   </view>
 
   
-  <view class="selectBlock"  wx:if="{{$propertySelect$status}}">
+  <view class="selectBlock"  wx:if="{{$propertySelect$status}}" catchtap="$propertySelect$close">
     <view class="select">
-      <view class="select_item" wx:for="{{$propertySelect$list}}" wx:key="select_item" bindtap="$propertySelect$selectedChange" data-wpyselectedchange-a="{{index}}">
+      <view class="select_item" wx:for="{{$propertySelect$list}}" wx:key="select_item" catchtap="$propertySelect$selectedChange" data-wpyselectedchange-a="{{index}}">
         <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
         <view class="icon {{item.selected?'icon_selected':''}}"/>
       </view>
     </view>
     <view class="btn_box">
-      <button class="selected_btn" bindtap="$propertySelect$selectedSure">确定</button>
+      <button class="selected_btn" catchtap="$propertySelect$selectedSure">确定</button>
     </view>
   </view>

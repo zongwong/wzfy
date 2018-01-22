@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="less">
 // 页面
 page{
   background: #f2f2f2;
@@ -138,6 +138,7 @@ page{
     left: -20rpx;
   }
 }
+
 </style>
 
 <script>
@@ -148,7 +149,6 @@ export default class extends wepy.app {
   config = {
     pages: [
             // 'pages/index/bind',
-      
       'pages/index/index',
       'pages/new/map',
       'pages/index/city',

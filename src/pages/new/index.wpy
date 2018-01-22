@@ -166,16 +166,35 @@
     data = {
       mycity:'',
       all:null,
-      areaList: [
-        {
-          text:'司马',
+      areaList: [],
+      priceList:[{
+          text:'不限',
           selected:false
         },{
-          text:'请问',
+          text:'100万以下',
           selected:false
-        }
-      ],
-      priceList:[],
+        },{
+          text:'100-150万',
+          selected:false
+        },{
+          text:'150-200万',
+          selected:false
+        },{
+          text:'200-250万',
+          selected:false
+        },{
+          text:'250-300万',
+          selected:false
+        },{
+          text:'300-500万',
+          selected:false
+        },{
+          text:'500-1000万',
+          selected:false
+        },{
+          text:'1000万以上',
+          selected:false
+        }],
       typeList:[],
       propertyList:[],
       areaStatus:false,
@@ -214,19 +233,59 @@
     }
 
     events = {
-      selected() {
+      async selected() {
         console.log('xz')
+        const data = await this.search()
+        console.log(data)
       }
     }
 
     async onLoad() {
       const city = await wxApi.getCity()
+      console.log(city)
       this.mycity = city
       const data = await api.builds({
         city:city
       })
+      const houseType = await api.houseType()
+      const apartmentLayout = await api.apartmentLayout()
+      const counties = await api.counties(city)
       this.all = data
+      this.typeList = this.createArr(houseType)
+      this.propertyList = this.createArr(apartmentLayout)
+      this.areaList = this.createArr(counties)
       this.$apply()
+    }
+    createArr(arr) {
+      if(!Array.isArray(arr)){
+        return false
+      }
+      let newArr = []
+      arr.forEach((item)=>{
+        newArr.push({
+          text:item,
+          selected:false
+        })
+      })
+      return newArr
+    }
+    getSelected(arr) {
+      let result = arr.filter((item)=>{
+        return item.selected
+      })
+      let returnStr = '';
+      result.forEach((item)=>{
+        returnStr+=item.text+'-'
+      })
+      return returnStr
+    }
+    async search() {
+      return await api.search({
+        county:this.getSelected(this.areaList),
+        total:this.getSelected(this.priceList),
+        property_type:this.getSelected(this.typeList),
+        apartment_layout:this.getSelected(this.propertyList),
+      })
     }
   }
 </script>

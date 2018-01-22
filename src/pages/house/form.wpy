@@ -7,24 +7,24 @@
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom">
         <view class="ceil_ft need" style="width:3em;">姓名：</view>
-        <view class="ceil_bd"><input type="text" placeholder="请填写真实姓名" /></view>
+        <view class="ceil_bd"><input type="text" value="{{name}}"  @input="nameInput" placeholder="请填写真实姓名" /></view>
       </view>
       <view class="ceil_item border_bottom">
         <view class="ceil_ft need" style="width:3em;">手机：</view>
-        <view class="ceil_bd"><input type="number" placeholder="请填写手机号码" /></view>
+        <view class="ceil_bd"><input type="number" value="{{phone}}"  @input="phoneInput" placeholder="请填写手机号码" /></view>
       </view>
       <view class="ceil_item border_bottom">
         <view class="ceil_ft need" style="width:3em;">性别：</view>
-        <view class="checkbox" style="margin-left:2em;"><text class="text">男</text><text class="icon icon_checkbox"></text></view>
-        <view class="checkbox"><text class="text">女</text><text class="icon icon_checkbox checked"></text></view>
+        <view @tap="sexSelect('man')" class="checkbox" style="margin-left:2em;"><text class="text">男</text><text class="icon icon_checkbox {{sex=='man'?'checked':''}}"></text></view>
+        <view @tap="sexSelect('women')" class="checkbox"><text class="text">女</text><text class="icon icon_checkbox {{sex=='women'?'checked':''}}"></text></view>
       </view>
     </view>
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom more_cb">
         <view class="ceil_ft">需求：</view>
-        <view class="checkbox"><text class="text">买房</text><text class="icon icon_checkbox"></text></view>
-        <view class="checkbox"><text class="text">卖方</text><text class="icon icon_checkbox checked"></text></view>
-        <view class="checkbox"><text class="text">租房</text><text class="icon icon_checkbox checked"></text></view>
+        <view @tap="needSelect('hand-buy')" class="checkbox"><text class="text">买房</text><text class="icon icon_checkbox {{need=='hand-buy'?'checked':''}}"></text></view>
+        <view @tap="needSelect('hand-sell')" class="checkbox"><text class="text">卖方</text><text class="icon icon_checkbox {{need=='hand-sell'?'checked':''}}"></text></view>
+        <!-- <view @tap="needSelect('hand-zf')" class="checkbox"><text class="text">租房</text><text class="icon icon_checkbox checked"></text></view> -->
       </view>
       <view class="ceil_item border_bottom more_cb">
         <view class="ceil_ft">装修程度：</view>
@@ -40,7 +40,7 @@
       </view>
       <view class="ceil_item border_bottom">
         <view class="ceil_bd">
-          <textarea name="" class="other" placeholder="如：不要老小区，不要靠近街道。"></textarea>
+          <textarea name="" value="{{content}}" @input="contentInput"  class="other" placeholder="如：不要老小区，不要靠近街道。"></textarea>
         </view>
       </view>
     </view>
@@ -56,13 +56,40 @@
     }
 
     data = {
-      
+      name:'',
+      phone:'',
+      sex:'men',
+      type:'hand-buy',
+      content:''
     }
 
     
 
     methods = {
-     
+      nameInput(e) {
+        this.name = e.detail.value
+      },
+      phoneInput(e) {
+        this.phone = e.detail.value
+      },
+      sexSelect(sex) {
+        this.sex = sex
+      },
+      needSelect(type) {
+        this.type = type
+      },
+      contentInput(e) {
+        this.content = e.detail.value
+      },
+      async submit(){
+        const data = await api.reports({
+          name:this.name,
+          phone:this.phone,
+          sex:this.sex,
+          type:this.type,
+          content:this.content,
+        })
+      }
     }
 
     events = {

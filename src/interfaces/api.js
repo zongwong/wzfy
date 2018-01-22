@@ -116,4 +116,9 @@ export default class Api extends base{
     const url = `${this.host}/wallet`
     return await this.post(url, data)
   }
+  // 报备
+  static async reports(data) {
+    const url = `${this.host}/reports`
+    return await this.post(url, data)
+  }
 }

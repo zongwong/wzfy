@@ -4,24 +4,24 @@
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom">
         <view class="ceil_ft need" style="width:3em;">姓名：</view>
-        <view class="ceil_bd"><input type="text" placeholder="请填写真实姓名"/></view>
+        <view class="ceil_bd"><input type="text" value="{{name}}" bindinput="nameInput" placeholder="请填写真实姓名"/></view>
       </view>
       <view class="ceil_item border_bottom">
         <view class="ceil_ft need" style="width:3em;">手机：</view>
-        <view class="ceil_bd"><input type="number" placeholder="请填写手机号码"/></view>
+        <view class="ceil_bd"><input type="number" value="{{phone}}" bindinput="phoneInput" placeholder="请填写手机号码"/></view>
       </view>
       <view class="ceil_item border_bottom">
         <view class="ceil_ft need" style="width:3em;">性别：</view>
-        <view class="checkbox" style="margin-left:2em;"><text class="text">男</text><text class="icon icon_checkbox"/></view>
-        <view class="checkbox"><text class="text">女</text><text class="icon icon_checkbox checked"/></view>
+        <view bindtap="sexSelect" class="checkbox" style="margin-left:2em;" data-wpysexselect-a="man"><text class="text">男</text><text class="icon icon_checkbox {{sex=='man'?'checked':''}}"/></view>
+        <view bindtap="sexSelect" class="checkbox" data-wpysexselect-a="women"><text class="text">女</text><text class="icon icon_checkbox {{sex=='women'?'checked':''}}"/></view>
       </view>
     </view>
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom more_cb">
         <view class="ceil_ft">需求：</view>
-        <view class="checkbox"><text class="text">买房</text><text class="icon icon_checkbox"/></view>
-        <view class="checkbox"><text class="text">卖方</text><text class="icon icon_checkbox checked"/></view>
-        <view class="checkbox"><text class="text">租房</text><text class="icon icon_checkbox checked"/></view>
+        <view bindtap="needSelect" class="checkbox" data-wpyneedselect-a="hand-buy"><text class="text">买房</text><text class="icon icon_checkbox {{need=='hand-buy'?'checked':''}}"/></view>
+        <view bindtap="needSelect" class="checkbox" data-wpyneedselect-a="hand-sell"><text class="text">卖方</text><text class="icon icon_checkbox {{need=='hand-sell'?'checked':''}}"/></view>
+        <!-- <view bindtap="needSelect('hand-zf')" class="checkbox"><text class="text">租房</text><text class="icon icon_checkbox checked"></text></view> -->
       </view>
       <view class="ceil_item border_bottom more_cb">
         <view class="ceil_ft">装修程度：</view>
@@ -37,7 +37,7 @@
       </view>
       <view class="ceil_item border_bottom">
         <view class="ceil_bd">
-          <textarea name="" class="other" placeholder="如：不要老小区，不要靠近街道。"/>
+          <textarea name="" value="{{content}}" bindinput="contentInput" class="other" placeholder="如：不要老小区，不要靠近街道。"/>
         </view>
       </view>
     </view>

@@ -41,15 +41,15 @@
   }
 </style>
 <template>
-  <view class="selectBlock" wx:if="{{status}}">
+  <view class="selectBlock" wx:if="{{status}}" catchtap="close">
     <view class="select">
-      <view class="select_item" wx:for="{{list}}" wx:key="select_item" @tap="selectedChange({{index}})">
+      <view class="select_item" wx:for="{{list}}" wx:key="select_item" catchtap="selectedChange({{index}})">
         <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
         <view class="icon {{item.selected?'icon_selected':''}}"></view>
       </view>
     </view>
     <view class="btn_box">
-      <button class="selected_btn" @tap="selectedSure">确定</button>
+      <button class="selected_btn" catchtap="selectedSure">确定</button>
     </view>
   </view>
 </template>
@@ -73,6 +73,9 @@
           },
           selectedChange(index) {
               this.list[index].selected = !this.list[index].selected
+          },
+          close() {
+            this.status = false
           }
       }
   }
