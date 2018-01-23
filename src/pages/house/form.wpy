@@ -15,23 +15,23 @@
       </view>
       <view class="ceil_item border_bottom">
         <view class="ceil_ft need" style="width:3em;">性别：</view>
-        <view @tap="sexSelect('man')" class="checkbox" style="margin-left:2em;"><text class="text">男</text><text class="icon icon_checkbox {{sex=='man'?'checked':''}}"></text></view>
+        <view @tap="sexSelect('men')" class="checkbox" style="margin-left:2em;"><text class="text">男</text><text class="icon icon_checkbox {{sex=='men'?'checked':''}}"></text></view>
         <view @tap="sexSelect('women')" class="checkbox"><text class="text">女</text><text class="icon icon_checkbox {{sex=='women'?'checked':''}}"></text></view>
       </view>
     </view>
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom more_cb">
         <view class="ceil_ft">需求：</view>
-        <view @tap="needSelect('hand-buy')" class="checkbox"><text class="text">买房</text><text class="icon icon_checkbox {{need=='hand-buy'?'checked':''}}"></text></view>
-        <view @tap="needSelect('hand-sell')" class="checkbox"><text class="text">卖方</text><text class="icon icon_checkbox {{need=='hand-sell'?'checked':''}}"></text></view>
-        <!-- <view @tap="needSelect('hand-zf')" class="checkbox"><text class="text">租房</text><text class="icon icon_checkbox checked"></text></view> -->
+        <view @tap="needSelect('hand-buy')" class="checkbox"><text class="text">买房</text><text class="icon icon_checkbox {{type=='hand-buy'?'checked':''}}"></text></view>
+        <view @tap="needSelect('hand-sell')" class="checkbox"><text class="text">卖方</text><text class="icon icon_checkbox {{type=='hand-sell'?'checked':''}}"></text></view>
+        <view @tap="needSelect('hand-house')" class="checkbox"><text class="text">租房</text><text class="icon icon_checkbox {{type=='hand-house'?'checked':''}}"></text></view>
       </view>
       <view class="ceil_item border_bottom more_cb">
         <view class="ceil_ft">装修程度：</view>
-        <view class="checkbox"><text class="text">毛坯</text><text class="icon icon_checkbox"></text></view>
-        <view class="checkbox"><text class="text">普装</text><text class="icon icon_checkbox checked"></text></view>
-        <view class="checkbox"><text class="text">精装</text><text class="icon icon_checkbox checked"></text></view>
-        <view class="checkbox"><text class="text">豪装</text><text class="icon icon_checkbox checked"></text></view>
+        <view class="checkbox" @tap="zxSelect('毛坯')"><text class="text">毛坯</text><text class="icon icon_checkbox {{zx=='毛坯'?'checked':''}}"></text></view>
+        <view class="checkbox" @tap="zxSelect('普装')"><text class="text">普装</text><text class="icon icon_checkbox {{zx=='普装'?'checked':''}}"></text></view>
+        <view class="checkbox" @tap="zxSelect('精装')"><text class="text">精装</text><text class="icon icon_checkbox {{zx=='精装'?'checked':''}}"></text></view>
+        <view class="checkbox" @tap="zxSelect('豪装')"><text class="text">豪装</text><text class="icon icon_checkbox {{zx=='豪装'?'checked':''}}"></text></view>
       </view>
     </view>
     <view class="ceils_wrap house_form">
@@ -44,12 +44,13 @@
         </view>
       </view>
     </view>
-    <button class="btn bottom full">我要推荐</button>
+    <button class="btn bottom full" @tap="submit">提交</button>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import api from '../../interfaces/api'
   export default class Form extends wepy.page {
     config = {
       navigationBarTitleText: '二手房'
@@ -60,10 +61,9 @@
       phone:'',
       sex:'men',
       type:'hand-buy',
-      content:''
+      content:'',
+      zx:''
     }
-
-    
 
     methods = {
       nameInput(e) {
@@ -81,23 +81,46 @@
       contentInput(e) {
         this.content = e.detail.value
       },
+      zxSelect(zx) {
+        this.zx = zx
+      },
       async submit(){
+        if(!this.name){
+          wepy.showModal({
+            title:'提示',
+            content:'请填写姓名'
+          })
+          return false
+        }
+        if(!this.phone){
+          wepy.showModal({
+            title:'提示',
+            content:'请填写手机号'
+          })
+          return false
+        }
+        if(!this.content){
+          wepy.showModal({
+            title:'提示',
+            content:'请填写其他需求'
+          })
+          return false
+        }
         const data = await api.reports({
           name:this.name,
           phone:this.phone,
           sex:this.sex,
           type:this.type,
-          content:this.content,
+          content:'装修程度:'+this.zx+','+this.content,
         })
+        if(data){
+          wepy.showModal({
+            title:'提示',
+            content:'推荐成功'
+          })
+        }
       }
     }
 
-    events = {
-      
-    }
-
-    onLoad() {
-      
-    }
   }
 </script>

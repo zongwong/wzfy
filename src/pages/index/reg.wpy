@@ -54,12 +54,6 @@
   color: #fff;
   font-size: 32rpx;
 }
-.regText{
-  text-align: center;
-  color: #fd6447;
-  font-size: 30rpx;
-  margin-top: 50rpx;
-}
 </style>
 <template>
   <view class="container">
@@ -83,7 +77,6 @@
         </view>
       </view>
       <button class="bindbtn" @tap="bind">登录</button>
-      <navigator class="regText" url="/pages/user/share">注册成万众会员</navigator>
     </form>
   </view>
 </template>

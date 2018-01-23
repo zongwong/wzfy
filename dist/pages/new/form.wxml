@@ -1,6 +1,6 @@
 
   <view class="container house">
-    <image src="../../images/ad2.png" class="ad"/>
+    <image src="../../images/ad4.png" class="ad"/>
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom">
         <view class="ceil_ft need" style="width:3em;">姓名：</view>
@@ -17,19 +17,20 @@
       </view>
     </view>
     <view class="ceils_wrap house_form">
+      <view class="ceil_item border_bottom more_cb">
+        <view class="ceil_ft need">意向楼盘：</view>
+        <view/>
+      </view>
+    </view>
+    <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom">
-        <view class="ceil_ft need">借款额度：</view>
-        <view class="ceil_bd"><input type="number" value="{{money}}" bindinput="moneyInput" placeholder="请填写需要额度"/></view>
-        <text>元</text>
+        <view class="ceil_ft">客户描述</view>
       </view>
-      <view class="ceil_item">
-        <view class="ceil_ft need">借款描述</view>
-      </view>
-      <view class="ceil_item" style="padding-top:0;">
+      <view class="ceil_item border_bottom">
         <view class="ceil_bd">
-          <textarea name="" value="{{content}}" bindinput="contentInput" class="other" placeholder="如：要购房，要买车。"/>
+          <textarea name="" value="{{content}}" bindinput="contentInput" class="other" placeholder="如：不要老小区，不要靠近街道。"/>
         </view>
       </view>
     </view>
-    <button bindtap="submit" class="btn bottom full">提交</button>
+    <button class="btn bottom full" bindtap="submit">提交</button>
   </view>

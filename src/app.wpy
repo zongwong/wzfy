@@ -148,11 +148,13 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-            // 'pages/index/bind',
+      'pages/user/user',
+      'pages/user/share',
+      'pages/index/bind',
+      'pages/new/form',
       'pages/index/index',
       'pages/new/map',
-      'pages/index/city',
-      'pages/user/user',
+      'pages/index/city',      
       'pages/fit/index',
       'pages/new/index',
       'pages/financial/index',
@@ -164,7 +166,6 @@ export default class extends wepy.app {
       'pages/fit/form',
       'pages/financial/detail',
       'pages/financial/form',
-      'pages/user/share',
       'pages/user/moneydetail',
       'pages/user/money',
       'pages/user/redetail',
@@ -210,7 +211,6 @@ export default class extends wepy.app {
   }
 
   onLaunch() {
-    wepy.setStorageSync('token','GF3HIMALCZEpL7zdexeqavILoQNUmdKh');
   }
   
 }

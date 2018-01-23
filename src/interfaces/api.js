@@ -11,6 +11,11 @@ export default class Api extends base{
     const url = `${this.host}/login`
     return await this.post(url, data)
   }
+  // 注册
+  static async register(data) {
+    const url = `${this.host}/register`
+    return await this.post(url, data)
+  }
   // banner
   static async banner() {
     const url = `${this.host}/banner`
@@ -120,5 +125,11 @@ export default class Api extends base{
   static async reports(data) {
     const url = `${this.host}/reports`
     return await this.post(url, data)
+  }
+  // 获取报备
+  // http://fenyong.oldlooker.com/api/reports?type=finance&status=succeed
+  static async getReports(data) {
+    const url = `${this.host}/reports`
+    return await this.get(url,data)
   }
 }

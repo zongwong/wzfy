@@ -20,41 +20,55 @@
 <template>
   <view class="container houseindex">
     <view class="index_list">
-        <navigator class="index_item"  url="/pages/house/detail?id=1" wx:for="{{5}}" wx:key="list*">
-            <image mode="aspectFill" src="../../images/house.png" class="post"></image>
+        <view @tap="toDetail({{item.id}})" class="index_item" wx:for="{{list}}" wx:key="list*">
+            <image mode="aspectFill" src="{{item.thumb}}" class="post"></image>
             <view class="title">
-              <view>请问请问亲我额</view>
-              <view class="sub_title">请问请问亲我额</view>
+              <view>{{item.title}}</view>
+              <view class="sub_title">{{item.description}}</view>
             </view>
-        </navigator>
+        </view>
     </view>
-    <button class="btn bottom full">我要推荐</button>
+    <navigator url="/pages/financial/form" class="btn bottom full">我要推荐</navigator>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import api from '../../interfaces/api'
   export default class Financialindex extends wepy.page {
     config = {
       navigationBarTitleText: '金融服务'
     }
 
     data = {
-      
+      list:''
     }
 
     
 
     methods = {
-     
+      async toDetail(id){
+        const item = this.list.filter((item)=>{
+          return item.id == id
+        })
+        console.log(item[0])
+        await wepy.setStorageSync('detail', item[0])
+        wepy.navigateTo({
+          url:'/pages/financial/detail'
+        })
+      }
     }
 
-    events = {
-      
-    }
 
-    onLoad() {
-      
+
+    async onShow() {
+      await wepy.removeStorageSync('detail')
+    }
+    async onLoad() {
+      await wepy.removeStorageSync('detail')
+      const data = await api.finances()
+      this.list = data.data
+      this.$apply()
     }
   }
 </script>

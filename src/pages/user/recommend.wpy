@@ -50,6 +50,7 @@
 <script>
   import wepy from 'wepy'
   import tab from '../../components/tab'
+  import api from '../../interfaces/api'
   export default class Recommend extends wepy.page {
     config = {
       navigationBarTitleText: '我的推荐'
@@ -66,8 +67,10 @@
             text:'未成交',
             selected:false,
         }],
+        list:'',
+        type:['new-house','hand-house','finance','decorate'],
+        status:['pending','processing','succeed','failed']
     }
-
     components = {
       tab:tab
     }
@@ -82,7 +85,34 @@
       }
     }
 
-    onLoad() {
+    async onLoad() {
+      // const list = await api.getReports({
+      //   type:'finance'
+      // })
+      // conosle.log(list)
+      await this.getisIng()
+    }
+
+    async getisIng() {
+      await Promise.all(
+        this.type.map(async function(val) {
+          console.log('xx return:'+val)
+          const pending = await api.getReports({
+            type:val,
+            status:'pending'
+          })
+          const processing = await api.getReports({
+            type:val,
+            status:'processing',
+          })
+          console.log(pending,processing)
+        })
+      )
+    }
+    async getSuccessed() {
+      
+    }
+    async getFail() {
       
     }
   }

@@ -1,6 +1,18 @@
 
+  <import src="../../wxParse/wxParse.wxml"/>
   <view class="container housedetail">
-    <image src="../../images/house.png" class="post"/>
-    
-    <button class="btn bottom full">我要推荐</button>
+    <image src="{{info.thumb}}" class="post" mode="aspectFill"/>
+    <view class="info">
+      <view class="title">{{info.title}}</view>
+      <view class="desc">{{info.description}}</view>
+    </view>
+    <view class="ceils_wrap">
+      <view class="ceil_item border_bottom">
+        <view class="ceil_bd">图文详情</view>
+      </view>
+    </view>
+    <view class="content">
+      <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+    </view>
+    <navigator url="/pages/house/form" class="btn bottom full">我要推荐</navigator>
   </view>

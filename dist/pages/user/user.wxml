@@ -3,7 +3,7 @@
     <view class="user">
       <image class="avatar" src="{{userInfo.avatarUrl}}"/>
       <text class="nickName">{{userInfo.nickName}}</text>
-      <text class="phone">123</text>
+      <text class="phone">手机号</text>
     </view>
     <view class="ceils_wrap">
       <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/msg">

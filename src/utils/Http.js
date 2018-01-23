@@ -19,10 +19,17 @@ export default class http {
         'Authorization' : 'Bearer '+token
       }
     }
+
     const res = await wepy.request(param);
 
     if (res.statusCode == 200) {
-      return res.data;
+      if (res.data.code == 0 && res.data.message =='你还未登录' && !res.data.status){
+        // wepy.navigateTo({
+        //   url:'/pages/index/bind'
+        // })
+      }else{
+        return res.data;
+      }
     } else {
       throw this.requestException(res);
     }

@@ -5,11 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _wepy = require('./../../npm/wepy/lib/wepy.js');
 
 var _wepy2 = _interopRequireDefault(_wepy);
+
+var _api = require('./../../interfaces/api.js');
+
+var _api2 = _interopRequireDefault(_api);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42,7 +44,8 @@ var Form = function (_wepy$page) {
       phone: '',
       sex: 'men',
       type: 'hand-buy',
-      content: ''
+      content: '',
+      zx: ''
     }, _this.methods = {
       nameInput: function nameInput(e) {
         this.name = e.detail.value;
@@ -59,6 +62,9 @@ var Form = function (_wepy$page) {
       contentInput: function contentInput(e) {
         this.content = e.detail.value;
       },
+      zxSelect: function zxSelect(zx) {
+        this.zx = zx;
+      },
       submit: function () {
         var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
           var data;
@@ -66,19 +72,62 @@ var Form = function (_wepy$page) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  _context.next = 2;
-                  return api.reports({
+                  if (this.name) {
+                    _context.next = 3;
+                    break;
+                  }
+
+                  _wepy2.default.showModal({
+                    title: '提示',
+                    content: '请填写姓名'
+                  });
+                  return _context.abrupt('return', false);
+
+                case 3:
+                  if (this.phone) {
+                    _context.next = 6;
+                    break;
+                  }
+
+                  _wepy2.default.showModal({
+                    title: '提示',
+                    content: '请填写手机号'
+                  });
+                  return _context.abrupt('return', false);
+
+                case 6:
+                  if (this.content) {
+                    _context.next = 9;
+                    break;
+                  }
+
+                  _wepy2.default.showModal({
+                    title: '提示',
+                    content: '请填写其他需求'
+                  });
+                  return _context.abrupt('return', false);
+
+                case 9:
+                  _context.next = 11;
+                  return _api2.default.reports({
                     name: this.name,
                     phone: this.phone,
                     sex: this.sex,
                     type: this.type,
-                    content: this.content
+                    content: '装修程度:' + this.zx + ',' + this.content
                   });
 
-                case 2:
+                case 11:
                   data = _context.sent;
 
-                case 3:
+                  if (data) {
+                    _wepy2.default.showModal({
+                      title: '提示',
+                      content: '推荐成功'
+                    });
+                  }
+
+                case 13:
                 case 'end':
                   return _context.stop();
               }
@@ -92,13 +141,8 @@ var Form = function (_wepy$page) {
 
         return submit;
       }()
-    }, _this.events = {}, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
-
-  _createClass(Form, [{
-    key: 'onLoad',
-    value: function onLoad() {}
-  }]);
 
   return Form;
 }(_wepy2.default.page);
@@ -106,4 +150,4 @@ var Form = function (_wepy$page) {
 
 Page(require('./../../npm/wepy/lib/wepy.js').default.$createPage(Form , 'pages/house/form'));
 
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZvcm0uanMiXSwibmFtZXMiOlsiRm9ybSIsImNvbmZpZyIsIm5hdmlnYXRpb25CYXJUaXRsZVRleHQiLCJkYXRhIiwibmFtZSIsInBob25lIiwic2V4IiwidHlwZSIsImNvbnRlbnQiLCJtZXRob2RzIiwibmFtZUlucHV0IiwiZSIsImRldGFpbCIsInZhbHVlIiwicGhvbmVJbnB1dCIsInNleFNlbGVjdCIsIm5lZWRTZWxlY3QiLCJjb250ZW50SW5wdXQiLCJzdWJtaXQiLCJhcGkiLCJyZXBvcnRzIiwiZXZlbnRzIiwicGFnZSJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQ0U7Ozs7Ozs7Ozs7Ozs7O0lBQ3FCQSxJOzs7Ozs7Ozs7Ozs7OztrTEFDbkJDLE0sR0FBUztBQUNQQyw4QkFBd0I7QUFEakIsSyxRQUlUQyxJLEdBQU87QUFDTEMsWUFBSyxFQURBO0FBRUxDLGFBQU0sRUFGRDtBQUdMQyxXQUFJLEtBSEM7QUFJTEMsWUFBSyxVQUpBO0FBS0xDLGVBQVE7QUFMSCxLLFFBVVBDLE8sR0FBVTtBQUNSQyxlQURRLHFCQUNFQyxDQURGLEVBQ0s7QUFDWCxhQUFLUCxJQUFMLEdBQVlPLEVBQUVDLE1BQUYsQ0FBU0MsS0FBckI7QUFDRCxPQUhPO0FBSVJDLGdCQUpRLHNCQUlHSCxDQUpILEVBSU07QUFDWixhQUFLTixLQUFMLEdBQWFNLEVBQUVDLE1BQUYsQ0FBU0MsS0FBdEI7QUFDRCxPQU5PO0FBT1JFLGVBUFEscUJBT0VULEdBUEYsRUFPTztBQUNiLGFBQUtBLEdBQUwsR0FBV0EsR0FBWDtBQUNELE9BVE87QUFVUlUsZ0JBVlEsc0JBVUdULElBVkgsRUFVUztBQUNmLGFBQUtBLElBQUwsR0FBWUEsSUFBWjtBQUNELE9BWk87QUFhUlUsa0JBYlEsd0JBYUtOLENBYkwsRUFhUTtBQUNkLGFBQUtILE9BQUwsR0FBZUcsRUFBRUMsTUFBRixDQUFTQyxLQUF4QjtBQUNELE9BZk87QUFnQkZLLFlBaEJFO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQSx5QkFpQmFDLElBQUlDLE9BQUosQ0FBWTtBQUM3QmhCLDBCQUFLLEtBQUtBLElBRG1CO0FBRTdCQywyQkFBTSxLQUFLQSxLQUZrQjtBQUc3QkMseUJBQUksS0FBS0EsR0FIb0I7QUFJN0JDLDBCQUFLLEtBQUtBLElBSm1CO0FBSzdCQyw2QkFBUSxLQUFLQTtBQUxnQixtQkFBWixDQWpCYjs7QUFBQTtBQWlCQUwsc0JBakJBOztBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBOztBQUFBO0FBQUE7QUFBQTs7QUFBQTtBQUFBO0FBQUEsSyxRQTJCVmtCLE0sR0FBUyxFOzs7Ozs2QkFJQSxDQUVSOzs7O0VBaEQrQixlQUFLQyxJOztrQkFBbEJ0QixJIiwiZmlsZSI6ImZvcm0uanMiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuICBpbXBvcnQgd2VweSBmcm9tICd3ZXB5J1xyXG4gIGV4cG9ydCBkZWZhdWx0IGNsYXNzIEZvcm0gZXh0ZW5kcyB3ZXB5LnBhZ2Uge1xyXG4gICAgY29uZmlnID0ge1xyXG4gICAgICBuYXZpZ2F0aW9uQmFyVGl0bGVUZXh0OiAn5LqM5omL5oi/J1xyXG4gICAgfVxyXG5cclxuICAgIGRhdGEgPSB7XHJcbiAgICAgIG5hbWU6JycsXHJcbiAgICAgIHBob25lOicnLFxyXG4gICAgICBzZXg6J21lbicsXHJcbiAgICAgIHR5cGU6J2hhbmQtYnV5JyxcclxuICAgICAgY29udGVudDonJ1xyXG4gICAgfVxyXG5cclxuICAgIFxyXG5cclxuICAgIG1ldGhvZHMgPSB7XHJcbiAgICAgIG5hbWVJbnB1dChlKSB7XHJcbiAgICAgICAgdGhpcy5uYW1lID0gZS5kZXRhaWwudmFsdWVcclxuICAgICAgfSxcclxuICAgICAgcGhvbmVJbnB1dChlKSB7XHJcbiAgICAgICAgdGhpcy5waG9uZSA9IGUuZGV0YWlsLnZhbHVlXHJcbiAgICAgIH0sXHJcbiAgICAgIHNleFNlbGVjdChzZXgpIHtcclxuICAgICAgICB0aGlzLnNleCA9IHNleFxyXG4gICAgICB9LFxyXG4gICAgICBuZWVkU2VsZWN0KHR5cGUpIHtcclxuICAgICAgICB0aGlzLnR5cGUgPSB0eXBlXHJcbiAgICAgIH0sXHJcbiAgICAgIGNvbnRlbnRJbnB1dChlKSB7XHJcbiAgICAgICAgdGhpcy5jb250ZW50ID0gZS5kZXRhaWwudmFsdWVcclxuICAgICAgfSxcclxuICAgICAgYXN5bmMgc3VibWl0KCl7XHJcbiAgICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IGFwaS5yZXBvcnRzKHtcclxuICAgICAgICAgIG5hbWU6dGhpcy5uYW1lLFxyXG4gICAgICAgICAgcGhvbmU6dGhpcy5waG9uZSxcclxuICAgICAgICAgIHNleDp0aGlzLnNleCxcclxuICAgICAgICAgIHR5cGU6dGhpcy50eXBlLFxyXG4gICAgICAgICAgY29udGVudDp0aGlzLmNvbnRlbnQsXHJcbiAgICAgICAgfSlcclxuICAgICAgfVxyXG4gICAgfVxyXG5cclxuICAgIGV2ZW50cyA9IHtcclxuICAgICAgXHJcbiAgICB9XHJcblxyXG4gICAgb25Mb2FkKCkge1xyXG4gICAgICBcclxuICAgIH1cclxuICB9XHJcbiJdfQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZvcm0uanMiXSwibmFtZXMiOlsiRm9ybSIsImNvbmZpZyIsIm5hdmlnYXRpb25CYXJUaXRsZVRleHQiLCJkYXRhIiwibmFtZSIsInBob25lIiwic2V4IiwidHlwZSIsImNvbnRlbnQiLCJ6eCIsIm1ldGhvZHMiLCJuYW1lSW5wdXQiLCJlIiwiZGV0YWlsIiwidmFsdWUiLCJwaG9uZUlucHV0Iiwic2V4U2VsZWN0IiwibmVlZFNlbGVjdCIsImNvbnRlbnRJbnB1dCIsInp4U2VsZWN0Iiwic3VibWl0Iiwic2hvd01vZGFsIiwidGl0bGUiLCJyZXBvcnRzIiwicGFnZSJdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUNFOzs7O0FBQ0E7Ozs7Ozs7Ozs7Ozs7O0lBQ3FCQSxJOzs7Ozs7Ozs7Ozs7OztrTEFDbkJDLE0sR0FBUztBQUNQQyw4QkFBd0I7QUFEakIsSyxRQUlUQyxJLEdBQU87QUFDTEMsWUFBSyxFQURBO0FBRUxDLGFBQU0sRUFGRDtBQUdMQyxXQUFJLEtBSEM7QUFJTEMsWUFBSyxVQUpBO0FBS0xDLGVBQVEsRUFMSDtBQU1MQyxVQUFHO0FBTkUsSyxRQVNQQyxPLEdBQVU7QUFDUkMsZUFEUSxxQkFDRUMsQ0FERixFQUNLO0FBQ1gsYUFBS1IsSUFBTCxHQUFZUSxFQUFFQyxNQUFGLENBQVNDLEtBQXJCO0FBQ0QsT0FITztBQUlSQyxnQkFKUSxzQkFJR0gsQ0FKSCxFQUlNO0FBQ1osYUFBS1AsS0FBTCxHQUFhTyxFQUFFQyxNQUFGLENBQVNDLEtBQXRCO0FBQ0QsT0FOTztBQU9SRSxlQVBRLHFCQU9FVixHQVBGLEVBT087QUFDYixhQUFLQSxHQUFMLEdBQVdBLEdBQVg7QUFDRCxPQVRPO0FBVVJXLGdCQVZRLHNCQVVHVixJQVZILEVBVVM7QUFDZixhQUFLQSxJQUFMLEdBQVlBLElBQVo7QUFDRCxPQVpPO0FBYVJXLGtCQWJRLHdCQWFLTixDQWJMLEVBYVE7QUFDZCxhQUFLSixPQUFMLEdBQWVJLEVBQUVDLE1BQUYsQ0FBU0MsS0FBeEI7QUFDRCxPQWZPO0FBZ0JSSyxjQWhCUSxvQkFnQkNWLEVBaEJELEVBZ0JLO0FBQ1gsYUFBS0EsRUFBTCxHQUFVQSxFQUFWO0FBQ0QsT0FsQk87QUFtQkZXLFlBbkJFO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsc0JBb0JGLEtBQUtoQixJQXBCSDtBQUFBO0FBQUE7QUFBQTs7QUFxQkosaUNBQUtpQixTQUFMLENBQWU7QUFDYkMsMkJBQU0sSUFETztBQUViZCw2QkFBUTtBQUZLLG1CQUFmO0FBckJJLG1EQXlCRyxLQXpCSDs7QUFBQTtBQUFBLHNCQTJCRixLQUFLSCxLQTNCSDtBQUFBO0FBQUE7QUFBQTs7QUE0QkosaUNBQUtnQixTQUFMLENBQWU7QUFDYkMsMkJBQU0sSUFETztBQUViZCw2QkFBUTtBQUZLLG1CQUFmO0FBNUJJLG1EQWdDRyxLQWhDSDs7QUFBQTtBQUFBLHNCQWtDRixLQUFLQSxPQWxDSDtBQUFBO0FBQUE7QUFBQTs7QUFtQ0osaUNBQUthLFNBQUwsQ0FBZTtBQUNiQywyQkFBTSxJQURPO0FBRWJkLDZCQUFRO0FBRkssbUJBQWY7QUFuQ0ksbURBdUNHLEtBdkNIOztBQUFBO0FBQUE7QUFBQSx5QkF5Q2EsY0FBSWUsT0FBSixDQUFZO0FBQzdCbkIsMEJBQUssS0FBS0EsSUFEbUI7QUFFN0JDLDJCQUFNLEtBQUtBLEtBRmtCO0FBRzdCQyx5QkFBSSxLQUFLQSxHQUhvQjtBQUk3QkMsMEJBQUssS0FBS0EsSUFKbUI7QUFLN0JDLDZCQUFRLFVBQVEsS0FBS0MsRUFBYixHQUFnQixHQUFoQixHQUFvQixLQUFLRDtBQUxKLG1CQUFaLENBekNiOztBQUFBO0FBeUNBTCxzQkF6Q0E7O0FBZ0ROLHNCQUFHQSxJQUFILEVBQVE7QUFDTixtQ0FBS2tCLFNBQUwsQ0FBZTtBQUNiQyw2QkFBTSxJQURPO0FBRWJkLCtCQUFRO0FBRksscUJBQWY7QUFJRDs7QUFyREs7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7O0FBQUE7QUFBQTtBQUFBOztBQUFBO0FBQUE7QUFBQSxLOzs7O0VBZHNCLGVBQUtnQixJOztrQkFBbEJ4QixJIiwiZmlsZSI6ImZvcm0uanMiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuICBpbXBvcnQgd2VweSBmcm9tICd3ZXB5J1xyXG4gIGltcG9ydCBhcGkgZnJvbSAnLi4vLi4vaW50ZXJmYWNlcy9hcGknXHJcbiAgZXhwb3J0IGRlZmF1bHQgY2xhc3MgRm9ybSBleHRlbmRzIHdlcHkucGFnZSB7XHJcbiAgICBjb25maWcgPSB7XHJcbiAgICAgIG5hdmlnYXRpb25CYXJUaXRsZVRleHQ6ICfkuozmiYvmiL8nXHJcbiAgICB9XHJcblxyXG4gICAgZGF0YSA9IHtcclxuICAgICAgbmFtZTonJyxcclxuICAgICAgcGhvbmU6JycsXHJcbiAgICAgIHNleDonbWVuJyxcclxuICAgICAgdHlwZTonaGFuZC1idXknLFxyXG4gICAgICBjb250ZW50OicnLFxyXG4gICAgICB6eDonJ1xyXG4gICAgfVxyXG5cclxuICAgIG1ldGhvZHMgPSB7XHJcbiAgICAgIG5hbWVJbnB1dChlKSB7XHJcbiAgICAgICAgdGhpcy5uYW1lID0gZS5kZXRhaWwudmFsdWVcclxuICAgICAgfSxcclxuICAgICAgcGhvbmVJbnB1dChlKSB7XHJcbiAgICAgICAgdGhpcy5waG9uZSA9IGUuZGV0YWlsLnZhbHVlXHJcbiAgICAgIH0sXHJcbiAgICAgIHNleFNlbGVjdChzZXgpIHtcclxuICAgICAgICB0aGlzLnNleCA9IHNleFxyXG4gICAgICB9LFxyXG4gICAgICBuZWVkU2VsZWN0KHR5cGUpIHtcclxuICAgICAgICB0aGlzLnR5cGUgPSB0eXBlXHJcbiAgICAgIH0sXHJcbiAgICAgIGNvbnRlbnRJbnB1dChlKSB7XHJcbiAgICAgICAgdGhpcy5jb250ZW50ID0gZS5kZXRhaWwudmFsdWVcclxuICAgICAgfSxcclxuICAgICAgenhTZWxlY3QoengpIHtcclxuICAgICAgICB0aGlzLnp4ID0genhcclxuICAgICAgfSxcclxuICAgICAgYXN5bmMgc3VibWl0KCl7XHJcbiAgICAgICAgaWYoIXRoaXMubmFtZSl7XHJcbiAgICAgICAgICB3ZXB5LnNob3dNb2RhbCh7XHJcbiAgICAgICAgICAgIHRpdGxlOifmj5DnpLonLFxyXG4gICAgICAgICAgICBjb250ZW50Oifor7floavlhpnlp5PlkI0nXHJcbiAgICAgICAgICB9KVxyXG4gICAgICAgICAgcmV0dXJuIGZhbHNlXHJcbiAgICAgICAgfVxyXG4gICAgICAgIGlmKCF0aGlzLnBob25lKXtcclxuICAgICAgICAgIHdlcHkuc2hvd01vZGFsKHtcclxuICAgICAgICAgICAgdGl0bGU6J+aPkOekuicsXHJcbiAgICAgICAgICAgIGNvbnRlbnQ6J+ivt+Whq+WGmeaJi+acuuWPtydcclxuICAgICAgICAgIH0pXHJcbiAgICAgICAgICByZXR1cm4gZmFsc2VcclxuICAgICAgICB9XHJcbiAgICAgICAgaWYoIXRoaXMuY29udGVudCl7XHJcbiAgICAgICAgICB3ZXB5LnNob3dNb2RhbCh7XHJcbiAgICAgICAgICAgIHRpdGxlOifmj5DnpLonLFxyXG4gICAgICAgICAgICBjb250ZW50Oifor7floavlhpnlhbbku5bpnIDmsYInXHJcbiAgICAgICAgICB9KVxyXG4gICAgICAgICAgcmV0dXJuIGZhbHNlXHJcbiAgICAgICAgfVxyXG4gICAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCBhcGkucmVwb3J0cyh7XHJcbiAgICAgICAgICBuYW1lOnRoaXMubmFtZSxcclxuICAgICAgICAgIHBob25lOnRoaXMucGhvbmUsXHJcbiAgICAgICAgICBzZXg6dGhpcy5zZXgsXHJcbiAgICAgICAgICB0eXBlOnRoaXMudHlwZSxcclxuICAgICAgICAgIGNvbnRlbnQ6J+ijheS/rueoi+W6pjonK3RoaXMuengrJywnK3RoaXMuY29udGVudCxcclxuICAgICAgICB9KVxyXG4gICAgICAgIGlmKGRhdGEpe1xyXG4gICAgICAgICAgd2VweS5zaG93TW9kYWwoe1xyXG4gICAgICAgICAgICB0aXRsZTon5o+Q56S6JyxcclxuICAgICAgICAgICAgY29udGVudDon5o6o6I2Q5oiQ5YqfJ1xyXG4gICAgICAgICAgfSlcclxuICAgICAgICB9XHJcbiAgICAgIH1cclxuICAgIH1cclxuXHJcbiAgfVxyXG4iXX0=

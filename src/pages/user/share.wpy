@@ -43,24 +43,24 @@ page{
     <view class="ceils_wrap share_from">
       <view class="ceil_item border_bottom">
         <view class="ceil_ft">手机号码：</view>
-        <view class="ceil_bd"><input type="number" placeholder="请填写手机号码" /></view>
+        <view class="ceil_bd"><input type="number" placeholder="请填写手机号码" @input="phoneInput" value="{{phone}}"/></view>
       </view>
       <view class="ceil_item border_bottom">
         <view class="ceil_ft">验证码：</view>
-        <view class="ceil_bd"><input type="number" placeholder="请填写验证码" /></view>
-        <button class="sms">发送验证码</button>
+        <view class="ceil_bd"><input type="number" placeholder="请填写验证码"  @input="codeInput" value="{{code}}"/></view>
+        <button class="sms" @tap="getCode" disabled="{{disabled}}">{{text}}</button>
       </view>
       <view class="ceil_item border_bottom">
         <view class="ceil_ft">真实姓名：</view>
-        <view class="ceil_bd"><input type="number" placeholder="请填写真实姓名" /></view>
+        <view class="ceil_bd"><input type="number" placeholder="请填写真实姓名"  @input="nameInput" value="{{name}}"/></view>
       </view>
       <view class="ceil_item border_bottom">
         <view class="ceil_ft">性别：</view>
-        <view class="checkbox"><text class="text">男</text><text class="icon icon_checkbox"></text></view>
-        <view class="checkbox"><text class="text">女</text><text class="icon icon_checkbox checked"></text></view>
+        <view @tap="sexSelect('men')" class="checkbox"><text class="text">男</text><text class="icon icon_checkbox {{sex=='men'?'checked':''}}"></text></view>
+        <view @tap="sexSelect('women')" class="checkbox"><text class="text">女</text><text class="icon icon_checkbox {{sex=='women'?'checked':''}}"></text></view>
       </view>
     </view>
-    <button class="btn bottom">注册</button>
+    <button @tap="bind" class="btn bottom">注册</button>
   </view>
 </template>
 
@@ -72,21 +72,109 @@ page{
     }
 
     data = {
-      
+      phone:'',
+      text:'获取验证码',
+      disabled: false,
+      code: '',
+      sex:'men'
     }
-
-    
 
     methods = {
-     
+      sexSelect(sex) {
+        this.sex = sex
+      },
+      phoneInput(e) {
+        this.phone = e.detail.value
+      },
+      codeInput(e) {
+        this.code = e.detail.value
+      },
+      nameInput(e) {
+        this.name = e.detail.value
+      },
+      // 验证码
+      async getCode() {
+        if(!(/^1[345789]\d{9}$/.test(this.phone))){
+          wepy.showModal({
+            content: '请输入正确的手机号',
+            title: '提示'
+          })
+          return false;
+        }
+        const data = await api.sms({
+          phone: this.phone
+        })
+        if(data.status){
+          wepy.showToast({
+            title: '验证码已发送'
+          })
+          this.disabled = true
+          this.text = '60s后获取'
+          let second = 60
+          let timer = setInterval(()=>{
+            second = second - 1
+            this.text = `${second}s后获取`
+            if(second==0){
+              this.text = '获取验证码'
+              this.disabled = false
+              clearInterval(timer)
+            }
+            this.$apply()
+          },1000)
+        }
+      },
+      // 绑定
+      async bind() {
+        if(!(/^1[345789]\d{9}$/.test(this.phone))){
+          wepy.showModal({
+            content: '请输入正确的手机号',
+            title: '提示'
+          })
+          return false;
+        }
+        if(!this.code){
+          wepy.showModal({
+            content: '请填写短信验证码',
+            title: '提示'
+          })
+          return false;
+        }
+        if(!this.name){
+          wepy.showModal({
+            content: '请填写真实姓名',
+            title: '提示'
+          })
+          return false;
+        }
+        const data = await api.register({
+          phone: this.phone,
+          code: this.code,
+          real_name:this.name,
+          sex:this.sex
+        }) 
+        console.log(data)
+        if(!data.token){
+          wepy.showModal({
+            title: '提示',
+            content: data.message
+          })
+          return false
+        }
+        
+        if(data.token){
+          wepy.setStorageSync('token',token)
+          wepy.setStorageSync('user',data)
+          wepy.showToast({
+            title:'注册成功'
+          })
+          setTimeout(() => {
+            wepy.redirectTo({
+              url: '/pages/index/index'
+            })
+          }, 600);          
+        }
+      }
     }
 
-    events = {
-      
-    }
-
-    onLoad() {
-      
-    }
   }
 </script>
