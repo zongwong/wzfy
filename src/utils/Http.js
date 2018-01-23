@@ -24,9 +24,9 @@ export default class http {
 
     if (res.statusCode == 200) {
       if (res.data.code == 0 && res.data.message =='你还未登录' && !res.data.status){
-        // wepy.navigateTo({
-        //   url:'/pages/index/bind'
-        // })
+        wepy.navigateTo({
+          url:'/pages/index/bind'
+        })
       }else{
         return res.data;
       }

@@ -18,18 +18,17 @@
       我邀请的好友列表
     </view>
       <view class="ceils_wrap">
-        <view class="ceil_item ceil_item_access border_bottom">
+        <view class="ceil_item ceil_item_access border_bottom" wx:for="{{list}}" wx:key="in_{{index}}">
           <view class="ceil_bd">
-            <text>我的消息</text>
+            <text>{{item.real_name}}</text>
           </view>
-          <view class="ceil_ft">1586525125</view>
+          <view class="ceil_ft">{{item.phone}}</view>
         </view>
-        <view class="ceil_item ceil_item_access border_bottom">
+         <view class="ceil_item ceil_item_access border_bottom" wx:if="{{!list.length}}">
           <view class="ceil_bd">
-            <text>我的消息</text>
+            <text>无</text>
           </view>
-          <view class="ceil_ft">1586525125</view>
-        </view>
+         </view>
       </view>
   </view>
 </template>
@@ -46,18 +45,8 @@
       list:[]
     }
 
-    
-
-    methods = {
-     
-    }
-
-    events = {
-      
-    }
-
     async onLoad() {
-      const data = await api.msg()
+      const data = await api.inviters()
       this.list = data
       this.$apply()
     }

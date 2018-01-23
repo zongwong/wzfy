@@ -132,4 +132,15 @@ export default class Api extends base{
     const url = `${this.host}/reports`
     return await this.get(url,data)
   }
+  // 获取单个报备
+  static async getReportDetail(id) {
+    const url = `${this.host}/reports/${id}`
+    return await this.get(url)
+  }
+  // 获取跟进记录
+  static async getRecordList(id) {
+    const url = `${this.host}/reports/${id}/records`
+    return await this.get(url)
+  }
+  
 }

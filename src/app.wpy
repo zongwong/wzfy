@@ -148,10 +148,12 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/new/form',
+      'pages/user/money',
+      'pages/user/moneydetail',
       'pages/user/user',
       'pages/user/share',
       'pages/index/bind',
-      'pages/new/form',
       'pages/index/index',
       'pages/new/map',
       'pages/index/city',      
@@ -166,8 +168,6 @@ export default class extends wepy.app {
       'pages/fit/form',
       'pages/financial/detail',
       'pages/financial/form',
-      'pages/user/moneydetail',
-      'pages/user/money',
       'pages/user/redetail',
       'pages/user/recommend',
       'pages/user/msg',

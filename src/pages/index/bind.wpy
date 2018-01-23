@@ -172,16 +172,16 @@
         }
         
         if(data.token){
-          wepy.setStorageSync('token',token)
-          wepy.setStorageSync('user',data)
+          wepy.setStorageSync('token',data.token)
+          wepy.setStorageSync('user',data.member)
           wepy.showToast({
             title:'登录成功'
           })
           setTimeout(() => {
-            wepy.redirectTo({
+            wepy.switchTab({
               url: '/pages/index/index'
             })
-          }, 600);          
+          }, 500);          
         }
       }
     }

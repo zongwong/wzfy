@@ -33,15 +33,11 @@
   <view class="container recommend">
     <tab :navs="navs"></tab>
     <view class="ceils_wrap">
-      <navigator class="ceil_item ceil_item_access list_item">
-        <view class="ceil_bd">新房购买</view>
-        <view class="ceil_ft">123</view>
-        <view class="status nocj"></view>
-      </navigator>
-      <navigator class="ceil_item ceil_item_access list_item">
-        <view class="ceil_bd">新房购买</view>
-        <view class="ceil_ft">123</view>
-        <view class="status yescj"></view>
+      <navigator class="ceil_item ceil_item_access list_item" wx:for="{{list}}" wx:key="re_{{index}}" url="/pages/user/redetail?id={{item.id}}">
+        <view class="ceil_bd">{{item.name}}</view>
+        <view class="ceil_ft">{{item.created_at}}</view>
+        <view wx:if="{{tabIndex==1}}" class="status yescj"></view>
+        <view wx:if="{{tabIndex==2}}" class="status nocj"></view>
       </navigator>
     </view>
   </view>
@@ -67,9 +63,10 @@
             text:'未成交',
             selected:false,
         }],
-        list:'',
+        list:[],
         type:['new-house','hand-house','finance','decorate'],
-        status:['pending','processing','succeed','failed']
+        status:['pending','processing','succeed','failed'],
+        tabIndex:0
     }
     components = {
       tab:tab
@@ -80,23 +77,33 @@
     }
 
     events = {
-      navTapEvent(index) {
-
+      async navTapEvent(index) {
+        
+        
+        if(index==0){
+          await this.getisIng()
+        }else if(index==1){
+          await this.getSuccessed()
+        }else{
+          await this.getFail()
+        }
+        this.tabIndex = index
+        this.$apply()
       }
     }
 
     async onLoad() {
-      // const list = await api.getReports({
-      //   type:'finance'
-      // })
-      // conosle.log(list)
       await this.getisIng()
+      // this.list = list
+      // this.$apply()
     }
 
     async getisIng() {
-      await Promise.all(
+      
+      return await Promise.all(
         this.type.map(async function(val) {
           console.log('xx return:'+val)
+          let arr = []
           const pending = await api.getReports({
             type:val,
             status:'pending'
@@ -105,15 +112,59 @@
             type:val,
             status:'processing',
           })
-          console.log(pending,processing)
+          return arr.concat(pending.data,processing.data)
+
         })
-      )
+      ).then((res)=>{
+        let arr = []
+        res.forEach(item => {
+          arr = arr.concat(item)
+        })
+        // return arr
+        this.list = arr
+        this.$apply()
+      })
+
     }
     async getSuccessed() {
-      
+      return await Promise.all(
+        this.type.map(async function(val) {
+          const failed = await api.getReports({
+            type:val,
+            status:'failed'
+          })
+          return failed.data
+
+        })
+      ).then((res)=>{
+        let arr = []
+        res.forEach(item => {
+          arr = arr.concat(item)
+        })
+        // return arr
+        this.list = arr
+        this.$apply()
+      })
     }
     async getFail() {
-      
+      return await Promise.all(
+        this.type.map(async function(val) {
+          const succeed = await api.getReports({
+            type:val,
+            status:'succeed'
+          })
+          return succeed.data
+
+        })
+      ).then((res)=>{
+        let arr = []
+        res.forEach(item => {
+          arr = arr.concat(item)
+        })
+        // return arr
+        this.list = arr
+        this.$apply()
+      })
     }
   }
 </script>

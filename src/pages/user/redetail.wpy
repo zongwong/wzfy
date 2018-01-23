@@ -91,35 +91,36 @@
     <view class="block">
         <view class="block_title">客户资料</view>
         <view class="block_content">
-            <view class="name">黄小仙</view>
-            <view class="info"><text>12312312312</text>
-            <text class="time">2131232312</text></view>
+            <view class="name">{{info.name}}</view>
+            <view class="info"><text>{{info.phone}}</text>
+            <text class="time">{{info.created_at}}</text></view>
         </view>
     </view>
     <view class="block">
         <view class="block_title">专属顾问</view>
         <view class="block_content">
-            <view class="info"><text>姓名</text>
-            <text>2131232312</text></view>
+            <view class="info"><text>{{info.serviceable.name||'未指派'}}</text>
+            <text>{{info.serviceable.phone||'无'}}</text></view>
         </view>
     </view>
     <view class="block">
         <view class="block_title">交易跟进状态：</view>
         <view class="block_content" style="padding:10rpx 0;">
-            <view class="info record success"><text class="dot"></text><text class="text">姓驱蚊器而且we气温气温名</text>
-            <text class="time">2131232312</text></view>
-            <view class="info record fail"><text class="dot"></text><text class="text">姓请问请问而且我额名</text>
-            <text class="time">2131232312</text></view>
+            <view class="info record" wx:for="{{info.records}}" wx:key="record_{{index}}"><text class="dot"></text><text class="text">{{item.content}}</text>
+            <text class="time">{{item.created_at}}</text></view>
+            <!-- <view class="info record fail"><text class="dot"></text><text class="text">姓请问请问而且我额名</text>
+            <text class="time">2131232312</text></view> -->
+            <view wx:if="{{!info.records.length}}" class="info record">暂无记录</view>
         </view>
     </view>
-    <view class="card">
+    <view class="card" wx:if="{{info.status=='failed' || info.status=='succeed'}}">
        <view class="top">
-           <view class="text">很抱歉交易失败,</view>
-           <view class="text" style="font-weight: normal;">请前往个人中心查看佣金</view>
-           <view class="time">2017/05/02</view>
+           <view wx:if="{{info.status=='failed'}}" class="text">很抱歉交易失败</view>
+           <view wx:if="{{info.status=='succeed'}}" class="text" style="font-weight: normal;">请前往个人中心查看佣金</view>
+           <view class="time">{{info.updated_at}}</view>
        </view>
-       <view class="bottom">
-           <view class="tips">备注:12312312313</view>
+       <view class="bottom" wx:if="{{info.status=='failed'}}">
+           <view class="tips">备注:交易失败</view>
        </view>
     </view>
   </view>
@@ -127,29 +128,28 @@
 
 <script>
   import wepy from 'wepy'
+  import api from '../../interfaces/api'
   export default class Redetail extends wepy.page {
     config = {
       navigationBarTitleText: '推荐详情'
     }
 
     data = {
-
+        info:'',
+        list:''
     }
 
-    components = {
-
-    }
 
     methods = {
      
     }
 
-    events = {
-      
-    }
-
-    onLoad() {
-      
+    async onLoad(options) {
+        const info = await api.getReportDetail(options.id)
+        // const list = await api.getRecordList(options.id)
+        this.info = info
+        // this.list = list
+        this.$apply()
     }
   }
 </script>

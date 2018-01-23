@@ -22,7 +22,13 @@
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom more_cb">
         <view class="ceil_ft need">意向楼盘：</view>
-        <view></view>
+        <view class="ceil_bd">
+            <picker bindchange="buildInput"  value="{{build}}" range="{{builds}}">
+              <view class="picker">
+                {{build}}
+              </view>
+            </picker>
+        </view>
       </view>
     </view>
     <view class="ceils_wrap house_form">
@@ -42,6 +48,7 @@
 <script>
   import wepy from 'wepy'
   import api from '../../interfaces/api'
+  import wxApi from '../../interfaces/wxapi'
   export default class newForm extends wepy.page {
     config = {
       navigationBarTitleText: '新房推荐'
@@ -53,9 +60,14 @@
       sex:'men',
       type:'new-buy',
       content:'',
+      build:'请选择意向楼盘',
+      builds:[]
     }
 
     methods = {
+      buildInput(e) {
+        this.build = this.builds[e.detail.value]
+      },
       nameInput(e) {
         this.name = e.detail.value
       },
@@ -83,6 +95,13 @@
           })
           return false
         }
+        if(this.build=='请选择意向楼盘'){
+          wepy.showModal({
+            title:'提示',
+            content:'请选择意向楼盘'
+          })
+          return false
+        }
         if(!this.content){
           wepy.showModal({
             title:'提示',
@@ -105,6 +124,13 @@
         }
       }
     }
-
+    async onLoad() {
+      const city = await wxApi.getCity()
+      const builds = await api.buildsName({
+        city:city
+      })
+      this.builds = builds
+      this.$apply()
+    }
   }
 </script>

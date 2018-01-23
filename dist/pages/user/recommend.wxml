@@ -10,15 +10,11 @@
   </view>
 
     <view class="ceils_wrap">
-      <navigator class="ceil_item ceil_item_access list_item">
-        <view class="ceil_bd">新房购买</view>
-        <view class="ceil_ft">123</view>
-        <view class="status nocj"/>
-      </navigator>
-      <navigator class="ceil_item ceil_item_access list_item">
-        <view class="ceil_bd">新房购买</view>
-        <view class="ceil_ft">123</view>
-        <view class="status yescj"/>
+      <navigator class="ceil_item ceil_item_access list_item"  wx:for="{{list}}" wx:key="re_{{index}}" url="/pages/user/redetail?id={{item.id}}">
+        <view class="ceil_bd">{{item.name}}</view>
+        <view class="ceil_ft">{{item.created_at}}</view>
+        <view wx:if="{{tabIndex==1}}" class="status yescj"/>
+        <view wx:if="{{tabIndex==2}}" class="status nocj"/>
       </navigator>
     </view>
   </view>

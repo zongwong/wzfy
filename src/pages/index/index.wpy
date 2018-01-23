@@ -97,7 +97,7 @@
         class="swiper">
         <block wx:for="{{banner}}" wx:key="swiper_{{index}}">
           <swiper-item>
-            <image src="{{item.thumb}}" mode="aspectFill" class="slide_image" />
+            <image src="{{item.thumb}}" mode="aspectFill" class="slide_image"  @tap="toDetail({{item.id}})" />
           </swiper-item>
         </block>
       </swiper>
@@ -145,6 +145,28 @@
        wepy.navigateTo({
          url:'/pages/index/city'
        })
+     },
+     async toDetail(id) {
+        const item = this.banner.filter((item)=>{
+          return item.id == id
+        })
+        console.log(item[0])
+        await wepy.setStorageSync('detail', item[0].data)
+        switch (item[0].type) {
+          case 'decorate':
+            wepy.navigateTo({url:'/pages/fit/detail'})
+            break;
+          case 'finance':
+            wepy.navigateTo({url:'/pages/financial/detail'})
+            break;
+          case 'hand-house':
+            wepy.navigateTo({url:'/pages/house/detail'})
+            break;
+          case 'new-house':
+            wepy.navigateTo({url:'/pages/new/detail?id='+item[0].data.id})
+            break;
+        }
+        
      }
     }
 
