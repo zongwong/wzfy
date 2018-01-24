@@ -48,9 +48,9 @@
         <view class="icon {{item.selected?'icon_selected':''}}"></view>
       </view>
     </view>
-    <view class="btn_box">
+    <!-- <view class="btn_box">
       <button class="selected_btn" catchtap="selectedSure">确定</button>
-    </view>
+    </view> -->
   </view>
 </template>
 <script>
@@ -67,16 +67,26 @@
           }
       }
       methods = {
-          selectedSure() {
-              this.status = false
-              this.$emit('selected');
-          },
           selectedChange(index) {
-              this.list[index].selected = !this.list[index].selected
+              this.list.forEach( (item, i ) => {
+                if(i == index){
+                  item.selected = true
+                }else{
+                  item.selected = false
+                }
+              });
+              this.selectedSure()
+              // this.list[index].selected = !this.list[index].selected
           },
           close() {
             this.status = false
           }
+
       }
+      selectedSure() {
+          this.status = false
+          this.$emit('selected')
+      }
+
   }
 </script>

@@ -5,6 +5,7 @@
   align-items: center;
   background: #fff;
   margin-bottom: 16rpx;
+  font-size: 32rpx;
   .avatar{
     width: 106rpx;
     height: 106rpx;

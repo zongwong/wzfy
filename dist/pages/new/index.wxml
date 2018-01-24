@@ -7,7 +7,7 @@
       <view class="item {{propertyStatus?'active':''}}" bindtap="propertySelect"><text>物业</text><text class="icon icon_arrow"/></view>
     </view>
     <view class="ceils_wrap new_wrap">
-      <navigator class="ceil_item" url="/pages/new/detail?id={{item.id}}"  wx:for="{{all.data}}" wx:key="item_{{index}}">
+      <navigator class="ceil_item" url="/pages/new/detail?id={{item.id}}"  wx:for="{{page.list}}" wx:key="item_{{index}}">
         <view class="ceil_ft post">
           <image class="img" mode="aspectFill" src="{{item.thumb[0]}}"/>
         </view>
@@ -39,9 +39,9 @@
         <view class="icon {{item.selected?'icon_selected':''}}"/>
       </view>
     </view>
-    <view class="btn_box">
-      <button class="selected_btn" catchtap="$areaSelect$selectedSure">确定</button>
-    </view>
+    <!-- <view class="btn_box">
+      <button class="selected_btn" catchtap="selectedSure">确定</button>
+    </view> -->
   </view>
 
   
@@ -52,9 +52,9 @@
         <view class="icon {{item.selected?'icon_selected':''}}"/>
       </view>
     </view>
-    <view class="btn_box">
-      <button class="selected_btn" catchtap="$priceSelect$selectedSure">确定</button>
-    </view>
+    <!-- <view class="btn_box">
+      <button class="selected_btn" catchtap="selectedSure">确定</button>
+    </view> -->
   </view>
 
   
@@ -65,9 +65,9 @@
         <view class="icon {{item.selected?'icon_selected':''}}"/>
       </view>
     </view>
-    <view class="btn_box">
-      <button class="selected_btn" catchtap="$typeSelect$selectedSure">确定</button>
-    </view>
+    <!-- <view class="btn_box">
+      <button class="selected_btn" catchtap="selectedSure">确定</button>
+    </view> -->
   </view>
 
   
@@ -78,7 +78,7 @@
         <view class="icon {{item.selected?'icon_selected':''}}"/>
       </view>
     </view>
-    <view class="btn_box">
-      <button class="selected_btn" catchtap="$propertySelect$selectedSure">确定</button>
-    </view>
+    <!-- <view class="btn_box">
+      <button class="selected_btn" catchtap="selectedSure">确定</button>
+    </view> -->
   </view>

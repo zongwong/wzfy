@@ -20,7 +20,7 @@
 <template>
   <view class="container houseindex">
     <view class="index_list">
-        <view @tap="toDetail({{item.id}})" class="index_item" wx:for="{{list}}" wx:key="list*">
+        <view @tap="toDetail({{item.id}})" class="index_item" wx:for="{{page.list}}" wx:key="list*">
             <image mode="aspectFill" src="{{item.thumb}}" class="post"></image>
             <view class="title">
               <view>{{item.title}}</view>
@@ -35,20 +35,25 @@
 <script>
   import wepy from 'wepy'
   import api from '../../interfaces/api'
+  import pagination from '../../mixin/pagination'
   export default class Financialindex extends wepy.page {
     config = {
       navigationBarTitleText: '金融服务'
     }
-
+    mixins = [ pagination ]
     data = {
-      list:''
+      list:'',
+      page: {
+        list: [
+        ],
+      },
     }
 
     
 
     methods = {
       async toDetail(id){
-        const item = this.list.filter((item)=>{
+        const item = this.page.list.filter((item)=>{
           return item.id == id
         })
         console.log(item[0])
@@ -66,9 +71,10 @@
     }
     async onLoad() {
       await wepy.removeStorageSync('detail')
-      const data = await api.finances()
-      this.list = data.data
+      this.page = await api.finances()
+      // this.list = data.data
       this.$apply()
+      await this.next()
     }
   }
 </script>

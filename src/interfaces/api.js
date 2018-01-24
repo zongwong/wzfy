@@ -1,5 +1,6 @@
 import wepy from 'wepy'
 import base from '../interfaces/base'
+import Page from '../utils/Page'
 export default class Api extends base{
   // 短信接口
   static async sms(data) {
@@ -57,9 +58,10 @@ export default class Api extends base{
     return await this.get(url)
   }
   // 获取所有楼盘
-  static async builds(data) {
-    const url = `${this.host}/builds`
-    return await this.get(url,data)
+  static async builds(data,fn) {
+    const url = `${this.host}/query`
+    return  new Page(url,fn)
+    // return await this.get(url,data)
   }
   // 获取楼盘名称
   static async buildsName(data) {
@@ -84,12 +86,14 @@ export default class Api extends base{
   // 二手房
   static async house() {
     const url = `${this.host}/hand-houses`
-    return await this.get(url)
+    // return await this.get(url)
+    return new Page(url)
   }
   // 金融
   static async finances() {
     const url = `${this.host}/finances`
-    return await this.get(url)
+    return new Page(url)
+    // return await this.get(url)
   }
   // 装修
   static async decorates() {

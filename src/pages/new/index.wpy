@@ -116,7 +116,7 @@
       <view class="item {{propertyStatus?'active':''}}" @tap="propertySelect"><text>物业</text><text class="icon icon_arrow"></text></view>
     </view>
     <view class="ceils_wrap new_wrap">
-      <navigator class="ceil_item" url="/pages/new/detail?id={{item.id}}" wx:for="{{all.data}}" wx:key="item_{{index}}">
+      <navigator class="ceil_item" url="/pages/new/detail?id={{item.id}}" wx:for="{{page.list}}" wx:key="item_{{index}}">
         <view class="ceil_ft post">
           <image class="img" mode="aspectFill" src="{{item.thumb[0]}}"></image>
         </view>
@@ -151,18 +151,19 @@
   import api from '../../interfaces/api'
   import wxApi from '../../interfaces/wxapi'
   import select from '../../components/select'
+  import pagination from '../../mixin/pagination'
   export default class New extends wepy.page {
     config = {
       navigationBarTitleText: '新房'
     }
-
+    
     components = {
       areaSelect:select,
       priceSelect:select,
       typeSelect:select,
       propertySelect:select,
     }
-
+    mixins = [ pagination ]
     data = {
       mycity:'',
       all:null,
@@ -201,6 +202,16 @@
       priceStatus:false,
       typeStatus:false,
       propertyStatus:false,
+      page: {
+        list: [
+        ],
+      },
+      params:{
+        city:'',
+        total:'',
+        property_type:'',
+        apartment_layout:'',
+      }
     }
 
     
@@ -239,33 +250,47 @@
         console.log(data)
       }
     }
-
     async onLoad() {
       const city = await wxApi.getCity()
       console.log(city)
       this.mycity = city
-      const data = await api.builds({
-        city:city
-      })
+      this.params.city = city
+      this.$apply()
+      // const data = await api.builds({
+      //   city:city
+      // })
+      // this.all = data
+      this.page = await api.builds({})
+      console.log(this.page)
+      this.$apply()
+      await this.next();
+
       const houseType = await api.houseType()
       const apartmentLayout = await api.apartmentLayout()
-      const counties = await api.counties(city)
-      this.all = data
-      this.typeList = this.createArr(houseType)
-      this.propertyList = this.createArr(apartmentLayout)
-      this.areaList = this.createArr(counties)
+      const counties = await api.cities()
+
+      this.typeList = this.createArr(apartmentLayout)
+      this.propertyList = this.createArr(houseType)
+      this.areaList = this.createArr(counties,city)
       this.$apply()
     }
-    createArr(arr) {
+    createArr(arr,city) {
       if(!Array.isArray(arr)){
         return false
       }
       let newArr = []
       arr.forEach((item)=>{
-        newArr.push({
-          text:item,
-          selected:false
-        })
+        if(city && item == city ){
+          newArr.push({
+            text:item,
+            selected:true
+          })
+        }else{
+          newArr.push({
+            text:item,
+            selected:false
+          })
+        }  
       })
       return newArr
     }
@@ -273,19 +298,29 @@
       let result = arr.filter((item)=>{
         return item.selected
       })
-      let returnStr = '';
-      result.forEach((item)=>{
-        returnStr+=item.text+'-'
-      })
-      return returnStr
+      // let returnStr = '';
+      // result.forEach((item)=>{
+      //   returnStr+=item.text+'-'
+      // })
+      console.log(result)
+      if (result.length) {
+        return result[0].text
+      }else{
+        return ''
+      }
+      
     }
     async search() {
-      return await api.search({
-        county:this.getSelected(this.areaList),
+      this.params = {
+        city:this.getSelected(this.areaList),
         total:this.getSelected(this.priceList),
-        property_type:this.getSelected(this.typeList),
-        apartment_layout:this.getSelected(this.propertyList),
-      })
+        property_type:this.getSelected(this.propertyList),
+        apartment_layout:this.getSelected(this.typeList),
+      }
+      this.$apply()
+      // return await api.builds()
+      this.page.reset()
+      await this.next()
     }
   }
 </script>

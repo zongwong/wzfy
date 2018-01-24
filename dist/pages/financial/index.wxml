@@ -1,7 +1,7 @@
 
   <view class="container houseindex">
     <view class="index_list">
-        <view bindtap="toDetail" class="index_item"  wx:for="{{list}}" wx:key="list*" data-wpytodetail-a="{{item.id}}">
+        <view bindtap="toDetail" class="index_item"  wx:for="{{page.list}}" wx:key="list*" data-wpytodetail-a="{{item.id}}">
             <image mode="aspectFill" src="{{item.thumb}}" class="post"/>
             <view class="title">
               <view>{{item.title}}</view>

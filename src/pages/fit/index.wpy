@@ -53,6 +53,7 @@
   import wepy from 'wepy'
   import tab from '../../components/tab'
   import api from '../../interfaces/api'
+  import pagination from '../../mixin/pagination'
   export default class Fitindex extends wepy.page {
     config = {
       navigationBarTitleText: '装修服务'
@@ -60,6 +61,7 @@
     components = {
       tab:tab
     }
+    mixins = [ pagination ]
     data = {
       navs:[{
         text:'套餐介绍',
@@ -69,14 +71,18 @@
         selected:false,
       }],
       list:null,
-      tabIndex:0
+      tabIndex:0,
+      page: {
+        list: [
+        ],
+      },
     }
 
     
 
     methods = {
       async toDetail(id){
-        const item = this.list.filter((item)=>{
+        const item = this.page.list.filter((item)=>{
           return item.id == id
         })
         console.log(item[0])
