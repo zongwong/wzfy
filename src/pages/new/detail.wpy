@@ -176,7 +176,7 @@
         </view>
         <view class="ceil_item ceil_block">
           <view>开盘时间：{{info.open_time}}</view>
-          <view>合作时间：{{info.open_time}}至{{info.open_time}}</view>
+          <!-- <view>合作时间：{{info.open_time}}至{{info.open_time}}</view> -->
           <view>项目负责人：{{info.manager}}</view>
         </view>
       </view>
@@ -254,7 +254,7 @@
                 </view>
                 <view class="ceil_item">
                   <view class="ceil_ft">交房时间：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.deliver_time}}</view>
                 </view>
               </view>
               <view class="ceils_wrap">
@@ -264,7 +264,7 @@
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">开发商品牌：</view>
-                  <view class="ceil_bd">{{info.company}}</view>
+                  <view class="ceil_bd">{{info.brand}}</view>
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">物业公司：</view>
@@ -272,21 +272,21 @@
                 </view>
                 <view class="ceil_item">
                   <view class="ceil_ft">售楼部电话：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.phone||'无'}}</view>
                 </view>
               </view>
               <view class="ceils_wrap">
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">建筑面积：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.area}}m2</view>
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">容积率：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.volume_rate}}</view>
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">绿化率：</view>
-                  <view class="ceil_bd">{{info.green_rate}}%</view>
+                  <view class="ceil_bd">{{info.green_rate}}</view>
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">总户数：</view>
@@ -301,26 +301,26 @@
               <view class="ceils_wrap">
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">均价：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.per_square}} 元/m2</view>
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">物业费：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.property_costs}}</view>
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">建筑类型：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.building_type}}</view>
                 </view>
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">装修状况：</view>
-                  <view class="ceil_bd">待定</view>
+                  <view class="ceil_bd">{{info.decoration_situation}}</view>
                 </view>
                 <view class="ceil_item">
                   <view class="ceil_ft">产权年限：</view>
                   <view class="ceil_bd">{{info.property_rights}}</view>
                 </view>
               </view>
-              <view class="param">别墅参数：</view>
+              <!-- <view class="param">别墅参数：</view>
               <view class="ceils_wrap">
                 <view class="ceil_item border_bottom">
                   <view class="ceil_ft">均价：</view>
@@ -342,14 +342,14 @@
                   <view class="ceil_ft">产权年限：</view>
                   <view class="ceil_bd">{{info.property_rights}}</view>
                 </view>
-              </view>
+              </view> -->
             </view>
           </view>
         </wxc-tab-panel>
 
         </wxc-tab>
     </view>
-    <button class="btn bottom full">我要推荐</button>
+    <navigator url="/pages/new/form" class="btn bottom full">我要推荐</navigator>
   </view>
 </template>
 
@@ -392,6 +392,7 @@
         this.nowImgIndex = e.detail.current + 1
       },
       toMap(){
+        let that = this
         wx.getLocation({
           type: 'gcj02', //返回可以用于wx.openLocation的经纬度
           success: function(res) {
@@ -402,8 +403,8 @@
               latitude: latitude,
               longitude: longitude,
               scale: 28,
-              name:'123',
-              address:'123'
+              //name:that.info.title,
+              //address:that.info.address
             })
           }
         })

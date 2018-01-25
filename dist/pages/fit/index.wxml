@@ -10,7 +10,7 @@
   </view>
 
     <view class="index_list">
-        <view class="index_item" bindtap="toDetail"  wx:for="{{list}}" wx:key="list*" data-wpytodetail-a="{{item.id}}">
+        <view class="index_item" bindtap="toDetail"  wx:for="{{page.list}}" wx:key="list*" data-wpytodetail-a="{{item.id}}">
             <image mode="aspectFill" src="{{item.thumb}}" class="post"/>
             <view class="title">
               <view>{{item.title}}</view>

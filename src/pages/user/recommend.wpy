@@ -32,6 +32,7 @@
 <template>
   <view class="container recommend">
     <tab :navs="navs"></tab>
+    <!-- <view style="height:600px"></view> -->
     <view class="ceils_wrap">
       <navigator class="ceil_item ceil_item_access list_item" wx:for="{{list}}" wx:key="re_{{index}}" url="/pages/user/redetail?id={{item.id}}">
         <view class="ceil_bd">{{item.name}}</view>
@@ -53,7 +54,7 @@
     }
 
     data = {
-      navs:[{
+        navs:[{
             text:'未完成',
             selected:true,
         },{
@@ -66,7 +67,9 @@
         list:[],
         type:['new-house','hand-house','finance','decorate'],
         status:['pending','processing','succeed','failed'],
-        tabIndex:0
+        tabIndex:0,
+        page:1,
+        isEnd:false
     }
     components = {
       tab:tab
@@ -78,8 +81,10 @@
 
     events = {
       async navTapEvent(index) {
-        
-        
+        this.isEnd = false
+        this.page = 1
+        this.list = []
+        this.$apply()
         if(index==0){
           await this.getisIng()
         }else if(index==1){
@@ -94,25 +99,25 @@
 
     async onLoad() {
       await this.getisIng()
-      // this.list = list
-      // this.$apply()
     }
 
     async getisIng() {
-      
+      let that = this
       return await Promise.all(
         this.type.map(async function(val) {
           console.log('xx return:'+val)
           let arr = []
-          const pending = await api.getReports({
-            type:val,
-            status:'pending'
-          })
+          // const pending = await api.getReports({
+          //   type:val,
+          //   status:'pending',
+          //   page:that.page
+          // })
           const processing = await api.getReports({
             type:val,
             status:'processing',
+            page:that.page,
           })
-          return arr.concat(pending.data,processing.data)
+          return arr.concat(processing.data)
 
         })
       ).then((res)=>{
@@ -120,18 +125,25 @@
         res.forEach(item => {
           arr = arr.concat(item)
         })
+        if(!arr.length){
+          this.isEnd = true
+        }else{
+          this.list = this.list.concat(arr)
+        }
         // return arr
-        this.list = arr
+        this.list = this.list.concat(arr)
         this.$apply()
       })
 
     }
-    async getSuccessed() {
+    async getFail() {
+      let that = this
       return await Promise.all(
         this.type.map(async function(val) {
           const failed = await api.getReports({
             type:val,
-            status:'failed'
+            status:'failed',
+            page:that.page
           })
           return failed.data
 
@@ -141,17 +153,22 @@
         res.forEach(item => {
           arr = arr.concat(item)
         })
-        // return arr
-        this.list = arr
+        if(!arr.length){
+          this.isEnd = true
+        }else{
+          this.list = this.list.concat(arr)
+        }
         this.$apply()
       })
     }
-    async getFail() {
+    async getSuccessed() {
+      let that = this
       return await Promise.all(
         this.type.map(async function(val) {
           const succeed = await api.getReports({
             type:val,
-            status:'succeed'
+            status:'succeed',
+            page:that.page
           })
           return succeed.data
 
@@ -161,10 +178,26 @@
         res.forEach(item => {
           arr = arr.concat(item)
         })
-        // return arr
-        this.list = arr
+        if(!arr.length){
+          this.isEnd = true
+        }else{
+          this.list = this.list.concat(arr)
+        }
         this.$apply()
       })
+    }
+    onReachBottom() {
+      if(this.isEnd){
+        return false
+      }
+      this.page += 1
+      if(this.tabIndex==0){
+        this.getisIng()
+      }else if(this.tabIndex==1){
+        this.getSuccessed()
+      }else{
+        this.getFail()
+      }
     }
   }
 </script>

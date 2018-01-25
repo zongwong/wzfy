@@ -92,25 +92,25 @@
           })
           return false
         }
-        if(!this.phone){
+        if(!(/^1[3456789]\d{9}$/.test(this.phone))){
           wepy.showModal({
             title:'提示',
-            content:'请填写手机号'
+            content:'请填写正确的手机号'
           })
           return false
         }
-        if(!this.content){
-          wepy.showModal({
-            title:'提示',
-            content:'请填写其他需求'
-          })
-          return false
-        }
+        // if(!this.content){
+        //   wepy.showModal({
+        //     title:'提示',
+        //     content:'请填写其他需求'
+        //   })
+        //   return false
+        // }
         const data = await api.reports({
           name:this.name,
           phone:this.phone,
           sex:this.sex,
-          type:this.type,
+          type:'hand-house',
           content:'装修程度:'+this.zx+','+this.content,
         })
         if(data){

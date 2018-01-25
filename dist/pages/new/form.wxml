@@ -19,13 +19,14 @@
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom more_cb">
         <view class="ceil_ft need">意向楼盘：</view>
-        <view class="ceil_bd">
+        <view class="ceil_bd box_input box_bank">
             <picker bindchange="buildInput" value="{{build}}" range="{{builds}}">
               <view class="picker">
                 {{build}}
               </view>
             </picker>
-        </view>
+            <view class="ceil_ft icon_down" style="width: 83rpx;"/>
+        </view> 
       </view>
     </view>
     <view class="ceils_wrap house_form">

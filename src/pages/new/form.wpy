@@ -1,5 +1,27 @@
 <style lang="scss">
 @import "../../style/form.scss";
+.box_input{
+  padding: 10rpx;
+  border-radius: 6rpx;
+  border: 2rpx solid #dedede;
+}
+.box_bank{
+  background: linear-gradient(86deg,#F1F1F1,#fff);
+  position: relative;
+  .icon_down{
+    position: absolute;
+    width: 83rpx;
+    border-left:2rpx solid #dedede;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: 11;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFUAAABECAYAAADwf3lkAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAD2rAAA9qwExSiD6AAADk0lEQVR42u2bTU8aURSG38FRaQaHhYnRBUQ2NnFBYqINRt2Y2ES0ibV+VBD6x7qvP6R/QhduqolhRWJdgt0UIuDgnXvPvefM4JOwu8y87z0f9yPg3d7efgSQwztU/PUB/ASwza0kRfz2ASCfzyMIAm4xA3iexy0hNk9PT2i32/C5hUTx/Pxs/AyuwIidVAq4AtOf1GEBSSw/G8QJTG+sT/GwKCY1MFbLf1IDI76nmgaGIyjiJ9UUjmrxey/WfXkSyzMucefGOFMntW+OQ0T5py0wIiaVAkkLWuTmn0MMJxTV0oO9p6YlKIDCicq1EBOkBaa/pUoy0gJj3FNtCXMNZRsjLf9JDsxL7+w9dZw4HSQERemYKkGoKhKqRSlT05A9cdD163RLJSF7XCKup0aRpMCQbKmSkkWu2hhJpiYpi2z6FHNMvbm5wf39Pc3D/gfm08YGcjm+XzLFuvm3kU2Li4v4dXWFx8dHkudVKhUEQaBVPVT+MnEG9ybf5DNMGIZoXF4ik4kl5VUKhQK+Hh1pf5/Km7kTAuGlUgkH1arRc3NBgB/NJqamplxbGqE/qeOyyQU7Ozsol8t6JjIZXFxcIJ/Pa1ULNa8uVByrued5ODs9xcPDA1qtVqzvft7bw8rKivJ42/6slb9OT5qZmUGz0cDs7Kzye1ZXV7G7u2vLRmx/VidVl4WFBZyenChl+vz8PL6fn0ea5CITJch0VTehXC5je3v8j7unp6fRbDSQzWYjx3D5IstUavEH1SpKpVLk+74dH2NpaYlKPokv8kmlFu95Huq1GsIwHBm7ubmJtbU1MeU+jHb5u2Bubg71Wm1g71ksFvHl8PDV8VLamHamujKwvLyM6v4+ACAIAlzW61Y3+BSeWC9UVCd2a2sLf+7usLG+jjAM+9+TerOlfJ/KbeD87GxEg9QrR+VM5TZgK6g2fDktf+7A2PY10FOjFg7JBnRx4WlspqYxs1x4sl7+Scgsak8Dq38SDajg2tdApibRgAqufZGXfxrLXdWXiBOVrvi34A6M0Z/TuMVHwR0Yo0zlFm8TE2/s5Z/GwCiXvzThL5G2OCbmQsUm1N7eL1QIvY1sqaRf/A7r1IXlQiXN2eTKn5XyT0I22fAn9kQ1TnQcOAOjdaKSnkk9T6bo+tTK1LSXt6lPlvJPenm/hcieqoLkwEz0X9NttTEfALrdLre/VNCbRx/AdafT+dDpdLg1pYXrf7ST3zEnZ0iaAAAAAElFTkSuQmCC);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+  }
+}
 </style>
 <template>
   <view class="container house">
@@ -22,13 +44,14 @@
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom more_cb">
         <view class="ceil_ft need">意向楼盘：</view>
-        <view class="ceil_bd">
+        <view class="ceil_bd box_input box_bank">
             <picker bindchange="buildInput"  value="{{build}}" range="{{builds}}">
               <view class="picker">
                 {{build}}
               </view>
             </picker>
-        </view>
+            <view class="ceil_ft icon_down" style="width: 83rpx;"></view>
+        </view> 
       </view>
     </view>
     <view class="ceils_wrap house_form">
@@ -88,10 +111,10 @@
           })
           return false
         }
-        if(!this.phone){
+        if(!(/^1[3456789]\d{9}$/.test(this.phone))){
           wepy.showModal({
             title:'提示',
-            content:'请填写手机号'
+            content:'请填写正确的手机号'
           })
           return false
         }
@@ -102,18 +125,18 @@
           })
           return false
         }
-        if(!this.content){
-          wepy.showModal({
-            title:'提示',
-            content:'请填写其他需求'
-          })
-          return false
-        }
+        // if(!this.content){
+        //   wepy.showModal({
+        //     title:'提示',
+        //     content:'请填写其他需求'
+        //   })
+        //   return false
+        // }
         const data = await api.reports({
           name:this.name,
           phone:this.phone,
           sex:this.sex,
-          type:this.type,
+          type:'new-house',
           content:this.content,
         })
         if(data){

@@ -57,13 +57,23 @@
   height: 36rpx;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAkCAYAAADsHujfAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAD2rAAA9qwExSiD6AAADTUlEQVRYw83YX6hVRRTH8c89jEZp/gklMn2Ikgo0fPChCIzC2r0URRFFgRQ7DCUCe9AgoaK/EFkURTAEPkgFlUEZTDckKwvpD4IPF8KnpP8phKWV224Pex/v3BtHz7nn3Fvr6bfXzKz93Wtmrz2zh/RhVVnMx2tYivtCTO9MNlarHxCsxTU4D8/3E6hfkLmZnvdfggzM/jcgoVNDVRYL1PM/HGL6ud8bVWVxBWaEmD7oOiNVWSzFF9iG9wcAcTU+xHBVFk9XZTF0yoxUZbEYu3BO4zqzX5AJMe7HMTzQMSNVWczCexnET7hlACDbsSW73lSVxV0dQfAUljf6V6wOMX3VL0WIaTTEtAEvZe7nqrI4/18gVVmsxLrmchS3h5j2DSAbud2LnY2enWcpz8ijaC+irSGmHQOGEGI6jjvxe+O6riqLy06AVGVxofpVhaN4cNAQGcw3eHZClk5kZE2WjddDTN9OFUhjL6jfHLipKovZbZAi67R1iiGEmH5Au7DNxOpWVRanY0XjPILdUw3S2HCmV7VwkbEp2hdiOtZ7zEnZ3kxf3MLZmeO7aYKAA5le1DK+/B6dRpD8XvNa6nXRtpnTCJLf63ALBzPH4mkEWZLpQy18nTmWVWURegh2uIPuxlZkeqQVYjqE/Y1jNi7tIdjL+Fi98Db0CLI603vaT59wQaNvwyfdRAoxHcSqHgHau792ER3FcLt+vJr1W1OVxcJeg/do640t1o9CTAdazZPtxpdNwyw8PFUEVVmcq96lte1Fxm8DHsr02mafOWiIIURjtWsv3hgHEmJ6F+0jYwvbmu3BIO1xXNvo41gXYvp7Ykbgbnzf6IXYWZXFskFkoiqLJ7Epcz8WYvqsfTEOJMT0I240Vm0XYXdVFnf0AbEQb2Fj5n4Tj+T9hjoMvhJvY07mTtgcYvq8S4AzUGIzFmRN23FriOmvU4I0gS5RL6SlE5r2NP5dGAkx/ZaNWYLLcb16LczPxo3iGWxs9q7jrCNIE3gOnsA9Op+TD6NSV+UZHfrsx/oQU8dT40lBMqDl6jm+Gad1MyYD2IJXQkx/nKxjVyAZ0Fm4AVdhpfoHTf45/wUj6k/EDnwaYhrtJnZPIB3g5qqn7UiI6c/JxvkHuSLkzCIZPQ8AAAAASUVORK5CYII=);
 }
+.nonebtn{
+  margin: 0;
+  padding: 0;
+  line-height: initial;
+  font-size: 30rpx;
+  background-color: #fff;
+  &:after{
+    border: 0;
+  }
+}
 </style>
 <template>
   <view class="container">
     <view class="user">
       <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
       <text class="nickName">{{userInfo.nickName}}</text>
-      <text class="phone">手机号</text>
+      <text class="phone">{{user.phone||'手机号'}}</text>
     </view>
     <view class="ceils_wrap">
       <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/msg">
@@ -84,12 +94,12 @@
         </view>
         <view class="ceil_ft"></view>
       </navigator>
-      <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/share">
+      <button class="ceil_item ceil_item_access border_bottom nonebtn" open-type="share">
         <view class="ceil_bd user_navs">
           <text class="icon icon_user icon_share"></text><text>分享好友</text>
         </view>
         <view class="ceil_ft"></view>
-      </navigator>
+      </button>
       <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/invite">
         <view class="ceil_bd user_navs">
           <text class="icon icon_user icon_invite"></text><text>我的邀请</text>
@@ -97,14 +107,14 @@
         <view class="ceil_ft"></view>
       </navigator>
     </view>
-    <view class="ceils_wrap">
+    <!-- <view class="ceils_wrap">
       <navigator class="ceil_item ceil_item_access border_bottom" url="">
         <view class="ceil_bd user_navs">
           <text class="icon icon_user icon_msg"></text><text>退出帐号</text>
         </view>
         <view class="ceil_ft"></view>
       </navigator>
-    </view>
+    </view> -->
   </view>
 </template>
 
@@ -117,7 +127,8 @@
     }
 
     data = {
-      userInfo:null
+      userInfo:null,
+      user:null
     }
 
     
@@ -132,8 +143,20 @@
 
     async onLoad() {
       const userInfo = await wxApi.getUser()
+      const user = await wepy.getStorageSync('user')
       this.userInfo = userInfo
+      this.user = user
       this.$apply()
+    }
+    onShareAppMessage() {
+      let id = this.user.id
+      return {
+        imageUrl:'../../images/sharebg.png',
+        path:`/pages/user/share?id=${id}`,
+        success:function(){
+          console.log(`/pages/user/share?id=${id}`)
+        }
+      }
     }
   }
 </script>

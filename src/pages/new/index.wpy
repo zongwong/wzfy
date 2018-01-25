@@ -129,8 +129,9 @@
             <text>{{item.city}}－{{item.county}}</text>
           </view>
           <view class="info_row">
-            <text>{{item.area}}  ｜ {{item.apartment_layout}} {{item.property_type}}</text>
-            <text class="money">89万起</text>
+            <!-- {{item.area}}m2  ｜  -->
+            <text>{{item.apartment_layout}} {{item.property_type}}</text>
+            <text class="money">{{item.total}}万起</text>
           </view>
           <view class="info_row flag_row">
             <view class="red flag_box"><text class="icon flag">佣</text><text class="flagtext">{{item.commision}}/套</text></view>
@@ -278,7 +279,10 @@
       if(!Array.isArray(arr)){
         return false
       }
-      let newArr = []
+      let newArr = [{
+          text:'不限',
+          selected:false
+        }]
       arr.forEach((item)=>{
         if(city && item == city ){
           newArr.push({
@@ -296,7 +300,7 @@
     }
     getSelected(arr) {
       let result = arr.filter((item)=>{
-        return item.selected
+        return item.selected && item.text!='不限'
       })
       // let returnStr = '';
       // result.forEach((item)=>{

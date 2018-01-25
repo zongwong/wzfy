@@ -3,7 +3,7 @@
     <view class="user">
       <image class="avatar" src="{{userInfo.avatarUrl}}"/>
       <text class="nickName">{{userInfo.nickName}}</text>
-      <text class="phone">手机号</text>
+      <text class="phone">{{user.phone||'手机号'}}</text>
     </view>
     <view class="ceils_wrap">
       <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/msg">
@@ -24,12 +24,12 @@
         </view>
         <view class="ceil_ft"/>
       </navigator>
-      <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/share">
+      <button class="ceil_item ceil_item_access border_bottom nonebtn" open-type="share">
         <view class="ceil_bd user_navs">
           <text class="icon icon_user icon_share"/><text>分享好友</text>
         </view>
         <view class="ceil_ft"/>
-      </navigator>
+      </button>
       <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/invite">
         <view class="ceil_bd user_navs">
           <text class="icon icon_user icon_invite"/><text>我的邀请</text>
@@ -37,12 +37,12 @@
         <view class="ceil_ft"/>
       </navigator>
     </view>
-    <view class="ceils_wrap">
+    <!-- <view class="ceils_wrap">
       <navigator class="ceil_item ceil_item_access border_bottom" url="">
         <view class="ceil_bd user_navs">
-          <text class="icon icon_user icon_msg"/><text>退出帐号</text>
+          <text class="icon icon_user icon_msg"></text><text>退出帐号</text>
         </view>
-        <view class="ceil_ft"/>
+        <view class="ceil_ft"></view>
       </navigator>
-    </view>
+    </view> -->
   </view>

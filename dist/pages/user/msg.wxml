@@ -3,7 +3,7 @@
 
       <view class="ceils_wrap">
 
-        <view class="ceil_item border_bottom ceil_swiped"  wx:for="{{list.data}}">
+        <view class="ceil_item border_bottom ceil_swiped"  wx:for="{{page.list}}" wx:key="msg_{{index}}">
           <!-- style="transform:translateX(-68px);" -->
           <view class="ceil_bd">
             <view class="ceil_item border_bottom">

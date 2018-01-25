@@ -37,7 +37,7 @@
   <view class="container houseindex">
     <tab :navs="navs"></tab>
     <view class="index_list">
-        <view class="index_item" @tap="toDetail({{item.id}})" wx:for="{{list}}" wx:key="list*">
+        <view class="index_item" @tap="toDetail({{item.id}})" wx:for="{{page.list}}" wx:key="list*">
             <image mode="aspectFill" src="{{item.thumb}}" class="post"></image>
             <view class="title">
               <view>{{item.title}}</view>
@@ -111,13 +111,17 @@
       await this.getDecoratesList()
     }
     async getDecoratesList() {
-      const data = await api.decorates()
-      this.list = data.data
+      this.page = await api.decorates()
+      this.page.reset()
+      await this.next()
+      // this.list = data.data
       this.$apply()
     }
     async getCaseList() {
-      const data = await api.cases()
-      this.list = data.data
+      this.page = await api.cases()
+      this.page.reset()
+      await this.next()
+      // this.list = data.data
       this.$apply()
     }
   }

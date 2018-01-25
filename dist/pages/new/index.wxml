@@ -20,8 +20,9 @@
             <text>{{item.city}}－{{item.county}}</text>
           </view>
           <view class="info_row">
-            <text>{{item.area}}  ｜ {{item.apartment_layout}} {{item.property_type}}</text>
-            <text class="money">89万起</text>
+            <!-- {{item.area}}m2  ｜  -->
+            <text>{{item.apartment_layout}} {{item.property_type}}</text>
+            <text class="money">{{item.total}}万起</text>
           </view>
           <view class="info_row flag_row">
             <view class="red flag_box"><text class="icon flag">佣</text><text class="flagtext">{{item.commision}}/套</text></view>
@@ -32,7 +33,7 @@
     </view>
   </view>
   
-  <view class="selectBlock"  wx:if="{{$areaSelect$status}}" catchtap="$areaSelect$close">
+  <view class="selectBlock"  wx:if="{{$areaSelect$status}}" catchtap="$areaSelect$close" style="min-height:{{$areaSelect$minHeight}}px">
     <view class="select">
       <view class="select_item" wx:for="{{$areaSelect$list}}" wx:key="select_item" catchtap="$areaSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
         <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
@@ -45,7 +46,7 @@
   </view>
 
   
-  <view class="selectBlock"  wx:if="{{$priceSelect$status}}" catchtap="$priceSelect$close">
+  <view class="selectBlock"  wx:if="{{$priceSelect$status}}" catchtap="$priceSelect$close" style="min-height:{{$priceSelect$minHeight}}px">
     <view class="select">
       <view class="select_item" wx:for="{{$priceSelect$list}}" wx:key="select_item" catchtap="$priceSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
         <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
@@ -58,7 +59,7 @@
   </view>
 
   
-  <view class="selectBlock"  wx:if="{{$typeSelect$status}}" catchtap="$typeSelect$close">
+  <view class="selectBlock"  wx:if="{{$typeSelect$status}}" catchtap="$typeSelect$close" style="min-height:{{$typeSelect$minHeight}}px">
     <view class="select">
       <view class="select_item" wx:for="{{$typeSelect$list}}" wx:key="select_item" catchtap="$typeSelect$selectedChange" data-wpyselectedchange-a="{{index}}">
         <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
@@ -71,7 +72,7 @@
   </view>
 
   
-  <view class="selectBlock"  wx:if="{{$propertySelect$status}}" catchtap="$propertySelect$close">
+  <view class="selectBlock"  wx:if="{{$propertySelect$status}}" catchtap="$propertySelect$close" style="min-height:{{$propertySelect$minHeight}}px">
     <view class="select">
       <view class="select_item" wx:for="{{$propertySelect$list}}" wx:key="select_item" catchtap="$propertySelect$selectedChange" data-wpyselectedchange-a="{{index}}">
         <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>

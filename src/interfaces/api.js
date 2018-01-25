@@ -13,8 +13,8 @@ export default class Api extends base{
     return await this.post(url, data)
   }
   // 注册
-  static async register(data) {
-    const url = `${this.host}/register`
+  static async register(id='',data) {
+    const url = `${this.host}/register?member_id=${id}`
     return await this.post(url, data)
   }
   // banner
@@ -98,17 +98,20 @@ export default class Api extends base{
   // 装修
   static async decorates() {
     const url = `${this.host}/decorates`
-    return await this.get(url)
+    // return await this.get(url)
+    return new Page(url)
   }
   // 案例
   static async cases() {
     const url = `${this.host}/cases`
-    return await this.get(url)
+    // return await this.get(url)
+    return new Page(url)
   }
   // 我的消息
   static async msg() {
     const url = `${this.host}/notifications`
-    return await this.get(url)
+    // return await this.get(url)
+    return new Page(url)
   }
   // 我的邀请
   static async inviters() {
@@ -118,7 +121,8 @@ export default class Api extends base{
   // 我的佣金 
   static async accounts() {
     const url = `${this.host}/accounts`
-    return await this.get(url)
+    // return await this.get(url)
+    return new Page(url)
   }
   // 提现
   static async wallet(data) {

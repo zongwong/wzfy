@@ -148,13 +148,13 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/index/index',
       'pages/new/form',
       'pages/user/money',
       'pages/user/moneydetail',
       'pages/user/user',
       'pages/user/share',
       'pages/index/bind',
-      'pages/index/index',
       'pages/new/map',
       'pages/index/city',      
       'pages/fit/index',

@@ -41,7 +41,7 @@
   }
 </style>
 <template>
-  <view class="selectBlock" wx:if="{{status}}" catchtap="close">
+  <view class="selectBlock" wx:if="{{status}}" catchtap="close" style="min-height:{{minHeight}}px">
     <view class="select">
       <view class="select_item" wx:for="{{list}}" wx:key="select_item" catchtap="selectedChange({{index}})">
         <view class="text {{item.selected?'selected':''}}">{{item.text}}</view>
@@ -66,6 +66,9 @@
               type:Object
           }
       }
+      data = {
+          minHeight:600
+      }
       methods = {
           selectedChange(index) {
               this.list.forEach( (item, i ) => {
@@ -86,6 +89,10 @@
       selectedSure() {
           this.status = false
           this.$emit('selected')
+      }
+      onLoad() {
+        let res = wx.getSystemInfoSync()
+        this.minHeight = res.windowHeight
       }
 
   }

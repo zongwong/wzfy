@@ -9,6 +9,7 @@
       </view>
   </view>
 
+    <!-- <view style="height:600px"></view> -->
     <view class="ceils_wrap">
       <navigator class="ceil_item ceil_item_access list_item"  wx:for="{{list}}" wx:key="re_{{index}}" url="/pages/user/redetail?id={{item.id}}">
         <view class="ceil_bd">{{item.name}}</view>

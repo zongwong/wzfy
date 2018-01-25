@@ -1,14 +1,14 @@
 
   <view class="container moneydetail">
     <view class="ceils_wrap">
-      <view class="ceil_item border_bottom list"  wx:for="{{list.data}}">
+      <view class="ceil_item border_bottom list"  wx:for="{{page.list}}">
         <view class="row">
-          <view class="left">{{item.remark||'123'}}</view>
-          <view class="right small">{{item.created_at||'123'}}</view>
+          <view class="left">{{item.remark}}</view>
+          <view class="right small">{{item.created_at}}</view>
         </view>
         <view class="row">
           <view class="left small"/>
-          <view class="right {{item.type=='income'?'light':''}}">{{item.type=='income'?'+':'-'}}{{item.amount||'1231'}}</view>
+          <view class="right {{item.type=='income'?'light':''}}">{{item.type=='income'?'+':'-'}}{{item.amount}}</view>
         </view>
       </view>
     </view>

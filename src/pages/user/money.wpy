@@ -186,7 +186,7 @@
        }
         this.user.balance = this.user.balance - this.money
         this.$apply()
-        await wx.setStorageSync('user', Object/String)
+        await wepy.setStorageSync('user', this.user)
         await wepy.showModal({
           title:'提示',
           content:'提现成功'

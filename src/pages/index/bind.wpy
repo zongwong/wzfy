@@ -144,7 +144,7 @@
       },
       // 绑定
       async bind() {
-        if(!(/^1[345789]\d{9}$/.test(this.phone))){
+        if(!(/^1[3456789]\d{9}$/.test(this.phone))){
           wepy.showModal({
             content: '请输入正确的手机号',
             title: '提示'
