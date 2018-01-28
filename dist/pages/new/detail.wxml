@@ -39,19 +39,48 @@
     </view>
     <!-- tab -->
     <view class="mytab">
-        <wxc-tab  bind:tabchange="onClick" default-index="{{activeKey}}" active-text-color="#FF6340" active-line-color="transparent" component-id="c3" animate="{{true}}" class="demo-tab">
+      
+  <view class="tabNav">
+      <view class="tabBox">
+        <view  wx:for="{{$tab$navs}}" wx:key="tab_{{index}}" class="tabNav-item {{item.selected?'active':''}}" bindtap="$tab$tap" data-wpytap-a="{{index}}">
+            {{item.text}}
+        </view>
+      </view>
+  </view>
+
+        <!-- <wxc-tab
+          bind:tabchange="onClick"
+          default-index="{{activeKey}}"
+          active-text-color="#FF6340"
+          active-line-color="transparent"
+          component-id="c3"
+          animate="{{true}}"
+          class="demo-tab"
+        >
         <view slot="tablabel">
-          <wxc-tab-label  wx:for="{{tabs}}" wx:for-item="tab" wx:key="{{tab.title}}" tab-index="{{index}}" component-id="c3">
+          <wxc-tab-label
+            wx:for="{{tabs}}"
+            wx:for-item="tab"
+            wx:key="{{tab.title}}"
+            tab-index="{{index}}"
+            component-id="c3"
+          >
             <view class="demo-tab__label">
               <view class="demo-tab__text {{ activeKey === index ? 'demo-tab--active' : ''}}">
                 {{tab.title}}
               </view>
             </view>
           </wxc-tab-label>
-        </view>
+        </view> -->
 
-        <wxc-tab-panel wx:for="{{tabs}}" wx:for-item="tab" wx:key="{{tab.content}}" tab-index="{{index}}" component-id="c3">
-          <view wx:if="{{index==0}}">
+        <!-- <wxc-tab-panel
+          wx:for="{{tabs}}"
+          wx:for-item="tab"
+          wx:key="{{tab.content}}"
+          tab-index="{{index}}"
+          component-id="c3"
+        > -->
+          <view  wx:if="{{index==0}}">
             <view class="html_content">
               <template is="wxParse" data="{{wxParseData:rules.nodes}}"/>
             </view>
@@ -181,9 +210,9 @@
               </view> -->
             </view>
           </view>
-        </wxc-tab-panel>
+        <!-- </wxc-tab-panel> -->
 
-        </wxc-tab>
+        <!-- </wxc-tab> -->
     </view>
     <navigator url="/pages/new/form" class="btn bottom full">我要推荐</navigator>
   </view>

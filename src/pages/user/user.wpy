@@ -88,7 +88,7 @@
         </view>
         <view class="ceil_ft"></view>
       </navigator>
-      <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/money">
+      <navigator class="ceil_item ceil_item_access border_bottom" url="/pages/user/tx">
         <view class="ceil_bd user_navs">
           <text class="icon icon_user icon_money"></text><text>我的佣金</text>
         </view>
@@ -107,14 +107,14 @@
         <view class="ceil_ft"></view>
       </navigator>
     </view>
-    <!-- <view class="ceils_wrap">
-      <navigator class="ceil_item ceil_item_access border_bottom" url="">
+    <view class="ceils_wrap">
+      <view class="ceil_item ceil_item_access border_bottom" @tap="loginOut">
         <view class="ceil_bd user_navs">
-          <text class="icon icon_user icon_msg"></text><text>退出帐号</text>
+          <text class="icon icon_user icon_logout"></text><text>退出帐号</text>
         </view>
         <view class="ceil_ft"></view>
-      </navigator>
-    </view> -->
+      </view>
+    </view>
   </view>
 </template>
 
@@ -134,7 +134,9 @@
     
 
     methods = {
-     
+     loginOut() {
+       wx.clearStorageSync()
+     }
     }
 
     events = {
@@ -151,7 +153,7 @@
     onShareAppMessage() {
       let id = this.user.id
       return {
-        imageUrl:'../../images/sharebg.png',
+        imageUrl:'https://www.xmwzfy.com/assets/img/bg.png',
         path:`/pages/user/share?id=${id}`,
         success:function(){
           console.log(`/pages/user/share?id=${id}`)

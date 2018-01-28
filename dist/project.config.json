@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.7.2",
+	"libVersion": "1.4.4",
 	"appid": "wx259b67fec466929c",
 	"projectname": "wzfy",
 	"svr": "",
@@ -59,6 +59,24 @@
 					"name": "share",
 					"pathName": "pages/user/share",
 					"query": "id=33"
+				},
+				{
+					"id": 5,
+					"name": "tx",
+					"pathName": "pages/user/tx",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "rd",
+					"pathName": "pages/user/redetail",
+					"query": "id=64"
+				},
+				{
+					"id": -1,
+					"name": "d",
+					"pathName": "pages/new/detail",
+					"query": "id=2"
 				}
 			]
 		}

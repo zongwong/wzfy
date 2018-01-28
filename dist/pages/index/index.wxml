@@ -28,4 +28,20 @@
         <text class="text_fix">装修服务</text>
       </navigator>
     </view>
+     <view class="ceils_wrap" style="margin:20rpx 0;" bindtap="phone" data-wpyphone-a="400-168-6599">
+       <view class="ceil_item">
+         <view class="ceil_bd">客服电话：400-168-6599</view>
+         <view class="ceil_ft btn_phone">立即拨打<text class="icon icon_phone"/></view>
+       </view>
+     </view>
+     <view class="notice">
+       <image src="../../images/ad6.png" class="noticebg"/>
+       <view class="msg">
+         <text class="icon icon_msg"/>
+         <text class="msg_text onTextHide {{animate?'animate':'leaveFn'}}">{{nowNotice}}</text>
+       </view>
+       <view class="yj_text">当前可用佣金(元)</view>
+       <view class="yjnum_text">{{money}}</view>
+       <navigator url="/pages/index/rule" class="yj_icon"/>
+     </view>
   </view>

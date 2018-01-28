@@ -84,6 +84,17 @@
             color: #999;
         }
     }
+    .imgBox{
+        display: flex;
+        align-content: center;
+        image{
+            width: 210rpx;
+            height: 140rpx;
+            &:nth-child(2n){
+                margin: 0 24rpx;
+            }
+        }
+    }
 }
 </style>
 <template>
@@ -106,8 +117,15 @@
     <view class="block">
         <view class="block_title">交易跟进状态：</view>
         <view class="block_content" style="padding:10rpx 0;">
-            <view class="info record" wx:for="{{info.records}}" wx:key="record_{{index}}"><text class="dot"></text><text class="text">{{item.content}}</text>
-            <text class="time">{{item.created_at}}</text></view>
+            <block wx:for="{{info.records}}" wx:key="record_{{index}}">
+                <view class="info record" ><text class="dot"></text><text class="text">{{item.content}}</text>
+                <text class="time">{{item.created_at}}</text></view>
+                <view class="imgBox">
+                    <block  wx:for="{{item.thumb}}" wx:key="thumb*" wx:for-item="its" >
+                    <image mode="aspectFill" src="{{its}}" @tap="imgView({{its}},{{item.thumb}})"></image>
+                    </block>
+                </view>
+            </block>
             <!-- <view class="info record fail"><text class="dot"></text><text class="text">姓请问请问而且我额名</text>
             <text class="time">2131232312</text></view> -->
             <view wx:if="{{!info.records.length}}" class="info record">暂无记录</view>
@@ -129,6 +147,7 @@
 <script>
   import wepy from 'wepy'
   import api from '../../interfaces/api'
+  import wxApi from '../../interfaces/wxapi'
   export default class Redetail extends wepy.page {
     config = {
       navigationBarTitleText: '推荐详情'
@@ -141,7 +160,9 @@
 
 
     methods = {
-     
+      imgView(src,urls) {
+          wxApi.imgView(src,urls)
+      }
     }
 
     async onLoad(options) {

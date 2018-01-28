@@ -138,7 +138,18 @@ page{
     left: -20rpx;
   }
 }
-
+.icon_phone{
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAXCAYAAADk3wSdAAACSklEQVQ4jZ2VXWiOYRjHf3tfzbYIM2c0QkuUhhMSNc7kRKJ8TLGUyYFSdmI5kDiRkCZOnElNoTQnJC1FW8rXATWbJtqBRvsS+zl4rne9e3rebbnqruf6+t/Xfd3/637KVEJmAbuB7cAH4Crwm/8RFbVK7XSyPFTz4S9eteoqtTzDhzoBeimAbqjL1Wuhn8xIuhK+n/FdnQWaVwfV50WOvPpK/aZWppK2qhfUrgD/FJVPAl0ZzpZU8q6w703Z56k71Rp1vzqsflbnF2JyQGW0dzDV7g5gDNiWsi8AHgB9kXsAqAVaCwE54Fd8L0wlDwO9wIqU/SvQHKBtwPcooAmoKoD2AkPA2lRyHVADlAOLiuyHgINAIzACnABuA3OBzZBwcxzoBBqAPPAXWAy8jMDrwEARaD+wATgK3AQqgG7gR7RhglLH41J2hH449D0luLhRXV+Kp7nY/Q4wChwLvdDngj8tL4CuEj6Kd2hTx9V16hz1i9qfRe7pVrGyVB1Rn6pl6hb1j/rI7HGdESjquejlkdBbQ7+YkTzt7BdWhfrOZGzrosL7AXw2YtZEa8ZNRvR8TFlJUNR6dUh9G8FV6pMAvqt+VMfUe2pP2PvUTVOBYjLT4wFWFas9AEbVpojLqfvUAfWXQbOpGt4SIM+KjrfMbDasjpZ1TwdaDPze1POWsS5HbPVMKNJoQrVh9ZTZt55X35hcYG6m3KtXX0clPerpqHy2Cb9vhe/MTI6f5mVzVJMlHbEJZWrJES4heZI/bgOwhOTdfQy0k7x4/APFenYbDAT4CgAAAABJRU5ErkJggg==);
+  width:21rpx;
+  height:23rpx;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.oneTextHide{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>
 
 <script>
@@ -149,6 +160,8 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index/index',
+      'pages/user/tx',
+      'pages/index/rule',
       'pages/new/form',
       'pages/user/money',
       'pages/user/moneydetail',

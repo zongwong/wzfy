@@ -197,12 +197,11 @@
 
 
     async onLoad() {
-      const user = await wepy.getStorageSync('user')
+      const user = await api.getMemberInfo()
       const banks = await api.banks()
       this.user = user
       this.banks = banks[0].split('\r\n')
       this.$apply()
-
     }
   }
 </script>

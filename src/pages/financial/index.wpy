@@ -1,6 +1,7 @@
 <style lang="scss">
 @import "../../style/index.scss";
 .houseindex{
+  padding-bottom: 150rpx;
   .index_list{
       .index_item{
           .title{

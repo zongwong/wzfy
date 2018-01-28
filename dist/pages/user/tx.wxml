@@ -1,0 +1,14 @@
+
+  <view class="container money">
+     <view class="moneyNum">￥{{user.balance}}.00</view>
+     <view class="moneyText">余额</view>
+     <navigator url="/pages/user/moneydetail" class="moneyBtn">佣金明细</navigator>
+     <view class="tips_box">
+         <view class="light">温馨提示：</view>
+         <view>小程序暂不支持提现功能，请前往应用市场下载“万众分佣”APP</view>
+     </view>
+  </view>
+  <view class="btn_box">
+      <view bindtap="downTips" class="btn_down" data-wpydowntips-a="Android">Android下载</view>
+      <view bindtap="downTips" class="btn_down" data-wpydowntips-a="ios">ios下载</view>
+  </view>

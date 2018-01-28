@@ -1,0 +1,92 @@
+<style lang="scss">
+.money{
+    background: #fff;
+    .moneyNum{
+        font-size: 44rpx;
+        font-weight: bold;
+        text-align: center;
+        color: #fd6447;
+        margin: 80rpx 0 14rpx;
+    }
+    .moneyText{
+        font-size: 26rpx;
+        text-align: center;
+    }
+    .moneyBtn{
+        font-size: 24rpx;
+        color: #fd6447;
+        border: 2rpx solid #fd6447;
+        border-radius: 50rpx;
+        padding: 2rpx 20rpx;
+        width: 4em;
+        text-align: center;
+        margin: 24rpx auto;
+    }
+    .tips_box{
+        margin: 0 34rpx;
+        border-top: 2rpx solid #e8e8e8;
+        padding: 40rpx 0;
+        font-size:20rpx;
+    }
+}
+.btn_box{
+    padding: 40rpx 36rpx;
+    display: flex;
+    justify-content: space-between;
+    .btn_down{
+        border-radius: 10rpx;
+        background: #fd6447;
+        color: #fff;
+        font-size: 32rpx;
+        line-height: 70rpx;
+        width: 310rpx;
+        text-align: center;
+    }
+}
+
+</style>
+<template>
+  <view class="container money">
+     <view class="moneyNum">￥{{user.balance}}.00</view>
+     <view class="moneyText">余额</view>
+     <navigator url="/pages/user/moneydetail" class="moneyBtn">佣金明细</navigator>
+     <view class="tips_box">
+         <view class="light">温馨提示：</view>
+         <view>小程序暂不支持提现功能，请前往应用市场下载“万众分佣”APP</view>
+     </view>
+  </view>
+  <view class="btn_box">
+      <view @tap="downTips('Android')" class="btn_down">Android下载</view>
+      <view @tap="downTips('ios')" class="btn_down">ios下载</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import api from '../../interfaces/api'
+  export default class Money extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的佣金'
+    }
+
+    data = {
+        user:''
+    }
+
+    methods = {
+        downTips(type) {
+            wepy.showModal({
+                title:'提示',
+                content:'请到应用商店搜索《万众分佣》下载'
+            })
+        }
+    }
+
+
+    async onLoad() {
+      const user = await api.getMemberInfo()
+      this.user = user
+      this.$apply()
+    }
+  }
+</script>

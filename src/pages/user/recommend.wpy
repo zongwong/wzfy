@@ -128,10 +128,10 @@
         if(!arr.length){
           this.isEnd = true
         }else{
-          this.list = this.list.concat(arr)
+          this.list = this.timeSort(this.list.concat(arr))
         }
         // return arr
-        this.list = this.list.concat(arr)
+        // this.list = this.timeSort(this.list.concat(arr))
         this.$apply()
       })
 
@@ -156,7 +156,7 @@
         if(!arr.length){
           this.isEnd = true
         }else{
-          this.list = this.list.concat(arr)
+          this.list = this.timeSort(this.list.concat(arr))
         }
         this.$apply()
       })
@@ -181,7 +181,7 @@
         if(!arr.length){
           this.isEnd = true
         }else{
-          this.list = this.list.concat(arr)
+          this.list = this.timeSort(this.list.concat(arr))
         }
         this.$apply()
       })
@@ -198,6 +198,9 @@
       }else{
         this.getFail()
       }
+    }
+    timeSort(arr) {
+      return arr.sort((a, b) => new Date(b.updated_at.replace(/-/g, '/')).getTime() - new Date(a.updated_at.replace(/-/g, '/')).getTime())
     }
   }
 </script>

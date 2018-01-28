@@ -48,9 +48,14 @@ export default class Api extends base{
     return await this.get(url)
   }
   // 获取广告
-  static async ad(data) {
+  static async ad() {
     const url = `${this.host}/ad`
-    return await this.get(url,data)
+    return await this.get(url)
+  }
+  // 获取广告
+  static async indexNotice() {
+    const url = `${this.host}/faker`
+    return await this.get(url)
   }
   // 获取单个楼盘
   static async buildInfo(id) {
@@ -150,5 +155,9 @@ export default class Api extends base{
     const url = `${this.host}/reports/${id}/records`
     return await this.get(url)
   }
-  
+  // 获取用户信息/api/members
+  static async getMemberInfo() {
+    const url = `${this.host}/members`
+    return await this.get(url)
+  }
 }

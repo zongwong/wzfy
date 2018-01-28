@@ -1,7 +1,7 @@
 <style lang="less">
 @import '../../wxParse/wxParse.wxss';
 .newdetail{
-  margin-bottom: 80rpx;
+  padding-bottom: 80rpx;
   .post{
     display: block;
     width: 100%;
@@ -183,7 +183,8 @@
     </view>
     <!-- tab -->
     <view class="mytab">
-        <wxc-tab
+      <tab :navs="nav"></tab>
+        <!-- <wxc-tab
           bind:tabchange="onClick"
           default-index="{{activeKey}}"
           active-text-color="#FF6340"
@@ -206,18 +207,18 @@
               </view>
             </view>
           </wxc-tab-label>
-        </view>
+        </view> -->
 
-        <wxc-tab-panel
+        <!-- <wxc-tab-panel
           wx:for="{{tabs}}"
           wx:for-item="tab"
           wx:key="{{tab.content}}"
           tab-index="{{index}}"
           component-id="c3"
-        >
+        > -->
           <view wx:if="{{index==0}}">
             <view class="html_content">
-              <template is="wxParse" data="{{wxParseData:rules.nodes}}"/>
+              <template is="wxParse" data="{{wxParseData:rules.nodes}}"></template>
             </view>
           </view>
           <view wx:if="{{index==1}}">
@@ -244,7 +245,7 @@
               </view>
             </view>
           </view>
-          <view wx:if="{{index==2}}"><view class="html_content"><template is="wxParse" data="{{wxParseData:selling_point.nodes}}"/></view></view>
+          <view wx:if="{{index==2}}"><view class="html_content"><template is="wxParse" data="{{wxParseData:selling_point.nodes}}"></template></view></view>
           <view wx:if="{{index==3}}">
             <view class="tab_ceils">
               <view class="ceils_wrap">
@@ -345,9 +346,9 @@
               </view> -->
             </view>
           </view>
-        </wxc-tab-panel>
+        <!-- </wxc-tab-panel> -->
 
-        </wxc-tab>
+        <!-- </wxc-tab> -->
     </view>
     <navigator url="/pages/new/form" class="btn bottom full">我要推荐</navigator>
   </view>
@@ -357,16 +358,19 @@
   import wepy from 'wepy'
   import api from '../../interfaces/api'
   import WxParse from '../../wxParse/wxParse.js'
+  import tab from '../../components/tab'
   export default class Fitdetail extends wepy.page {
     config = {
       navigationBarTitleText: '新房详情',
-      usingComponents: {
-        'wxc-tab': '../../packages/@minui/wxc-tab/dist/index',
-        'wxc-tab-panel': '../../packages/@minui/wxc-tab/dist/panel',
-        'wxc-tab-label': '../../packages/@minui/wxc-tab/dist/label'
-      }
+      // usingComponents: {
+      //   'wxc-tab': '../../packages/@minui/wxc-tab/dist/index',
+      //   'wxc-tab-panel': '../../packages/@minui/wxc-tab/dist/panel',
+      //   'wxc-tab-label': '../../packages/@minui/wxc-tab/dist/label'
+      // }
     }
-
+    components = {
+      tab:tab
+    }
     data = {
       tabs: [
         {title: '客户规则'},
@@ -374,14 +378,32 @@
         {title: '楼盘卖点'},
         {title: '楼盘信息'}
       ],
+      nav:[{
+        text:'客户规则',
+        selected:true
+      },{
+        text:'在售户型',
+        selected:false
+      },{
+        text:'楼盘卖点',
+        selected:false
+      },{
+        text:'楼盘信息',
+        selected:false
+      }],
       activeKey: 1,
       info:null,
       saleList:[],
-      nowImgIndex:1
+      nowImgIndex:1,
+      index:0
     }
 
     
-
+    events={
+      navTapEvent(index){
+        this.index = index
+      }
+    }
     methods = {
       onClick: function(e) {
         console.log(`ComponentId:${e.detail.componentId},you selected:${e.detail.key}`);

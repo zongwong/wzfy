@@ -26,21 +26,6 @@ export default class wxApi extends base {
     })
   }
   // 逆解析
-  // static async BaiduMap() {
-  //   let BMap = new bmap.BMapWX({  
-  //     ak: BaiduAk
-  //   })
-  //   return new Promise((resolve, reject) => {
-  //     BMap.regeocoding({  
-  //       fail:function(res){
-  //         reject(res)
-  //       },  
-  //       success:function(res){
-  //         resolve(res)
-  //       }  
-  //     })
-  //   })
-  // }
   // 服务城市
   static async getCity() {
     let city = await wepy.getStorageSync('city')
@@ -90,5 +75,18 @@ export default class wxApi extends base {
       const { userInfo } = await wepy.getUserInfo()
       return data
     }
+  }
+  // 拨打电话
+  static async phoneCall (phone) {
+    await wepy.makePhoneCall({
+      phoneNumber:phone
+    })
+  }
+  // 图片浏览
+  static imgView(src = '', urls = []) {
+    wepy.previewImage({
+      current: src,
+      urls: urls
+    })
   }
 }

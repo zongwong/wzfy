@@ -7,7 +7,7 @@
       <view class="item {{propertyStatus?'active':''}}" bindtap="propertySelect"><text>物业</text><text class="icon icon_arrow"/></view>
     </view>
     <view class="ceils_wrap new_wrap">
-      <navigator class="ceil_item" url="/pages/new/detail?id={{item.id}}"  wx:for="{{page.list}}" wx:key="item_{{index}}">
+      <view class="ceil_item" catchtap="toDetail" url="/pages/new/detail?id={{item.id}}"  wx:for="{{page.list}}" wx:key="item_{{index}}" data-wpytodetail-a="{{item.id}}">
         <view class="ceil_ft post">
           <image class="img" mode="aspectFill" src="{{item.thumb[0]}}"/>
         </view>
@@ -25,11 +25,11 @@
             <text class="money">{{item.total}}万起</text>
           </view>
           <view class="info_row flag_row">
-            <view class="red flag_box"><text class="icon flag">佣</text><text class="flagtext">{{item.commision}}/套</text></view>
-            <text class="nbtn">我要推荐</text>
+            <view class="red flag_box"><text class="icon flag">佣</text><text class="flagtext oneTextHide">{{item.commision}}/套</text></view>
+            <view catchtap="toForm" class="nbtn">我要推荐</view>
           </view>
         </view>
-      </navigator>
+      </view>
     </view>
   </view>
   

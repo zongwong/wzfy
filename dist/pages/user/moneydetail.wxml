@@ -1,7 +1,7 @@
 
   <view class="container moneydetail">
     <view class="ceils_wrap">
-      <view class="ceil_item border_bottom list"  wx:for="{{page.list}}">
+      <view class="ceil_item border_bottom list"  wx:for="{{page.list}}" wx:key="money_{{index}}">
         <view class="row">
           <view class="left">{{item.remark}}</view>
           <view class="right small">{{item.created_at}}</view>
