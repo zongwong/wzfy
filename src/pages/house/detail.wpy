@@ -33,7 +33,7 @@
     data = {
       info:''
     }
-
+    onShareAppMessage(){}
     async onLoad() {
       const detail = await wx.getStorageSync('detail')
       this.info = detail

@@ -45,7 +45,7 @@ page{
     data = {
         info:''
     }
-
+    onShareAppMessage(){}
     async onLoad() {
         const data = await api.ad()
         this.info = data

@@ -4,7 +4,7 @@
         <view class="block_title">客户资料</view>
         <view class="block_content">
             <view class="name">{{info.name}}</view>
-            <view class="info"><text>{{info.phone}}</text>
+            <view class="info" bindtap="phoneCall" data-wpyphonecall-a="{{info.phone}}"><text>{{info.phone}}</text>
             <text class="time">{{info.created_at}}</text></view>
         </view>
     </view>
@@ -12,7 +12,7 @@
         <view class="block_title">专属顾问</view>
         <view class="block_content">
             <view class="info"><text>{{info.serviceable.name||'未指派'}}</text>
-            <text>{{info.serviceable.phone||'无'}}</text></view>
+            <text bindtap="phoneCall" data-wpyphonecall-a="{{info.serviceable.phone}}">{{info.serviceable.phone||'无'}}</text></view>
         </view>
     </view>
     <view class="block">

@@ -113,7 +113,7 @@
       bankname:'',
       banks:[]
     }
-
+    onShareAppMessage(){}
     methods = {
      allGet() {
        this.money = this.user.balance

@@ -86,7 +86,7 @@
       build:'请选择意向楼盘',
       builds:[]
     }
-
+    onShareAppMessage(){}
     methods = {
       buildInput(e) {
         this.build = this.builds[e.detail.value]

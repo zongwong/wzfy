@@ -50,5 +50,6 @@
       this.$apply()
       WxParse.wxParse('content', 'html', detail.content, this, 4)
     }
+    onShareAppMessage(){}
   }
 </script>

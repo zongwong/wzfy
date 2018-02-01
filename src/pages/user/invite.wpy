@@ -44,7 +44,7 @@
     data = {
       list:[]
     }
-
+    onShareAppMessage(){}
     async onLoad() {
       const data = await api.inviters()
       this.list = data

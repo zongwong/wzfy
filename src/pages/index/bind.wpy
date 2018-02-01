@@ -103,7 +103,7 @@
       disabled: false,
       code: ''
     }
-
+    onShareAppMessage(){}
     methods = {
       phoneInput(e) {
         this.phone = e.detail.value

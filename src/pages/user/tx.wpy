@@ -82,7 +82,7 @@
         }
     }
 
-
+    onShareAppMessage(){}
     async onLoad() {
       const user = await api.getMemberInfo()
       this.user = user

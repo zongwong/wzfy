@@ -177,7 +177,7 @@ page{
         }
       }
     }
-
+    onShareAppMessage(){}
     onLoad(options) {
       this.member_id = options.id
     }

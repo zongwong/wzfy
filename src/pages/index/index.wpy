@@ -295,7 +295,8 @@ export default class Index extends wepy.page {
     const info = await api.indexNotice();
     this.info = info;
     this.nowNotice = info.ls[0];
-    this.money = this.format(info.balance)
+    // this.money = this.format(info.balance)
+    this.jump(info.balance)
     clearInterval(this.timer)
     this.notice()
     this.$apply()
@@ -323,5 +324,25 @@ export default class Index extends wepy.page {
     }
     return result
   }
+  jump(num) {
+    let l = num.length;
+    let start = '1';
+    for(let i =0;i<l-1;i++){
+      start+='0'
+    }
+    let dir = parseInt(num) - parseInt(start)
+    let once = Math.floor(dir/20)
+    let result = parseInt(start)
+    let jump = setInterval(()=>{
+      result = result + once
+      if(result>=num){
+        result = num
+        clearInterval(jump)
+      }
+      this.money = this.format(result)
+      this.$apply()
+    },30) 
+  }
+  onShareAppMessage(){}
 }
 </script>

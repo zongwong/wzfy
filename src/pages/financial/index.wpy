@@ -65,7 +65,7 @@
       }
     }
 
-
+    onShareAppMessage(){}
 
     async onShow() {
       await wepy.removeStorageSync('detail')

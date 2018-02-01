@@ -59,7 +59,7 @@
       },
     }
 
-
+    onShareAppMessage(){}
     async onLoad() {
       this.page = await api.accounts()
       await this.next()

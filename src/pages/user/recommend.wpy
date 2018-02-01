@@ -78,7 +78,7 @@
     methods = {
      
     }
-
+    onShareAppMessage(){}
     events = {
       async navTapEvent(index) {
         this.isEnd = false

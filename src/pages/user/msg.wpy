@@ -83,7 +83,7 @@
      
     }
 
-
+    onShareAppMessage(){}
     async onLoad() {
       this.page = await api.msg()
       await this.next()

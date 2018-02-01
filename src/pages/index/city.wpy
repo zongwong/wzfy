@@ -63,7 +63,7 @@
     events = {
       
     }
-
+    onShareAppMessage(){}
     async onLoad() {
       const data = await api.cities()
       this.city = data

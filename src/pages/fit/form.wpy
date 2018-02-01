@@ -54,7 +54,7 @@
       content:'',
       need:'自住'
     }
-
+    onShareAppMessage(){}
     methods = {
       nameInput(e) {
         this.name = e.detail.value

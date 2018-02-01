@@ -368,6 +368,7 @@
       //   'wxc-tab-label': '../../packages/@minui/wxc-tab/dist/label'
       // }
     }
+
     components = {
       tab:tab
     }
@@ -404,6 +405,7 @@
         this.index = index
       }
     }
+    onShareAppMessage(){}
     methods = {
       onClick: function(e) {
         console.log(`ComponentId:${e.detail.componentId},you selected:${e.detail.key}`);

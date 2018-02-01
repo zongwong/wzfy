@@ -92,7 +92,7 @@
         })
       }
     }
-
+    onShareAppMessage(){}
     events = {
       navTapEvent(index) {
         this.tabIndex = index

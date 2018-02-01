@@ -30,7 +30,7 @@
       },
     }
 
-    
+    onShareAppMessage(){}
 
     methods = {
      async toDetail(id){

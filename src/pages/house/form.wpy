@@ -64,7 +64,7 @@
       content:'',
       zx:''
     }
-
+    onShareAppMessage(){}
     methods = {
       nameInput(e) {
         this.name = e.detail.value
