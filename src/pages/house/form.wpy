@@ -20,19 +20,22 @@
       </view>
     </view>
     <view class="ceils_wrap house_form">
-      <view class="ceil_item border_bottom more_cb">
+      <view class="ceil_item border_bottom more_cb" style="flex-wrap:wrap;">
         <view class="ceil_ft">需求：</view>
-        <view @tap="needSelect('hand-buy')" class="checkbox"><text class="text">买房</text><text class="icon icon_checkbox {{type=='hand-buy'?'checked':''}}"></text></view>
-        <view @tap="needSelect('hand-sell')" class="checkbox"><text class="text">卖方</text><text class="icon icon_checkbox {{type=='hand-sell'?'checked':''}}"></text></view>
-        <view @tap="needSelect('hand-house')" class="checkbox"><text class="text">租房</text><text class="icon icon_checkbox {{type=='hand-house'?'checked':''}}"></text></view>
+        <view class="ceil_bd">
+          <view wx:for="{{typeArr}}"  style="display:inline-block;width:40%;" wx:key="type_{{index}}"   @tap="needSelect('{{index}}')" class="checkbox"><text class="text" style="width:4em;display:inline-block;">{{item.text}}</text><text class="icon icon_checkbox {{item.selected?'checked':''}}"></text></view>
+        </view>
+        <!-- <view @tap="needSelect('hand-sell')" class="checkbox"><text class="text">他要卖</text><text class="icon icon_checkbox {{type=='hand-sell'?'checked':''}}"></text></view> -->
+        <!-- <view @tap="needSelect('hand-chu')" class="checkbox"><text class="text">他要出租</text><text class="icon icon_checkbox {{type=='hand-chu'?'checked':''}}"></text></view> -->
+        <!-- <view @tap="needSelect('hand-house')" class="checkbox"><text class="text">他要求租</text><text class="icon icon_checkbox {{type=='hand-house'?'checked':''}}"></text></view> -->
       </view>
-      <view class="ceil_item border_bottom more_cb">
+      <!-- <view class="ceil_item border_bottom more_cb">
         <view class="ceil_ft">装修程度：</view>
         <view class="checkbox" @tap="zxSelect('毛坯')"><text class="text">毛坯</text><text class="icon icon_checkbox {{zx=='毛坯'?'checked':''}}"></text></view>
         <view class="checkbox" @tap="zxSelect('普装')"><text class="text">普装</text><text class="icon icon_checkbox {{zx=='普装'?'checked':''}}"></text></view>
         <view class="checkbox" @tap="zxSelect('精装')"><text class="text">精装</text><text class="icon icon_checkbox {{zx=='精装'?'checked':''}}"></text></view>
         <view class="checkbox" @tap="zxSelect('豪装')"><text class="text">豪装</text><text class="icon icon_checkbox {{zx=='豪装'?'checked':''}}"></text></view>
-      </view>
+      </view> -->
     </view>
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom">
@@ -62,7 +65,20 @@
       sex:'men',
       type:'hand-buy',
       content:'',
-      zx:''
+      zx:'',
+      typeArr:[{
+        text:'他要买',
+        selected:false,
+      },{
+        text:'他要卖',
+        selected:false,
+      },{
+        text:'他要出租',
+        selected:false,
+      },{
+        text:'他要求组',
+        selected:false,
+      }]
     }
     onShareAppMessage(){}
     methods = {
@@ -75,8 +91,9 @@
       sexSelect(sex) {
         this.sex = sex
       },
-      needSelect(type) {
-        this.type = type
+      needSelect(index) {
+        // this.type = type
+        this.typeArr[index].selected = !this.typeArr[index].selected
       },
       contentInput(e) {
         this.content = e.detail.value
@@ -99,19 +116,26 @@
           })
           return false
         }
-        // if(!this.content){
-        //   wepy.showModal({
-        //     title:'提示',
-        //     content:'请填写其他需求'
-        //   })
-        //   return false
-        // }
+        let str = '';
+        this.typeArr.forEach(item => {
+          if(item.selected){
+            str+=item.text+','
+          }
+        })
+        console.log(str)
+        if(!str){
+          wepy.showModal({
+            title:'提示',
+            content:'请选择需求'
+          })
+          return false
+        }
         const data = await api.reports({
           name:this.name,
           phone:this.phone,
           sex:this.sex,
           type:'hand-house',
-          content:'装修程度:'+this.zx+','+this.content,
+          content: '需求:'+str + this.content,
         })
         if(data){
           wepy.showModal({

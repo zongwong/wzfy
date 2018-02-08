@@ -193,7 +193,7 @@
           </swiper-item>
         </block>
       </swiper>
-      <view class="city" @tap="toCity">{{mycity}}<text class="icon icon_down"></text></view>
+      <!-- <view class="city" @tap="toCity">{{mycity}}<text class="icon icon_down"></text></view> -->
     </view>
     <view class="navs_wrap">
       <navigator class="nav_item" hover-class="none" url="/pages/new/index">
@@ -290,8 +290,8 @@ export default class Index extends wepy.page {
     this.banner = data;
   }
   async onShow() {
-    const city = await wxApi.getCity();
-    this.mycity = city;
+    // const city = await wxApi.getCity();
+    // this.mycity = city;
     const info = await api.indexNotice();
     this.info = info;
     this.nowNotice = info.ls[0];

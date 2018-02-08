@@ -83,3 +83,5 @@
       <button class="selected_btn" catchtap="selectedSure">确定</button>
     </view> -->
   </view>
+
+  <navigator url="/pages/new/form?type=不限&city=" class="btn bottom full">我要推荐</navigator>

@@ -36,7 +36,7 @@
     <view class="ceils_wrap">
       <navigator class="ceil_item ceil_item_access list_item" wx:for="{{list}}" wx:key="re_{{index}}" url="/pages/user/redetail?id={{item.id}}">
         <view class="ceil_bd">{{item.name}}</view>
-        <view class="ceil_ft">{{item.created_at}}</view>
+        <view class="ceil_ft">{{item.time}}</view>
         <view wx:if="{{tabIndex==1}}" class="status yescj"></view>
         <view wx:if="{{tabIndex==2}}" class="status nocj"></view>
       </navigator>
@@ -55,13 +55,13 @@
 
     data = {
         navs:[{
-            text:'未完成',
+            text:'跟进中',
             selected:true,
         },{
             text:'已成交',
             selected:false,
         },{
-            text:'未成交',
+            text:'暂缓',
             selected:false,
         }],
         list:[],
@@ -129,6 +129,9 @@
           this.isEnd = true
         }else{
           this.list = this.timeSort(this.list.concat(arr))
+          this.list.forEach(item => {
+            item.time = item.updated_at.slice(0,10)
+          });
         }
         // return arr
         // this.list = this.timeSort(this.list.concat(arr))
@@ -157,6 +160,9 @@
           this.isEnd = true
         }else{
           this.list = this.timeSort(this.list.concat(arr))
+          this.list.forEach(item => {
+            item.time = item.updated_at.slice(0,10)
+          });
         }
         this.$apply()
       })
@@ -182,6 +188,10 @@
           this.isEnd = true
         }else{
           this.list = this.timeSort(this.list.concat(arr))
+          this.list.forEach(item => {
+            console.log(item)
+            item.time = item.updated_at.slice(0,10)
+          });
         }
         this.$apply()
       })

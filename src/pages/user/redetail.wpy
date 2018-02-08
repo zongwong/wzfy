@@ -134,7 +134,7 @@
     <view class="card" wx:if="{{info.status=='failed' || info.status=='succeed'}}">
        <view class="top">
            <view wx:if="{{info.status=='failed'}}" class="text">很抱歉交易失败</view>
-           <view wx:if="{{info.status=='succeed'}}" class="text" style="font-weight: normal;">请前往个人中心查看佣金</view>
+           <view wx:if="{{info.status=='succeed'}}" class="text" style="font-weight: normal;">恭喜任务已成交</view>
            <view class="time">{{info.updated_at}}</view>
        </view>
        <view class="bottom" wx:if="{{info.status=='failed'}}">

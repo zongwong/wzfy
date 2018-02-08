@@ -17,19 +17,22 @@
       </view>
     </view>
     <view class="ceils_wrap house_form">
-      <view class="ceil_item border_bottom more_cb">
+      <view class="ceil_item border_bottom more_cb" style="flex-wrap:wrap;">
         <view class="ceil_ft">需求：</view>
-        <view bindtap="needSelect" class="checkbox" data-wpyneedselect-a="hand-buy"><text class="text">买房</text><text class="icon icon_checkbox {{type=='hand-buy'?'checked':''}}"/></view>
-        <view bindtap="needSelect" class="checkbox" data-wpyneedselect-a="hand-sell"><text class="text">卖方</text><text class="icon icon_checkbox {{type=='hand-sell'?'checked':''}}"/></view>
-        <view bindtap="needSelect" class="checkbox" data-wpyneedselect-a="hand-house"><text class="text">租房</text><text class="icon icon_checkbox {{type=='hand-house'?'checked':''}}"/></view>
+        <view class="ceil_bd">
+          <view  wx:for="{{typeArr}}" style="display:inline-block;width:40%;" wx:key="type_{{index}}" bindtap="needSelect" class="checkbox" data-wpyneedselect-a="{{index}}"><text class="text" style="width:4em;display:inline-block;">{{item.text}}</text><text class="icon icon_checkbox {{item.selected?'checked':''}}"/></view>
+        </view>
+        <!-- <view bindtap="needSelect('hand-sell')" class="checkbox"><text class="text">他要卖</text><text class="icon icon_checkbox {{type=='hand-sell'?'checked':''}}"></text></view> -->
+        <!-- <view bindtap="needSelect('hand-chu')" class="checkbox"><text class="text">他要出租</text><text class="icon icon_checkbox {{type=='hand-chu'?'checked':''}}"></text></view> -->
+        <!-- <view bindtap="needSelect('hand-house')" class="checkbox"><text class="text">他要求租</text><text class="icon icon_checkbox {{type=='hand-house'?'checked':''}}"></text></view> -->
       </view>
-      <view class="ceil_item border_bottom more_cb">
+      <!-- <view class="ceil_item border_bottom more_cb">
         <view class="ceil_ft">装修程度：</view>
-        <view class="checkbox" bindtap="zxSelect" data-wpyzxselect-a="毛坯"><text class="text">毛坯</text><text class="icon icon_checkbox {{zx=='毛坯'?'checked':''}}"/></view>
-        <view class="checkbox" bindtap="zxSelect" data-wpyzxselect-a="普装"><text class="text">普装</text><text class="icon icon_checkbox {{zx=='普装'?'checked':''}}"/></view>
-        <view class="checkbox" bindtap="zxSelect" data-wpyzxselect-a="精装"><text class="text">精装</text><text class="icon icon_checkbox {{zx=='精装'?'checked':''}}"/></view>
-        <view class="checkbox" bindtap="zxSelect" data-wpyzxselect-a="豪装"><text class="text">豪装</text><text class="icon icon_checkbox {{zx=='豪装'?'checked':''}}"/></view>
-      </view>
+        <view class="checkbox" bindtap="zxSelect('毛坯')"><text class="text">毛坯</text><text class="icon icon_checkbox {{zx=='毛坯'?'checked':''}}"></text></view>
+        <view class="checkbox" bindtap="zxSelect('普装')"><text class="text">普装</text><text class="icon icon_checkbox {{zx=='普装'?'checked':''}}"></text></view>
+        <view class="checkbox" bindtap="zxSelect('精装')"><text class="text">精装</text><text class="icon icon_checkbox {{zx=='精装'?'checked':''}}"></text></view>
+        <view class="checkbox" bindtap="zxSelect('豪装')"><text class="text">豪装</text><text class="icon icon_checkbox {{zx=='豪装'?'checked':''}}"></text></view>
+      </view> -->
     </view>
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom">

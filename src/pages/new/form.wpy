@@ -137,7 +137,7 @@
           phone:this.phone,
           sex:this.sex,
           type:'new-house',
-          content:this.content,
+          content:'意向楼盘:'+this.build+','+this.content,
         })
         if(data){
           wepy.showModal({
@@ -147,12 +147,14 @@
         }
       }
     }
-    async onLoad() {
-      const city = await wxApi.getCity()
+    async onLoad(options) {
+      // const city = await wxApi.getCity()
       const builds = await api.buildsName({
-        city:city
+        city:options.city
       })
+      builds.unshift('不限')
       this.builds = builds
+      this.build = options.type
       this.$apply()
     }
   }

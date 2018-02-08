@@ -2,6 +2,9 @@
   page{
     position: relative;
   }
+  .new{
+    padding-bottom: 100rpx;
+  }
   .search{
     display: flex;
     background: #f9f9f9;
@@ -147,6 +150,7 @@
   <priceSelect :list.sync="priceList" :status.sync="priceStatus"></priceSelect>
   <typeSelect :list.sync="typeList" :status.sync="typeStatus"></typeSelect>
   <propertySelect :list.sync="propertyList" :status.sync="propertyStatus"></propertySelect>
+  <navigator url="/pages/new/form?type=不限&city=" class="btn bottom full">我要推荐</navigator>
 </template>
 
 <script>
@@ -264,17 +268,17 @@
       }
     }
     async onLoad() {
-      const city = await wxApi.getCity()
-      console.log(city)
-      this.mycity = city
-      this.params.city = city
+      // const city = await wxApi.getCity()
+      // console.log(city)
+      // this.mycity = city
+      this.params.city = ''
       this.$apply()
       // const data = await api.builds({
       //   city:city
       // })
       // this.all = data
       this.page = await api.builds({})
-      console.log(this.page)
+      // console.log(this.page)
       this.$apply()
       await this.next();
 
@@ -284,7 +288,7 @@
 
       this.typeList = this.createArr(apartmentLayout)
       this.propertyList = this.createArr(houseType)
-      this.areaList = this.createArr(counties,city)
+      this.areaList = this.createArr(counties,'不限')
       this.$apply()
     }
     createArr(arr,city) {

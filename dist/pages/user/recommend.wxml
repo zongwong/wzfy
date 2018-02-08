@@ -13,7 +13,7 @@
     <view class="ceils_wrap">
       <navigator class="ceil_item ceil_item_access list_item"  wx:for="{{list}}" wx:key="re_{{index}}" url="/pages/user/redetail?id={{item.id}}">
         <view class="ceil_bd">{{item.name}}</view>
-        <view class="ceil_ft">{{item.created_at}}</view>
+        <view class="ceil_ft">{{item.time}}</view>
         <view wx:if="{{tabIndex==1}}" class="status yescj"/>
         <view wx:if="{{tabIndex==2}}" class="status nocj"/>
       </navigator>

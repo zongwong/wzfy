@@ -29,6 +29,7 @@ export default class wxApi extends base {
   // 服务城市
   static async getCity() {
     let city = await wepy.getStorageSync('city')
+    return city
     let cities = await api.cities()
     // if(city){
       return new Promise((resolve, reject) => {

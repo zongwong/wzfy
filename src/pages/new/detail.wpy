@@ -350,7 +350,7 @@
 
         <!-- </wxc-tab> -->
     </view>
-    <navigator url="/pages/new/form" class="btn bottom full">我要推荐</navigator>
+    <navigator url="/pages/new/form?type={{info.title}}&city={{info.city}}" class="btn bottom full">我要推荐</navigator>
   </view>
 </template>
 
