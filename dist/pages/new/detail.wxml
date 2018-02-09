@@ -20,7 +20,7 @@
             <view class="ceils_wrap">
               <view class="ceil_item row">
                 <view class="ceil_bd light">{{info.per_square}}元/m2</view>
-                <view class="ceil_ft flag_box"><text class="icon flag">佣</text><text class="flagtext">{{info.commision}}/套</text></view>
+                <!-- <view class="ceil_ft flag_box"><text class="icon flag">佣</text><text class="flagtext">{{info.commision}}/套</text></view> -->
               </view>
             </view>
           </view>

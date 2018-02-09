@@ -25,8 +25,9 @@
             <text class="money">{{item.total}}万起</text>
           </view>
           <view class="info_row flag_row">
-            <view class="red flag_box"><text class="icon flag">佣</text><text class="flagtext oneTextHide">{{item.commision}}/套</text></view>
-            <view catchtap="toForm" class="nbtn">我要推荐</view>
+            <!-- <text class="icon flag">佣</text><text class="flagtext oneTextHide">{{item.commision}}/套</text> -->
+            <view class="red flag_box"/>
+            <view catchtap="toForm" class="nbtn" data-wpytoform-a="{{item.city}}" data-wpytoform-b="{{item.title}}">我要推荐</view>
           </view>
         </view>
       </view>
