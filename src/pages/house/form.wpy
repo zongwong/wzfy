@@ -76,7 +76,7 @@
         text:'他要出租',
         selected:false,
       },{
-        text:'他要求组',
+        text:'他要求租',
         selected:false,
       }]
     }

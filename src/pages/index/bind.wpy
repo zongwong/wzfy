@@ -140,6 +140,11 @@
             }
             this.$apply()
           },1000)
+        }else{
+          wepy.showModal({
+            title:'提示',
+            content:data.message
+          })
         }
       },
       // 绑定
