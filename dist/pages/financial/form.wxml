@@ -18,12 +18,12 @@
     </view>
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom">
-        <view class="ceil_ft need">借款额度：</view>
+        <view class="ceil_ft">借款额度：</view>
         <view class="ceil_bd"><input type="number" value="{{money}}" bindinput="moneyInput" placeholder="请填写需要额度"/></view>
-        <text>元</text>
+        <text>万元</text>
       </view>
       <view class="ceil_item">
-        <view class="ceil_ft need">借款描述</view>
+        <view class="ceil_ft">借款描述</view>
       </view>
       <view class="ceil_item" style="padding-top:0;">
         <view class="ceil_bd">

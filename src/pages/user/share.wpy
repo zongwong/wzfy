@@ -154,6 +154,7 @@ page{
           real_name:this.name,
           sex:this.sex
         }) 
+        console.log(this.member_id)
         console.log(data)
         if(!data.token){
           wepy.showModal({
@@ -164,15 +165,18 @@ page{
         }
         
         if(data.token){
-          wepy.setStorageSync('token',data.token)
-          wepy.setStorageSync('user',data.member)
+          // wepy.setStorageSync('token',data.token)
+          // wepy.setStorageSync('user',data.member)
           wepy.showToast({
             title:'注册成功'
           })
           setTimeout(() => {
-            wepy.switchTab({
-              url: '/pages/index/index'
-            })
+            // wepy.switchTab({
+            //   url: '/pages/index/index'
+            // })
+            wepy.navigateTo({
+                url: '/pages/index/bind'
+              })
           }, 600);          
         }
       }
@@ -180,6 +184,7 @@ page{
     onShareAppMessage(){}
     onLoad(options) {
       this.member_id = options.id
+      console.log(this.member_id)
     }
   }
 </script>

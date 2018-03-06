@@ -15,6 +15,7 @@ export default class Api extends base{
   // 注册
   static async register(id='',data) {
     const url = `${this.host}/register?member_id=${id}`
+    console.log(url)
     return await this.post(url, data)
   }
   // banner

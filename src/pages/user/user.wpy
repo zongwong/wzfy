@@ -134,8 +134,19 @@
     
 
     methods = {
-     loginOut() {
-       wx.clearStorageSync()
+     async loginOut() {
+       const data = await wepy.showModal({
+         title:'提示',
+         content:'你是否确认退出登录'
+       })
+       console.log(data)
+       if(data.confirm){
+         wx.removeStorageSync('token')
+         wx.removeStorageSync('user')
+         wx.redirectTo({
+           url:'/pages/index/bind'
+         })
+       }
      }
     }
 

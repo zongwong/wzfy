@@ -18,15 +18,15 @@
         <view @tap="sexSelect('men')" class="checkbox" style="margin-left:2em;"><text class="text">男</text><text class="icon icon_checkbox {{sex=='men'?'checked':''}}"></text></view>
         <view @tap="sexSelect('women')" class="checkbox"><text class="text">女</text><text class="icon icon_checkbox {{sex=='women'?'checked':''}}"></text></view>
       </view>
-      <view class="ceil_item border_bottom">
+      <!-- <view class="ceil_item border_bottom">
         <view class="ceil_ft need" style="width:3em;">需求：</view>
         <view @tap="needSelect('自住')" class="checkbox" style="margin-left:2em;"><text class="text">自住</text><text class="icon icon_checkbox {{need=='自住'?'checked':''}}"></text></view>
         <view @tap="needSelect('出租')" class="checkbox"><text class="text">出租</text><text class="icon icon_checkbox {{need=='出租'?'checked':''}}"></text></view>
-      </view>
+      </view> -->
     </view>
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom">
-        <view class="ceil_ft need" style="white-space:nowrap;">房屋实际情况/具体装修要求</view>
+        <view class="ceil_ft" style="white-space:nowrap;">房屋实际情况/具体装修要求</view>
       </view>
       <view class="ceil_item">
         <view class="ceil_bd">
@@ -98,7 +98,7 @@
           phone:this.phone,
           sex:this.sex,
           type:this.type,
-          content:'装修类型:'+this.need+','+this.content,
+          content:this.content,
         })
         if(data){
           wepy.showModal({

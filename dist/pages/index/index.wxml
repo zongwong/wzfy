@@ -34,7 +34,7 @@
          <view class="ceil_ft btn_phone">立即拨打<text class="icon icon_phone"/></view>
        </view>
      </view>
-     <view class="notice">
+     <navigator url="/pages/index/rule" class="notice">
        <image src="../../images/ad6.png" class="noticebg"/>
        <view class="msg">
          <text class="icon icon_msg"/>
@@ -42,6 +42,6 @@
        </view>
        <view class="yj_text">当前可用佣金(元)</view>
        <view class="yjnum_text">{{money}}</view>
-       <navigator url="/pages/index/rule" class="yj_icon"/>
-     </view>
+       <view class="yj_icon"/>
+     </navigator>
   </view>

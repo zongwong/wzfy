@@ -15,15 +15,15 @@
         <view bindtap="sexSelect" class="checkbox" style="margin-left:2em;" data-wpysexselect-a="men"><text class="text">男</text><text class="icon icon_checkbox {{sex=='men'?'checked':''}}"/></view>
         <view bindtap="sexSelect" class="checkbox" data-wpysexselect-a="women"><text class="text">女</text><text class="icon icon_checkbox {{sex=='women'?'checked':''}}"/></view>
       </view>
-      <view class="ceil_item border_bottom">
+      <!-- <view class="ceil_item border_bottom">
         <view class="ceil_ft need" style="width:3em;">需求：</view>
-        <view bindtap="needSelect" class="checkbox" style="margin-left:2em;" data-wpyneedselect-a="自住"><text class="text">自住</text><text class="icon icon_checkbox {{need=='自住'?'checked':''}}"/></view>
-        <view bindtap="needSelect" class="checkbox" data-wpyneedselect-a="出租"><text class="text">出租</text><text class="icon icon_checkbox {{need=='出租'?'checked':''}}"/></view>
-      </view>
+        <view bindtap="needSelect('自住')" class="checkbox" style="margin-left:2em;"><text class="text">自住</text><text class="icon icon_checkbox {{need=='自住'?'checked':''}}"></text></view>
+        <view bindtap="needSelect('出租')" class="checkbox"><text class="text">出租</text><text class="icon icon_checkbox {{need=='出租'?'checked':''}}"></text></view>
+      </view> -->
     </view>
     <view class="ceils_wrap house_form">
       <view class="ceil_item border_bottom">
-        <view class="ceil_ft need" style="white-space:nowrap;">房屋实际情况/具体装修要求</view>
+        <view class="ceil_ft" style="white-space:nowrap;">房屋实际情况/具体装修要求</view>
       </view>
       <view class="ceil_item">
         <view class="ceil_bd">

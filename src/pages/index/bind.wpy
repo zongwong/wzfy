@@ -140,6 +140,11 @@
             }
             this.$apply()
           },1000)
+        }else{
+          wepy.showModal({
+            content: data.message,
+            title: '提示'
+          })
         }
       },
       // 绑定
@@ -177,10 +182,17 @@
           wepy.showToast({
             title:'登录成功'
           })
+          let isAgree = await wepy.getStorageSync('agree')
           setTimeout(() => {
-            wepy.switchTab({
-              url: '/pages/index/index'
-            })
+            if(isAgree){
+              wepy.switchTab({
+                url: '/pages/index/index'
+              })
+            }else{
+              wepy.navigateTo({
+                url: '/pages/user/agree'
+              })
+            }
           }, 500);          
         }
       }
@@ -189,8 +201,15 @@
       
     }
 
-    onLoad() {
-      
+    onShow() {
+      let pages = getCurrentPages();
+      let currPage = pages[pages.length - 1];   //当前页面
+      let prevPage = pages[pages.length - 2];  //上一个页面
+      console.log(prevPage.route)
+      if(prevPage.route == 'pages/user/agree'){
+        wepy.clearStorageSync()
+      }
+
     }
   }
 </script>

@@ -160,6 +160,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index/index',
+      'pages/user/agree',
       'pages/user/tx',
       'pages/index/rule',
       'pages/new/form',
