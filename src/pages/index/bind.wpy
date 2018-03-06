@@ -142,8 +142,13 @@
           },1000)
         }else{
           wepy.showModal({
+<<<<<<< HEAD
             content: data.message,
             title: '提示'
+=======
+            title:'提示',
+            content:data.message
+>>>>>>> 1a261c1295c34294eeb7aef94fdcdf9fc8bfbdec
           })
         }
       },
