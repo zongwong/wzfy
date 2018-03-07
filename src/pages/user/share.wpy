@@ -123,6 +123,11 @@ page{
             }
             this.$apply()
           },1000)
+        }else{
+          wepy.showModal({
+            content: data.message,
+            title: '提示'
+          })
         }
       },
       // 绑定

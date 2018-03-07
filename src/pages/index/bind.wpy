@@ -142,13 +142,8 @@
           },1000)
         }else{
           wepy.showModal({
-<<<<<<< HEAD
             content: data.message,
             title: '提示'
-=======
-            title:'提示',
-            content:data.message
->>>>>>> 1a261c1295c34294eeb7aef94fdcdf9fc8bfbdec
           })
         }
       },
@@ -208,13 +203,15 @@
 
     onShow() {
       let pages = getCurrentPages();
-      let currPage = pages[pages.length - 1];   //当前页面
-      let prevPage = pages[pages.length - 2];  //上一个页面
-      console.log(prevPage.route)
-      if(prevPage.route == 'pages/user/agree'){
-        wepy.clearStorageSync()
+      if(pages.length>=2){
+        let currPage = pages[pages.length - 1];   //当前页面
+        let prevPage = pages[pages.length - 2];  //上一个页面
+        console.log(pages)
+        console.log(prevPage.route)
+        if(prevPage.route == 'pages/user/agree'){
+          wepy.clearStorageSync()
+        }
       }
-
     }
   }
 </script>
