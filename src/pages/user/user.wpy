@@ -164,6 +164,7 @@
     onShareAppMessage() {
       let id = this.user.id
       return {
+        title:this.userInfo.nickName+'邀请您加入万众分佣创富平台',
         imageUrl:'https://www.xmwzfy.com/assets/img/bg.png',
         path:`/pages/user/share?id=${id}`,
         success:function(){

@@ -13,9 +13,15 @@ export default class Api extends base{
     return await this.post(url, data)
   }
   // 注册
-  static async register(id='',data) {
-    const url = `${this.host}/register?member_id=${id}`
+  static async register(id, data) {
+    let url = ''
+    if (!id) {
+      url = `${this.host}/register`
+    } else {
+      url = `https://www.xmwzfy.com/register?member_id=${id}`
+    }
     console.log(url)
+    console.log(data)
     return await this.post(url, data)
   }
   // banner
