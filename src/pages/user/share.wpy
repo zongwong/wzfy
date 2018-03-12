@@ -38,9 +38,9 @@ page{
 }
 </style>
 <template>
-  <view class="container share">
+  <view class="share">
     <image src="../../images/sharebg.png" class="sharebg"></image>
-    <view class="ceils_wrap share_from">
+    <view class="ceils_wrap share_from" style="padding-bottom:100rpx;">
       <view class="ceil_item border_bottom">
         <view class="ceil_ft">手机号码：</view>
         <view class="ceil_bd"><input type="number" placeholder="请填写手机号码" @input="phoneInput" value="{{phone}}"/></view>

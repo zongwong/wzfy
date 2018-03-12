@@ -139,10 +139,20 @@
           type:'new-house',
           content:'意向楼盘:'+this.build+','+this.content,
         })
-        if(data){
-          wepy.showModal({
+        if(typeof data.status == 'undefined'){
+          const ret = await wepy.showModal({
             title:'提示',
             content:'推荐成功'
+          })
+          if(ret.confirm){
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        }else{
+          wepy.showModal({
+            title:'提示',
+            content:data.message
           })
         }
       }

@@ -24,6 +24,7 @@ page{
     color: #fff;
     font-size: 34rpx;
     line-height: 1.8823529;
+    z-index: 1;
   }
   &.full{
     width: 100%;
