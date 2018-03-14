@@ -21,5 +21,5 @@
         <view bindtap="sexSelect" class="checkbox" data-wpysexselect-a="women"><text class="text">女</text><text class="icon icon_checkbox {{sex=='women'?'checked':''}}"/></view>
       </view>
     </view>
-    <button bindtap="bind" class="btn bottom">注册</button>
+    <button bindtap="bind" disabled="{{ajax}}" class="btn bottom">注册</button>
   </view>

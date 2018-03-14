@@ -60,7 +60,7 @@ page{
         <view @tap="sexSelect('women')" class="checkbox"><text class="text">女</text><text class="icon icon_checkbox {{sex=='women'?'checked':''}}"></text></view>
       </view>
     </view>
-    <button @tap="bind" class="btn bottom">注册</button>
+    <button @tap="bind" disabled="{{ajax}}" class="btn bottom">注册</button>
   </view>
 </template>
 
@@ -78,7 +78,8 @@ page{
       disabled: false,
       code: '',
       sex:'men',
-      member_id:''
+      member_id:'',
+      ajax:false
     }
 
     methods = {
@@ -154,7 +155,7 @@ page{
           return false;
         }
         console.log(this.member_id)
-      
+        this.ajax = true
         const data = await api.register(this.member_id,{
           phone: this.phone,
           code: this.code,
@@ -182,10 +183,13 @@ page{
               })
           }, 600);          
         }else {
+          this.ajax = false
+          this.$apply()
           wepy.showModal({
             title: '提示',
             content: data.message
           })
+          
         }
       }
     }
