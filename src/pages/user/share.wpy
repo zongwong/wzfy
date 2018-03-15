@@ -163,34 +163,29 @@ page{
           sex:this.sex
         }) 
         console.log(data)
-        // if(!data.token){
-        //   wepy.showModal({
-        //     title: '提示',
-        //     content: data.message
-        //   })
-        //   return false
-        // }
+
         
-        if(data.status){
+        if(typeof data.status !='undefined' && !data.status){
           // wepy.setStorageSync('token',data.token)
           // wepy.setStorageSync('user',data.member)
-          wepy.showToast({
-            title:'注册成功'
-          })
-          setTimeout(() => {
-            wepy.navigateTo({
-                url: '/pages/index/bind'
-              })
-          }, 600);          
-        }else {
           this.ajax = false
           this.$apply()
           wepy.showModal({
             title: '提示',
             content: data.message
           })
-          
+          return false;
         }
+
+        wepy.showToast({
+          title:'注册成功'
+        })
+        setTimeout(() => {
+          wx.redirectTo({
+              url: '/pages/index/bind',
+          })
+        }, 600);
+
       }
     }
     onShareAppMessage(){}
