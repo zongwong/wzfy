@@ -66,6 +66,7 @@
       type:'hand-buy',
       content:'',
       zx:'',
+      isAjax:false,
       typeArr:[{
         text:'他要买',
         selected:false,
@@ -109,7 +110,7 @@
           })
           return false
         }
-        if(!(/^1[3456789]\d{9}$/.test(this.phone))){
+        if(!(/^1[3456789]\d{9}$/.test(this.phone.replace(/-/g,'')))){
           wepy.showModal({
             title:'提示',
             content:'请填写正确的手机号'
@@ -130,9 +131,14 @@
           })
           return false
         }
+        if(this.isAjax){
+          return false
+        }
+        this.isAjax = true
+        this.$apply()
         const data = await api.reports({
           name:this.name,
-          phone:this.phone,
+          phone:this.phone.replace(/-/g,''),
           sex:this.sex,
           type:'hand-house',
           content: '需求:'+str + this.content,
@@ -146,12 +152,17 @@
             wx.navigateBack({
               delta: 1
             })
+          }else{
+            this.isAjax = false
+            this.$apply()
           }
         }else{
           wepy.showModal({
             title:'提示',
             content:data.message
           })
+          this.isAjax = false
+          this.$apply()
         }
       }
     }

@@ -97,21 +97,23 @@ page{
       },
       // 验证码
       async getCode() {
-        if(!(/^1[345789]\d{9}$/.test(this.phone))){
+        if(!(/^1[345789]\d{9}$/.test(this.phone.replace(/-/g,'')))){
           wepy.showModal({
             content: '请输入正确的手机号',
             title: '提示'
           })
           return false;
         }
+        this.disabled = true
+        this.$apply()
         const data = await api.sms({
-          phone: this.phone
+          phone: this.phone.replace(/-/g,'')
         })
         if(data.status){
           wepy.showToast({
             title: '验证码已发送'
           })
-          this.disabled = true
+          
           this.text = '60s后获取'
           let second = 60
           let timer = setInterval(()=>{
@@ -129,11 +131,13 @@ page{
             content: data.message,
             title: '提示'
           })
+          this.disabled = false
+          this.$apply()
         }
       },
       // 绑定
       async bind() {
-        if(!(/^1[3456789]\d{9}$/.test(this.phone))){
+        if(!(/^1[3456789]\d{9}$/.test(this.phone.replace(/-/g,'')))){
           wepy.showModal({
             content: '请输入正确的手机号',
             title: '提示'
@@ -155,9 +159,13 @@ page{
           return false;
         }
         console.log(this.member_id)
+        if(this.ajax){
+          return false
+        }
         this.ajax = true
+        this.$apply()
         const data = await api.register(this.member_id,{
-          phone: this.phone,
+          phone: this.phone.replace(/-/g,''),
           code: this.code,
           real_name:this.name,
           sex:this.sex
@@ -166,8 +174,7 @@ page{
 
         
         if(typeof data.status !='undefined' && !data.status){
-          // wepy.setStorageSync('token',data.token)
-          // wepy.setStorageSync('user',data.member)
+          
           this.ajax = false
           this.$apply()
           wepy.showModal({
@@ -176,13 +183,14 @@ page{
           })
           return false;
         }
-
+        wepy.setStorageSync('token',data.token)
+        wepy.setStorageSync('user',data.member)
         wepy.showToast({
           title:'注册成功'
         })
         setTimeout(() => {
           wx.redirectTo({
-              url: '/pages/index/bind',
+              url: '/pages/user/agree',
           })
         }, 600);
 

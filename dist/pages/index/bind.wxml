@@ -19,7 +19,7 @@
           <view class="ceil_ft"><button class="code" bindtap="getCode" disabled="{{disabled}}">{{text}}</button></view>
         </view>
       </view>
-      <button class="bindbtn" bindtap="bind">登录</button>
+      <button class="bindbtn" bindtap="bind" disabled="{{loginDisabled}}">登录</button>
       <navigator class="regText" url="/pages/user/share">注册成万众会员</navigator>
     </form>
   </view>

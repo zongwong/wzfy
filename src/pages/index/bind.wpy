@@ -82,7 +82,7 @@
           <view class="ceil_ft"><button class="code" @tap="getCode" disabled="{{disabled}}">{{text}}</button></view>
         </view>
       </view>
-      <button class="bindbtn" @tap="bind">登录</button>
+      <button class="bindbtn" @tap="bind" disabled="{{loginDisabled}}">登录</button>
       <navigator class="regText" url="/pages/user/share">注册成万众会员</navigator>
     </form>
   </view>
@@ -101,7 +101,8 @@
       phone:'',
       text:'获取验证码',
       disabled: false,
-      code: ''
+      code: '',
+      loginDisabled:false
     }
     onShareAppMessage(){}
     methods = {
@@ -113,21 +114,19 @@
       },
       // 验证码
       async getCode() {
-        if(!(/^1[345789]\d{9}$/.test(this.phone))){
+        if(!(/^1[345789]\d{9}$/.test(this.phone.replace(/-/g,'')))){
           wepy.showModal({
             content: '请输入正确的手机号',
             title: '提示'
           })
           return false;
         }
+        this.disabled = true
+        this.$apply();
         const data = await api.sms({
-          phone: this.phone
+          phone: this.phone.replace(/-/g,'')
         })
         if(data.status){
-          wepy.showToast({
-            title: '验证码已发送'
-          })
-          this.disabled = true
           this.text = '60s后获取'
           let second = 60
           let timer = setInterval(()=>{
@@ -140,16 +139,21 @@
             }
             this.$apply()
           },1000)
+          wepy.showToast({
+            title: '验证码已发送'
+          })
         }else{
           wepy.showModal({
             content: data.message,
             title: '提示'
           })
+          this.disabled = false
+          this.$apply()
         }
       },
       // 绑定
       async bind() {
-        if(!(/^1[3456789]\d{9}$/.test(this.phone))){
+        if(!(/^1[3456789]\d{9}$/.test(this.phone.replace(/-/g,'')))){
           wepy.showModal({
             content: '请输入正确的手机号',
             title: '提示'
@@ -163,8 +167,10 @@
           })
           return false;
         }
+        this.loginDisabled = true
+        this.$apply()
         const data = await api.bind({
-          phone: this.phone,
+          phone: this.phone.replace(/-/g,''),
           code: this.code
         }) 
         console.log(data)
@@ -173,6 +179,8 @@
             title: '提示',
             content: data.message
           })
+          this.loginDisabled = false
+          this.$apply()
           return false
         }
         
