@@ -1,6 +1,7 @@
 
   <view class="share">
-    <image src="../../images/sharebg.png" class="sharebg"/>
+    <!-- <image src="https://www.xmwzfy.com/assets/img/bg.png" mode="aspectFill" class="sharebg"></image> -->
+    <view class="sharebg"/>
     <view class="ceils_wrap share_from" style="padding-bottom:100rpx;">
       <view class="ceil_item border_bottom">
         <view class="ceil_ft">手机号码：</view>

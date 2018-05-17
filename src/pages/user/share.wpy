@@ -8,6 +8,8 @@ page{
     width: 100%;
     height: 650rpx;
     margin-bottom: 34rpx;
+    background: url(https://www.xmwzfy.com/assets/img/bg.png) 0 0 / 100% auto no-repeat;
+    // background-position: 100%;
   }
   .share_from{
     .ceil_item{
@@ -39,7 +41,8 @@ page{
 </style>
 <template>
   <view class="share">
-    <image src="../../images/sharebg.png" class="sharebg"></image>
+    <!-- <image src="https://www.xmwzfy.com/assets/img/bg.png" mode="aspectFill" class="sharebg"></image> -->
+    <view class="sharebg"></view>
     <view class="ceils_wrap share_from" style="padding-bottom:100rpx;">
       <view class="ceil_item border_bottom">
         <view class="ceil_ft">手机号码：</view>
